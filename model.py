@@ -15,16 +15,16 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(32), nullable=True)
     lname = db.Column(db.String(32), nullable=True)
-    email = db.Column(db.String(64), nullable=True)
+    email = db.Column(db.String(64), nullable=True, unique=True)
     password = db.Column(db.String(64), nullable=True)
-    location = db.Column(db.String(32), nullable=True)
-    state = db.Column(db.String(2), nullable=True)
+    zipcode = db.Column(db.String(32), nullable=True)
     twitter = db.Column(db.String(32), nullable=True)
     linkedin = db.Column(db.String(32), nullable=True)
     website_url = db.Column(db.String(64), nullable=True)
     description = db.Column(db.Text, nullable=True)
+    engineer_type = db.Column(db.Integer, nullable=True)
     # photo = db.Column(db.String(64), nullable=True)
-    # active = db.Column(db.Boolean(), nullable=False)
+    #active = db.Column(db.Boolean(), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -75,36 +75,36 @@ class Relationship(db.Model):
                                                         mentee=mentee_id)                                                                          
 
 
-class Keyword(db.Model):
+class Language(db.Model):
 
-    __tablename__ = "keywords"
+    __tablename__ = "languages"
     
-    keyword_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    keyword = db.Column(db.String(64), nullable=True)
+    language_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    language_name = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
 
-        return "<Keyword: {id} {keyword} >".format(id=self.keyword_id, keyword=self.keyword)
+        return "<language: {id} {language} >".format(id=self.language_id, language=self.language_name)
 
 
-class KeyMiddle(db.Model):
+class LanguageMiddle(db.Model):
 
-    __tablename__ = 'key_middles'
+    __tablename__ = 'lang_middles'
 
-    key_middle_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    keyword_id = db.Column(db.Integer, db.ForeignKey('keywords.keyword_id'), nullable=False)  
+    lang_middle_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    language_id = db.Column(db.Integer, db.ForeignKey('languages.language_id'), nullable=False)  
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
     user = db.relationship("User", backref="key_middles")
-    keyword = db.relationship("Keyword", backref="key_middles")
+    language = db.relationship("Language", backref="key_middles")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return "<Key Middle ID: {id}\n{key_id} {user}>".format(id=self.key_middle_id,
-                                                            key_id=self.keyword_id,
+                                                            key_id=self.language_id,
                                                             user=self.user_id)
 
 
@@ -119,6 +119,7 @@ class Education(db.Model):
     degree_level = db.Column(db.String(64), nullable=True)
     major = db.Column(db.String(64), nullable=True)
     year = db.Column(db.String(64), nullable=True)
+    
     
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -152,63 +153,55 @@ class EducationMiddle(db.Model):
                                                                 user=self.user_id)
 
 
-class Engineer(db.Model):
+class EngineeringType(db.Model):
 
-    __tablename__ = "engineers"
+    __tablename__ = "engineering_types"
 
-    engineer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    engineer_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     engineer_type = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Engineering Category ID: {id}\t{type}>".format(id=self.engineer_id, type=engineer_type)
+        return "<Engineering Category ID: {id}\t{type}>".format(id=self.engineer_type_id, type=engineer_type)
 
-
-class EngineerMiddle(db.Model):
-
-    __tablename__ = "eng_middles"
-
-    eng_middle_id = db.Column(db.Integer, autoincrement=True, primary_key=True) 
-    engineer_id = db.Column(db.Integer, db.ForeignKey('engineers.engineer_id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    
-    user = db.relationship("User", backref="eng_middles")
-    engineer = db.relationship("Engineer", backref="eng_middles")
-
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return "<Engineering Middle ID: {id}\n{eng_id} {user}>".format(id=self.eng_middle_id,
-                                                                eng_id=self.engineer_id,
-                                                                user=self.user_id)
 
 
 def seed_data():
     """Create example data for the test database."""
     #FIXME: write a function that creates a game and adds it to the database.
 
+    engineering_types = ['Full Stack', 'Front End', 'Back End', 'Web', 'Mobile', 'Game', 'DevOps', 'CRM', 'Test', 'Embedded', 'Security', 'Infrastucture', 'Architect', 'Platform', 'Other']
+    for name in engineering_types:
+        print name
+        add_type = EngineeringType(engineer_type=name)
+        db.session.add(add_type)
+
+
+    lang_list = open("lang_list.txt")    
+    for name in lang_list:
+        print name
+        add_lang = Language(language_name=name)
+        db.session.add(add_lang)
+
+
     user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', password='xxxxxx',
-                  location='Oakland', state='CA', twitter='dmcdekker', linkedin='denise-m-dekker', 
-                  website_url='dmdekker.io', description='Some long and lovely text about me')
+                  zipcode='94609', twitter='dmcdekker', linkedin='denise-m-dekker', 
+                  website_url='dmdekker.io', description='Some long and lovely text about me', engineer_type=3)
 
     mentee = Mentee(user=user_1)
     relationship = Relationship(mentee=mentee)
-
-    engineer = Engineer(engineer_type='Full Stack')
-    eng_id = EngineerMiddle(engineer=engineer, user=user_1)
     
-    keyword = Keyword(keyword='Python')
-    keyword_id = KeyMiddle(keyword=keyword, user=user_1)
+    language_id = LanguageMiddle(language_id=3, user=user_1)
 
     education = Education(school_name='Mills College', city='Oakland', school_state='CA', degree_level='BA',
                   major='CS', year='2017')
+
     ed_id = EducationMiddle(education=education, user=user_1)
 
-    db.session.add_all([user_1, engineer, eng_id, keyword, keyword_id, education, 
-                        ed_id, mentee, relationship])
+    db.session.add_all([user_1, mentee, relationship, language_id, education, ed_id])
     db.session.commit()
-    
+
 
 #########################################################################################
 # Helper functions
