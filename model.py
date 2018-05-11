@@ -24,13 +24,13 @@ class User(db.Model):
     description = db.Column(db.Text, nullable=True)
     engineer_type = db.Column(db.Integer, nullable=True)
     # photo = db.Column(db.String(64), nullable=True)
-    #active = db.Column(db.Boolean(), nullable=False)
+    # active = db.Column(db.Boolean(), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return "<User: {fname}\t{lname}\tEmail:{email}\t{loc}>".format(fname=self.fname, lname=self.lname,
-                                                                email=self.email, loc=self.location)
+                                                                email=self.email, zipcode=zipcode)
                                                     
                                                     
 
@@ -187,7 +187,8 @@ def seed_data():
 
     user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', password='xxxxxx',
                   zipcode='94609', twitter='dmcdekker', linkedin='denise-m-dekker', 
-                  website_url='dmdekker.io', description='Some long and lovely text about me', engineer_type=3)
+                  website_url='dmdekker.io', description='Some long and lovely text about me', 
+                  engineer_type=3)
 
     mentee = Mentee(user=user_1)
     relationship = Relationship(mentee=mentee)
@@ -198,6 +199,7 @@ def seed_data():
                   major='CS', year='2017')
 
     ed_id = EducationMiddle(education=education, user=user_1)
+
 
     db.session.add_all([user_1, mentee, relationship, language_id, education, ed_id])
     db.session.commit()

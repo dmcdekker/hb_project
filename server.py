@@ -1,5 +1,4 @@
 """Shero"""
-
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
@@ -78,6 +77,7 @@ def profile_setup():
         user.website_url = request.form['website_url']
         user.description = request.form['description']
         user.engineer_type = request.form['engineer_type']
+        #user.active = request.args['active']
 
         # Get form variables for education
         school_name = request.form['school_name']
@@ -94,14 +94,14 @@ def profile_setup():
             db.session.add(lang_id)
             db.session.commit()
 
+
         # create new education object
         education = Education(school_name=school_name, city=city, school_state=school_state, degree_level=degree_level,
                               major=major, year=year)
         
         # create new education id object s
         ed_id = EducationMiddle(education=education, user=user)
-
-        
+      
         # create new mentee id and relationship object
         mentee = Mentee(user=user)
         relationship = Relationship(mentee=mentee)
@@ -114,6 +114,7 @@ def profile_setup():
 
     flash("Congrats, {}! You've successfully added your profile!".format(session['fname']))
     return redirect("/")
+
 
 
 if __name__ == "__main__":

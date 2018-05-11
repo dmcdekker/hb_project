@@ -93,10 +93,19 @@
       <label>
         Languages
           {% for language in languages %}
-          <input name='get_langs' type="checkbox" value="{{ language.language_id }}">{{ language.language_name }}<br>
+          <input name='get_langs' type='checkbox' value='{{ language.language_id }}'>{{ language.language_name }}<br>
           {% endfor %}
       </label>
     </div>
+
+
+<!--     <div>
+      <label>
+        Profile Active?
+        <input type='radio' name='active' value=True>Active
+        <input type='radio' name='active' value=False>Inactive
+      </label>
+    </div>     -->  
 
     <div>
       <input type="submit" value="Profile">
