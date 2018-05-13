@@ -171,14 +171,12 @@ def seed_data():
 
     engineering_types = ['Full Stack', 'Front End', 'Back End', 'Web', 'Mobile', 'Game', 'DevOps', 'CRM', 'Test', 'Embedded', 'Security', 'Infrastucture', 'Architect', 'Platform', 'Other']
     for name in engineering_types:
-        print name
         add_type = EngineeringType(engineer_type=name)
         db.session.add(add_type)
 
 
     lang_list = open("lang_list.txt")    
     for name in lang_list:
-        print name
         add_lang = Language(language_name=name)
         db.session.add(add_lang)
 

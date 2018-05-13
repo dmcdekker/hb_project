@@ -15,17 +15,6 @@ app.secret_key = "SHERO_app"
 
 app.jinja_env.undefined = StrictUndefined
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    file = request.files['image']
-    f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-    
-    # add your custom code to check that the uploaded file is a valid image and not a malicious file (out-of-scope for this post)
-    file.save(f)
-
-    return render_template('test.html')
-
-
 
 @app.route('/')
 def index():
@@ -130,6 +119,13 @@ def profile_setup():
     flash("Congrats, {}! You've successfully added your profile!".format(session['fname']))
     return redirect("/")
 
+
+@app.route("/profiles")
+def user_list():
+    """Show list of all profiles"""
+
+    users = User.query.all()
+    return render_template("profiles.html", users=users)
 
 
 if __name__ == "__main__":
