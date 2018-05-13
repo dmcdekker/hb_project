@@ -15,6 +15,7 @@ class User(db.Model):
     fname = db.Column(db.String(32), nullable=True)
     lname = db.Column(db.String(32), nullable=True)
     email = db.Column(db.String(64), nullable=True, unique=True)
+    #user_name = db.Column(db.String(64), nullable=True, unique=True)
     password = db.Column(db.String(64), nullable=True)
     zipcode = db.Column(db.String(32), nullable=True)
     twitter = db.Column(db.String(32), nullable=True)
@@ -157,6 +158,7 @@ class EngineeringType(db.Model):
 
     engineer_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     engineer_type = db.Column(db.String(64), nullable=True)
+
 
     def __repr__(self):
         """Provide helpful representation when printed."""

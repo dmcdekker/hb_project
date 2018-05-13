@@ -125,7 +125,12 @@ def user_list():
     """Show list of all profiles"""
 
     users = User.query.all()
-    return render_template("profiles.html", users=users)
+
+    engineer_types = EngineeringType.query.all()
+
+    #engineer = EngineeringType.query.filter_by(engineer_type_id=users.user_id)
+
+    return render_template("profiles.html", users=users, engineer_types=engineer_types)
 
 
 if __name__ == "__main__":
