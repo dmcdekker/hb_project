@@ -1,4 +1,5 @@
 """Shero"""
+
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
@@ -12,8 +13,19 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "SHERO_app"
 
-# if an undefined variable is used in Jinja2; raise an error.
 app.jinja_env.undefined = StrictUndefined
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files['image']
+    f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    
+    # add your custom code to check that the uploaded file is a valid image and not a malicious file (out-of-scope for this post)
+    file.save(f)
+
+    return render_template('test.html')
+
+
 
 @app.route('/')
 def index():
@@ -38,9 +50,10 @@ def register_process():
     email = request.form["email"]
     password = request.form["password"]
     zipcode = request.form['zipcode']
-    
+
     new_user = User(fname=fname, lname=lname, email=email, password=password,
                     zipcode=zipcode)
+
 
     db.session.add(new_user)
     db.session.commit()
@@ -48,10 +61,10 @@ def register_process():
     session['user_id'] = new_user.user_id
     session['fname'] = new_user.fname
 
-    return redirect('/profile')    
+    return redirect('/add-profile')    
 
 
-@app.route('/profile', methods=['GET'])
+@app.route('/add-profile', methods=['GET'])
 def profile_form():
     """Show form for user signup"""
 
@@ -59,16 +72,19 @@ def profile_form():
 
     languages = Language.query.all()
 
-    return render_template('profile.html', engineer_type=engineer_type, languages=languages)
+    return render_template('add-profile.html', engineer_type=engineer_type, languages=languages)
 
 
-@app.route('/profile', methods=['POST'])
+@app.route('/add-profile', methods=['POST'])
 def profile_setup():
     """Process profile setup"""
 
     user_id = session.get('user_id')
     
     user = User.query.filter_by(user_id=user_id).first()
+
+
+
 
     if user_id:
         # update column values instead of creating new user
@@ -93,7 +109,6 @@ def profile_setup():
             lang_id = LanguageMiddle(language_id=lang, user=user)
             db.session.add(lang_id)
             db.session.commit()
-
 
         # create new education object
         education = Education(school_name=school_name, city=city, school_state=school_state, degree_level=degree_level,
@@ -121,13 +136,16 @@ if __name__ == "__main__":
 
     app.debug = True
 
-    connect_to_db(app)
+    # make sure templates, etc. are not cached in debug mode
+    app.jinja_env.auto_reload = app.debug
 
     # disable intercept redirects
     app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
+
+    connect_to_db(app)
 
     app.run(host="0.0.0.0")
 
