@@ -15,15 +15,17 @@ class User(db.Model):
     fname = db.Column(db.String(32), nullable=True)
     lname = db.Column(db.String(32), nullable=True)
     email = db.Column(db.String(64), nullable=True, unique=True)
-    #user_name = db.Column(db.String(64), nullable=True, unique=True)
     password = db.Column(db.String(64), nullable=True)
-    zipcode = db.Column(db.String(32), nullable=True)
+    user_name = db.Column(db.String(64), nullable=True, unique=True)
+    city = db.Column(db.String(32), nullable=True)
+    state = db.Column(db.String(2), nullable=True)
     twitter = db.Column(db.String(32), nullable=True)
     linkedin = db.Column(db.String(32), nullable=True)
     website_url = db.Column(db.String(64), nullable=True)
     description = db.Column(db.Text, nullable=True)
     engineer_type = db.Column(db.Integer, nullable=True)
-    # active = db.Column(db.Boolean(), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=True)
+    is_mentor = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -31,47 +33,55 @@ class User(db.Model):
         return "<User: {fname}\t{lname}\tEmail:{email}\t{loc}>".format(fname=self.fname, lname=self.lname,
                                                                 email=self.email, zipcode=zipcode)
                                                     
-                                                    
+                                                 
 
-class Mentee(db.Model):
+# class Mentee(db.Model):
 
-    __tablename__ = "mentees"
+#     __tablename__ = "mentees"
 
-    mentee_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+#     mentee_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
-    user = db.relationship("User", backref="mentees")
+#     user = db.relationship("User", backref="mentees")
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-        return "<Mentee: {id}\t{user}>".format(id=mentee_id, user=user_id)
+#         return "<Mentee: {id}\t{user}>".format(id=mentee_id, user=user_id)
 
 
-# class Mentor(db.model):
+# class Mentor(db.Model):
 
 #     __tablename__ = "mentors"
 
 #     mentor_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = FK user_id
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
-#     return "<Mentor: {id}\t{user}>".format(id=mentor_id, user=user_id)
-    
+#     user = db.relationship("User", backref="mentors")
 
-class Relationship(db.Model):
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-    __tablename__ = "relationships"
+#         return "<Mentor: {id}\t{user}>".format(id=mentor_id, user=user_id)
 
-    relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
 
-    mentee = db.relationship("Mentee", backref="relationships")
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+# class Relationship(db.Model):
 
-        return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
-                                                        mentee=mentee_id)                                                                          
+#     __tablename__ = "relationships"
+
+#     relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
+#     mentor_id = db.Column(db.Integer, db.ForeignKey('mentors.mentor_id'))
+
+#     mentee = db.relationship("Mentee", backref="relationships")
+#     mentor = db.relationship("Mentor", backref="relationships")
+
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
+
+#         return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
+#                                                         mentee=mentee_id)                                                                          
 
 
 class Language(db.Model):
@@ -183,13 +193,13 @@ def seed_data():
         db.session.add(add_lang)
 
 
-    user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', password='xxxxxx',
-                  zipcode='94609', twitter='dmcdekker', linkedin='denise-m-dekker', 
+    user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', user_name='dmcdekker', password='xxxxxx',
+                  city='Oakland', state='CA', twitter='dmcdekker', linkedin='denise-m-dekker', 
                   website_url='dmdekker.io', description='Some long and lovely text about me', 
-                  engineer_type=3)
+                  engineer_type=3, is_active=True, is_mentor=False)
 
-    mentee = Mentee(user=user_1)
-    relationship = Relationship(mentee=mentee)
+    # mentee = Mentee(user=user_1)
+    # relationship = Relationship(relationship_id=1)
     
     language_id = LanguageMiddle(language_id=3, user=user_1)
 
@@ -199,7 +209,7 @@ def seed_data():
     ed_id = EducationMiddle(education=education, user=user_1)
 
 
-    db.session.add_all([user_1, mentee, relationship, language_id, education, ed_id])
+    db.session.add_all([user_1, language_id, education, ed_id])
     db.session.commit()
 
 
@@ -217,7 +227,7 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    # As a convenience, if we run this module interactively, it will leave
+    # As a convenience, if we run this module interis_actively, it will leave
     # you in a state of being able to work with the database directly.
 
     from server import app

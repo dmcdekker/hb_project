@@ -7,16 +7,17 @@
     {% for user in users %}
       <li>
        <a href="/profiles/{{ user.user_id }}">
-          {{ user.fname }} {{ user.lname }}
-        </a>
+          {{ user.fname }} {{ user.lname }} <br>
+      </a>
       {% for eng_type in engineer_types %}
         {% if user.engineer_type == eng_type.engineer_type_id %}   
             {{ eng_type.engineer_type }}
       </li>
         {% endif %}
       {% endfor %} 
-      <!-- {{ user.zipcode }} -->
-    {% endfor %} 
+     {{ user.city }}, {{ user.state }}  
+    {% endfor %}
+
   </ul>
 
 

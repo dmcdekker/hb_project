@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Mentee, Relationship, Language, LanguageMiddle 
+from model import connect_to_db, db, User, Language, LanguageMiddle 
 from model import Education, EducationMiddle, EngineeringType
 
 app = Flask(__name__)
@@ -38,10 +38,12 @@ def register_process():
     lname = request.form['lname']
     email = request.form["email"]
     password = request.form["password"]
-    zipcode = request.form['zipcode']
+    city = request.form["city"]
+    state = request.form["state"]
+    user_name = request.form["user_name"]
 
     new_user = User(fname=fname, lname=lname, email=email, password=password,
-                    zipcode=zipcode)
+                    city=city, state=state, user_name=user_name)
 
 
     db.session.add(new_user)
@@ -79,8 +81,20 @@ def profile_setup():
         user.linkedin = request.form['linkedin']
         user.website_url = request.form['website_url']
         user.description = request.form['description']
-        user.engineer_type = request.form['engineer_type']
-        #user.active = request.args['active']
+        user.engineer_type = request.form['engineer_type']     
+
+        get_active = request.form['is_active']
+        if get_active == 'True':
+            user.is_active = True
+        elif get_active == 'False':
+            user.is_active = False
+
+        get_is_mentor = request.form['is_mentor']
+        if get_is_mentor == 'True':
+            user.is_mentor = True
+        elif get_is_mentor == 'False':
+            user.is_mentor = False
+
 
         # Get form variables for education
         school_name = request.form['school_name']
@@ -105,10 +119,10 @@ def profile_setup():
         ed_id = EducationMiddle(education=education, user=user)
       
         # create new mentee id and relationship object
-        mentee = Mentee(user=user)
-        relationship = Relationship(mentee=mentee)
+        #mentee = Mentee(user=user)
+        #relationship = Relationship(mentee=mentee)
 
-        db.session.add_all([user, education, ed_id, mentee, relationship])
+        db.session.add_all([user, education, ed_id])
         db.session.commit()
 
     else:
@@ -126,8 +140,6 @@ def user_list():
 
     engineer_types = EngineeringType.query.all()
 
-    #engineer = EngineeringType.query.filter_by(engineer_type_id=users.user_id)
-
     return render_template("profiles.html", users=users, engineer_types=engineer_types)
 
 
@@ -139,12 +151,9 @@ def user_detail(user_id):
 
     schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
 
-    # query middle table with user_id and education_id
-    # get education_id from Ed table and return object w/ attributes
+    languages = Language.query.join(LanguageMiddle).filter_by(user_id=user.user_id).all()
 
-    #schools = Education.query.filter_by(user_id=user.user_id, education_id=education.education_id).all()
-
-    return render_template("user_profile.html", user=user, schools=schools)
+    return render_template("user_profile.html", user=user, schools=schools, languages=languages)
 
 
 @app.route('/login', methods=['GET'])
@@ -186,9 +195,6 @@ def logout():
     flash("You are now logged Out")
 
     return redirect("/")
-
-
-
 
 
 if __name__ == "__main__":
