@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>{{ user.fname }} {{ user.lname }}</h1>
+  <h4>{{ user.twitter }}</h4>
+  <h4>{{ user.linkedin }}</h4>
+  <h4>{{ user.website_url }}</h4>
+
+  {% for school in schools %}
+
+  <h2>{{ school.school_name }}</h2>
+  <h4>{{ school.city }}, {{ school.school_state }}</h4>
+  <h4>Degree Awareded: {{ school.degree_level }}, {{ school.major }}</h4>
+  <h4>Year Awarded: {{ school.year }}</h4>
+
+
+
+  {% endfor %}
+
+  <p>Description: {{ user.description }}</p>
+
+
+{% endblock %}

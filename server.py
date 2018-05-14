@@ -73,8 +73,6 @@ def profile_setup():
     user = User.query.filter_by(user_id=user_id).first()
 
 
-
-
     if user_id:
         # update column values instead of creating new user
         user.twitter = request.form['twitter']
@@ -131,6 +129,23 @@ def user_list():
     #engineer = EngineeringType.query.filter_by(engineer_type_id=users.user_id)
 
     return render_template("profiles.html", users=users, engineer_types=engineer_types)
+
+
+@app.route("/profiles/<int:user_id>")
+def user_detail(user_id):
+    """Show info about user."""
+
+    user = User.query.get(user_id)
+
+    schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
+
+    # query middle table with user_id and education_id
+    # get education_id from Ed table and return object w/ attributes
+
+    #schools = Education.query.filter_by(user_id=user.user_id, education_id=education.education_id).all()
+
+    return render_template("user_profile.html", user=user, schools=schools)
+
 
 
 if __name__ == "__main__":
