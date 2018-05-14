@@ -34,14 +34,16 @@
      <p>{{ user.description }}</p>
   </div>
 
-  <div id='is_active'>
-    <h4>Active</h4>
-    {{ user.is_active }}
-  </div> 
+  <div id='for_display'>
+    <div id='is_active'>
+      <h4>Active</h4>
+      {{ user.is_active }}
+    </div> 
 
-  <div id='is_mentor'>
-    <h4>Mentor?</h4>
-    {{ user.is_mentor }}
+    <div id='is_mentor'>
+      <h4>Mentor?</h4>
+      {{ user.is_mentor }}
+    </div>
   </div> 
 
 {% endblock %}

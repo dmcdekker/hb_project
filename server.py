@@ -156,6 +156,7 @@ def user_detail(user_id):
     return render_template("user_profile.html", user=user, schools=schools, languages=languages)
 
 
+
 @app.route('/login', methods=['GET'])
 def login_form():
     """Show login form."""
