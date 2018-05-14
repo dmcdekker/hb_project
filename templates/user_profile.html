@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
+  <div>
+    <h1>{{ user.fname }} {{ user.lname }}</h1>
+    <h4>Twitter: {{ user.twitter }}</h4>
+    <h4>LinkedIn: {{ user.linkedin }}</h4>
+    <h4>Website: {{ user.website_url }}</h4>
+    <h4>Email: {{ user.email }}</h4>
+  </div>  
 
-  <h1>{{ user.fname }} {{ user.lname }}</h1>
-  <h4>{{ user.twitter }}</h4>
-  <h4>{{ user.linkedin }}</h4>
-  <h4>{{ user.website_url }}</h4>
-
-  {% for school in schools %}
-
-  <h2>{{ school.school_name }}</h2>
-  <h4>{{ school.city }}, {{ school.school_state }}</h4>
-  <h4>Degree Awareded: {{ school.degree_level }}, {{ school.major }}</h4>
-  <h4>Year Awarded: {{ school.year }}</h4>
-
-
-
-  {% endfor %}
+  <div id='school_info'>
+    {% for school in schools %}
+      <h2>{{ school.school_name }}</h2>
+      <h4>{{ school.city }}, {{ school.school_state }}</h4>
+      <h4>Degree Awarded: {{ school.major }}, {{ school.degree_level }}</h4>
+      <h4>Year Awarded: {{ school.year }}</h4>
+    {% endfor %}
+  </div>
 
   <p>Description: {{ user.description }}</p>
 

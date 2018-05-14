@@ -147,6 +147,49 @@ def user_detail(user_id):
     return render_template("user_profile.html", user=user, schools=schools)
 
 
+@app.route('/login', methods=['GET'])
+def login_form():
+    """Show login form."""
+
+    return render_template("login.html")
+
+
+@app.route('/login', methods=['POST'])
+def login_process():
+    """Process login."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash("No such user")
+        return redirect("/login")
+
+    if user.password != password:
+        flash("Incorrect password")
+        return redirect("/login")
+
+    session["user_id"] = user.user_id
+
+    flash("Logged in")
+    return redirect("/profiles/{}".format(user.user_id))
+
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    flash("You are now logged Out")
+
+    return redirect("/")
+
+
+
+
 
 if __name__ == "__main__":
 
