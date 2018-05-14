@@ -3,6 +3,8 @@ import unittest
 from server import app
 from model import db, seed_data, connect_to_db
 
+connect_to_db(app)
+
 
 class MyTests(unittest.TestCase):
     """Tests for my mentoring site."""
@@ -10,6 +12,7 @@ class MyTests(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
         app.config['TESTING'] = True
+        # seed_data()
 
     def test_homepage(self):
         result = self.client.get("/")
@@ -23,7 +26,7 @@ class MyTests(unittest.TestCase):
 
     def test_profile(self):
         # FIXME: Add a test to show we see the profile form
-        result = self.client.get("/profile")
+        result = self.client.get("/add-profile")
         self.assertIn("Please complete to make your public profile", result.data)
         #self.assertNotIn("Party Details", result.data)
 
