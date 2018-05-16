@@ -1,73 +1,73 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <div>
-    <div id='edit_profile'>
-      <button class='btn btn large' id='edit-profile' submit='edit_profile' type='submit'>EDIT PROFILE</button>
-    </div>  
+<div class='container'>
+  
+    <div id='social-container'>
+      <h1>{{ user.fname }} {{ user.lname }}</h1>
 
-      <div id='social-media'>
+      <div>
+        <h4 id='twitter_id'>Twitter: {{ user.twitter }}</h4>
+      </div>       
 
-        <h1>{{ user.fname }} {{ user.lname }}</h1>
-        
-        <h4>Twitter: {{ user.twitter }}</h4>
-        <div id='twitter-div'></div>
-        <div id='update-status'></div>
+      <div>
+        <h4 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h4>
+      </div> 
 
-        <!-- <h4>LinkedIn: {{ user.linkedin }}</h4>
-        <div id='linkedin'></div>
+      <div>
+        <h4 id='website_url_id'>Website: {{ user.website_url }}</h4>
+      </div>  
 
-        <h4>Website: {{ user.website_url }}</h4>
-        <div id='website_url'></div>
+      <div>
+        <input class="btn btn-primary" id='edit-social' type="submit" value="EDIT SOCIAL">
+      <div id='social-div'></div>
+    </div> 
 
-        <h4>Email: {{ user.email }}</h4>
-        <div id='email'></div> -->
-      </div>
-  </div>   
+</div>   
 
 
-  <!-- <form action="/edit-profile.json" method="post" id="twitter-new"><input type="text" name="twitter" id="twit-field"/><br><input type="submit" value="Submit"></form>
-
- -->
-
-  <div id='edit_education'>
-    <button class='btn btn large' id='edit-education' submit='edit_education' type='submit'>EDIT EDUCATION</button>
-   
-    <div id='school_info'>
+  <div id='education-container'> 
+    <div id='school-info'>
       <h2>Education</h2>
       {% for school in schools %}
         <h3>{{ school.school_name }}, {{ school.year }}</h3>
         <p>{{ school.city }}, {{ school.school_state }}</p>
         <h4>{{ school.major }}, {{ school.degree_level }}</h4>  
       {% endfor %} 
-    </div>   
+    </div>
+    <div>
+      <input class="btn btn-primary" id='edit-education' type="submit" value="EDIT EDU">
+        <div id='education-div'></div>
+    </div> 
   </div>
 
   
-  <div>
-    <div id='edit_languages'>
-      <button class='btn btn large' id='edit-profile' submit='edit_languages' type='submit'>EDIT LANGUAGES</button>
-    </div>  
-    
-      <div id='language_info'>
-        <h2>Languages</h2>
-        {% for language in languages %}
-          <h4>{{ language.language_name }}</h4>
-        {% endfor %}
-      </div>  
+  <div id='language-container'>
+    <div id='language-info'>
+      <h2>Languages</h2>
+      {% for language in languages %}
+        <h5>{{ language.language_name }}</h5>
+      {% endfor %}
+    </div> 
+
+    <div>
+    <input class="btn btn-primary" id='edit-language' type="submit" value="EDIT LANGUAGES">
+      <div id='language-div'></div>
+    </div> 
+ 
   </div>
 
 
     
-  <div>
-    <div id='edit_description'>
-      <button class='btn btn large' id='edit-profile' submit='edit_description' type='submit'>EDIT DESCRIPTION</button>
-    </div>   
-
-      <div id='description'>
+  <div id='description-container'>
+      <div id='description-info'>
         <h2>Description</h2>
          <p>{{ user.description }}</p>
       </div>
+
+      <input class="btn btn-primary" id='edit-decription' type="submit" value="EDIT DESCRIPTION">
+        <div id='description-div'></div>
+      </div> 
   </div>
 
     
@@ -88,4 +88,5 @@
 
 
 <script src="../static/user_profile.js"></script>
+</div>
 {% endblock %}

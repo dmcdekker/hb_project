@@ -175,13 +175,24 @@ def edit_profile():
     
     if user_id:
 
-        twitter = request.form.get('twitter')
         user = User.query.get(user_id)
-        print user
-        user.twitter = twitter
+
+        twitter = request.form.get('twitter')
+        linkedin = request.form.get('linkedin')
+        website_url = request.form.get('website_url')
+
+        if twitter != '':
+            user.twitter = twitter
+        
+        if linkedin != '':    
+            user.linkedin = linkedin
+
+        if website_url != '':    
+            user.website_url = website_url
+
         db.session.commit()
 
-        return jsonify(twitter)
+        return jsonify(twitter, linkedin, website_url)
 
     # user_id = session.get('user_id')
     
