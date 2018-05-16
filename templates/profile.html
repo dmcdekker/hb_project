@@ -3,77 +3,77 @@
 
 <h1>Profile</h1>
 
-<form action="add-profile" method="POST">
+<form action='add-profile' method='POST'>
 
   <h3>Please complete to make your public profile</h3>
 
   <div>
       <label>
         Twitter Handle
-        <input type="text" name="twitter">
+        <input type='text' name='twitter'>
       </label>
     </div>
 
     <div>
       <label>
         LinkedIn Handle
-        <input type="text" name="linkedin">
+        <input type='text' name='linkedin'>
       </label>
     </div>
 
     <div>
       <label>
         Website URL
-        <input type="text" name="website_url">
+        <input type='text' name='website_url'>
       </label>
     </div>
 
     <div>
       <label>
         Description
-        <input type="text" name="description">
+        <input type='text' name='description'>
       </label>
     </div>
 
     <div>
       <label>
         Name of College
-        <input type="text" name="school_name">
+        <input type='text' name='school_name'>
       </label>
     </div>
 
     <div>
       <label>
         College Location 
-        <input type="text" name="city">
+        <input type='text' name='city'>
       </label>
     </div>
 
     <div>
       <label>
         College State 
-        <input type="text" name="school_state">
+        <input type='text' name='school_state'>
       </label>
     </div>
 
     <div>
       <label>
         Degree Awarded
-        <input type="text" name="degree_level">
+        <input type='text' name='degree_level'>
       </label>
     </div>
 
     <div>
       <label>
         Degree Major
-        <input type="text" name="major">
+        <input type='text' name='major'>
       </label>
     </div>
 
     <div>
       <label>
         Year Graduated
-        <input type="text" name="year">
+        <input type='text' name='year'>
       </label>
     </div>
 
@@ -83,7 +83,7 @@
         <!-- for loop with jinja to go through values -->
         <select name='engineer_type'>
           {% for type in engineer_type %}
-          <option value="{{ type.engineer_type_id }}">{{ type.engineer_type }}</option>
+          <option value='{{ type.engineer_type_id }}'>{{ type.engineer_type }}</option>
           {% endfor %}
         </select>
       </label>
@@ -107,7 +107,7 @@
     </div>     -->  
 
     <div>
-      <input type="submit" value="Profile">
+      <input type='submit' value='Profile'>
     </div>
 
   </form>

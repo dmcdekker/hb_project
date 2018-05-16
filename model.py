@@ -30,39 +30,9 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<User: {fname}\t{lname}\tEmail:{email}\t{loc}>".format(fname=self.fname, lname=self.lname,
-                                                                email=self.email, zipcode=zipcode)
+        return "<User: {fname}\t{lname}\tEmail:{email}\t{city}>".format(fname=self.fname, lname=self.lname,
+                                                                email=self.email, city=self.city)
                                                     
-                                                 
-
-# class Mentee(db.Model):
-
-#     __tablename__ = "mentees"
-
-#     mentee_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    
-#     user = db.relationship("User", backref="mentees")
-
-#     def __repr__(self):
-#         """Provide helpful representation when printed."""
-
-#         return "<Mentee: {id}\t{user}>".format(id=mentee_id, user=user_id)
-
-
-# class Mentor(db.Model):
-
-#     __tablename__ = "mentors"
-
-#     mentor_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-#     user = db.relationship("User", backref="mentors")
-
-#     def __repr__(self):
-#         """Provide helpful representation when printed."""
-
-#         return "<Mentor: {id}\t{user}>".format(id=mentor_id, user=user_id)
 
 
 
@@ -198,8 +168,8 @@ def seed_data():
                   website_url='dmdekker.io', description='Some long and lovely text about me', 
                   engineer_type=3, is_active=True, is_mentor=False)
 
-    # mentee = Mentee(user=user_1)
-    # relationship = Relationship(relationship_id=1)
+
+    #relationship = Relationship(mentee_id=user_1)
     
     language_id = LanguageMiddle(language_id=3, user=user_1)
 

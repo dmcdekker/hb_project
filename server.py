@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Language, LanguageMiddle 
@@ -63,7 +63,7 @@ def profile_form():
 
     languages = Language.query.all()
 
-    return render_template('add-profile.html', engineer_type=engineer_type, languages=languages)
+    return render_template('add_profile.html', engineer_type=engineer_type, languages=languages)
 
 
 @app.route('/add-profile', methods=['POST'])
@@ -81,7 +81,7 @@ def profile_setup():
         user.linkedin = request.form['linkedin']
         user.website_url = request.form['website_url']
         user.description = request.form['description']
-        user.engineer_type = request.form['engineer_type']     
+        user.engineer_type = request.form['engineer_type'] 
 
         get_active = request.form['is_active']
         if get_active == 'True':
@@ -136,6 +136,12 @@ def profile_setup():
 def user_list():
     """Show list of all profiles"""
 
+    user_id = session.get('user_id')
+
+    if not user_id:
+        flash("Please log in or register to view profiles")
+        return redirect('/')
+
     users = User.query.all()
 
     engineer_types = EngineeringType.query.all()
@@ -147,6 +153,12 @@ def user_list():
 def user_detail(user_id):
     """Show info about user."""
 
+    # user_id = session.get('user_id')
+
+    # if not user_id:
+    #     flash("Please log in or register to view profiles")
+    #     return redirect('/')
+
     user = User.query.get(user_id)
 
     schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
@@ -156,6 +168,56 @@ def user_detail(user_id):
     return render_template("user_profile.html", user=user, schools=schools, languages=languages)
 
 
+@app.route('/edit-profile.json', methods=['POST'])
+def edit_profile():
+
+    user_id = session.get('user_id')
+    
+    if user_id:
+
+        twitter = request.form.get('twitter')
+        user = User.query.get(user_id)
+        print user
+        user.twitter = twitter
+        db.session.commit()
+
+        return jsonify(twitter)
+
+    # user_id = session.get('user_id')
+    
+    # if user_id:
+    
+    #     # update personal info
+    #     user.fname = request.form['fname']
+    #     user.lname = request.form['lname']
+    #     user.email = request.form['email']
+    #     user.password = request.form['password']
+    #     user.city = request.form['city']
+    #     user.state = request.form['state']
+    #     user.twitter = request.form['twitter']
+    #     user.linkedin = request.form['linkedin']
+    #     user.website_url = request.form['website_url']
+    #     user.description = request.form['description']
+    #     user.engineer_type = request.form['engineer_type']     
+
+    #     get_active = request.form['is_active']
+    #     if get_active == 'True':
+    #         user.is_active = True
+    #     elif get_active == 'False':
+    #         user.is_active = False
+
+    #     get_is_mentor = request.form['is_mentor']
+    #     if get_is_mentor == 'True':
+    #         user.is_mentor = True
+    #     elif get_is_mentor == 'False':
+    #         user.is_mentor = False
+
+    #     db.session.commit()
+    #     return jsonify(twitter)
+
+
+    # return redirect('/login')    
+        
 
 @app.route('/login', methods=['GET'])
 def login_form():

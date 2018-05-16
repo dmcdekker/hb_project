@@ -7,77 +7,56 @@
 
   <h3>Please complete to make your public profile</h3>
 
-  <div>
+    <div id='social_media'>
       <label>
         Twitter Handle
         <input type="text" name="twitter">
       </label>
-    </div>
-
-    <div>
       <label>
         LinkedIn Handle
         <input type="text" name="linkedin">
       </label>
-    </div>
-
-    <div>
       <label>
         Website URL
         <input type="text" name="website_url">
       </label>
     </div>
 
-    <div>
+    <div id='description'>
       <label>
-        Description
+        About Me
         <input type="text" name="description">
       </label>
     </div>
 
-    <div>
+    <div id='education'>
       <label>
         Name of College
         <input type="text" name="school_name">
       </label>
-    </div>
-
-    <div>
       <label>
         College Location 
         <input type="text" name="city">
       </label>
-    </div>
-
-    <div>
       <label>
         College State 
         <input type="text" name="school_state">
       </label>
-    </div>
-
-    <div>
       <label>
         Degree Awarded
         <input type="text" name="degree_level">
       </label>
-    </div>
-
-    <div>
       <label>
         Degree Major
         <input type="text" name="major">
       </label>
-    </div>
-
-    <div>
       <label>
         Year Graduated
         <input type="text" name="year">
       </label>
     </div>
 
-    <div>
+    <div id='engineer_type'>
       <label>
         Type of Engineering
         <!-- for loop with jinja to go through values -->
@@ -89,7 +68,7 @@
       </label>
     </div>
 
-    <div>
+    <div id='languages'>
       <label>
         Languages
           {% for language in languages %}
