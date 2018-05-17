@@ -1,25 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h2>Profiles</h2>
+<div class='container'>
 
-  <ul>
-    {% for user in users %}
-      <li>
-       <a href="/profiles/{{ user.user_id }}">
-          {{ user.fname }} {{ user.lname }} <br>
-      </a>
-      {% for eng_type in engineer_types %}
-        {% if user.engineer_type == eng_type.engineer_type_id %}   
-            {{ eng_type.engineer_type }}
-      </li>
+  <div class="page-header">
+        <h1>Profiles</h1>
+  </div>
+
+  <div id='user-type'>
+    <button id='all-page'>All</button>
+    <button id='mentor-page'>Mentors</button>
+    <button id='mentee-page'>Mentees</button>
+  </div>
+
+  <div id='mentor-profiles'>
+    <ul>
+      {% for user in users %}
+        {% if user.is_mentor %}
+
+          <li>
+           <a href="/profiles/{{ user.user_id }}">
+              {{ user.fname }} {{ user.lname }} <br>
+          </a>  
+          {% for eng_type in engineer_types %}
+            {% if user.engineer_type == eng_type.engineer_type_id %}   
+                {{ eng_type.engineer_type }}
+          </li>
+            {% endif %}
+          {% endfor %} 
+         {{ user.city }}, {{ user.state }}
         {% endif %}
-      {% endfor %} 
-     {{ user.city }}, {{ user.state }}  
-    {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
 
-  </ul>
+  <div id='mentee-profiles'>
+    <ul>
+      {% for user in users %}
+        {% if not user.is_mentor %}
+          <li>
+           <a href="/profiles/{{ user.user_id }}">
+              {{ user.fname }} {{ user.lname }} <br>
+          </a>  
+          {% for eng_type in engineer_types %}
+            {% if user.engineer_type == eng_type.engineer_type_id %}   
+                {{ eng_type.engineer_type }}
+          </li>
+            {% endif %}
+          {% endfor %} 
+         {{ user.city }}, {{ user.state }}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 
+<script type="text/javascript">
 
+$('#mentor-page').click(function(){
+  $('#mentor-profiles').show()
+  $('#mentee-profiles').hide()
+  });
+
+$('#mentee-page').click(function(){
+  $('#mentee-profiles').show()
+  $('#mentor-profiles').hide()
+  });
+
+$('#all-page').click(function(){
+  $('#mentor-profiles').show()
+  $('#mentee-profiles').show()
+  });
+
+</script>
 
 {% endblock %}

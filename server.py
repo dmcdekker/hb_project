@@ -1,5 +1,8 @@
 """Shero"""
 
+from pprint import pformat
+import os
+
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
@@ -15,6 +18,9 @@ app.secret_key = "SHERO_app"
 
 app.jinja_env.undefined = StrictUndefined
 
+EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
+
+EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
 
 @app.route('/')
 def index():
@@ -132,44 +138,9 @@ def profile_setup():
     return redirect("/")
 
 
-@app.route("/profiles")
-def user_list():
-    """Show list of all profiles"""
-
-    user_id = session.get('user_id')
-
-    if not user_id:
-        flash("Please log in or register to view profiles")
-        return redirect('/')
-
-    users = User.query.all()
-
-    engineer_types = EngineeringType.query.all()
-
-    return render_template("profiles.html", users=users, engineer_types=engineer_types)
-
-
-@app.route("/profiles/<int:user_id>")
-def user_detail(user_id):
-    """Show info about user."""
-
-    # user_id = session.get('user_id')
-
-    # if not user_id:
-    #     flash("Please log in or register to view profiles")
-    #     return redirect('/')
-
-    user = User.query.get(user_id)
-
-    schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
-
-    languages = Language.query.join(LanguageMiddle).filter_by(user_id=user.user_id).all()
-
-    return render_template("user_profile.html", user=user, schools=schools, languages=languages)
-
-
 @app.route('/edit-profile.json', methods=['POST'])
 def edit_profile():
+    """User can edit profile"""
 
     user_id = session.get('user_id')
     
@@ -192,43 +163,76 @@ def edit_profile():
 
         db.session.commit()
 
-        return jsonify(twitter, linkedin, website_url)
+        return jsonify(twitter, linkedin, website_url)    
+
+
+@app.route("/profiles")
+def user_list():
+    """Show list of all profiles"""
+
+    user_id = session.get('user_id')
+
+    if not user_id:
+        flash("Please log in or register to view profiles")
+        return redirect('/')
+
+    users = User.query.all()
+
+    engineer_types = EngineeringType.query.all()
+
+    return render_template("profiles.html", users=users, engineer_types=engineer_types)
+
+
+
+@app.route("/profiles/<int:user_id>")
+def user_detail(user_id):
+    """Show info about user."""
 
     # user_id = session.get('user_id')
-    
-    # if user_id:
-    
-    #     # update personal info
-    #     user.fname = request.form['fname']
-    #     user.lname = request.form['lname']
-    #     user.email = request.form['email']
-    #     user.password = request.form['password']
-    #     user.city = request.form['city']
-    #     user.state = request.form['state']
-    #     user.twitter = request.form['twitter']
-    #     user.linkedin = request.form['linkedin']
-    #     user.website_url = request.form['website_url']
-    #     user.description = request.form['description']
-    #     user.engineer_type = request.form['engineer_type']     
 
-    #     get_active = request.form['is_active']
-    #     if get_active == 'True':
-    #         user.is_active = True
-    #     elif get_active == 'False':
-    #         user.is_active = False
+    # if not user_id:
+    #     flash("Please log in or register to view profiles")
+    #     return redirect('/')
 
-    #     get_is_mentor = request.form['is_mentor']
-    #     if get_is_mentor == 'True':
-    #         user.is_mentor = True
-    #     elif get_is_mentor == 'False':
-    #         user.is_mentor = False
+    user = User.query.get(user_id)
 
-    #     db.session.commit()
-    #     return jsonify(twitter)
+    schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
 
+    languages = Language.query.join(LanguageMiddle).filter_by(user_id=user.user_id).all()
 
-    # return redirect('/login')    
+    return render_template("user_profile.html", user=user, schools=schools, languages=languages)
+
         
+# @app.route("/events")
+# def show_events():
+#     """Show events from Eventbite"""
+
+#     query = request.args.get('query')
+
+#     payload = {'q': query}
+
+#     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
+
+#     response = requests.get(EVENTBRITE_URL + "events/search/",
+#                                 params=payload,
+#                                 headers=headers)
+
+#     data = response.json()
+
+#     if response.ok:
+#             events = data['events']
+
+#     else:
+#         flash(":( No parties: {}".format(data['error_description']))
+#         events = []        
+
+
+
+#     return render_template("events.html", data=pformat(data),
+#                                results=events)
+
+
+
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -271,6 +275,7 @@ def logout():
     return redirect("/")
 
 
+
 if __name__ == "__main__":
 
     app.debug = True
@@ -287,4 +292,9 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     app.run(host="0.0.0.0")
+
+
+
+
+
 

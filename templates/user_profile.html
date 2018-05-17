@@ -4,18 +4,20 @@
 <div class='container'>
   
     <div id='social-container'>
-      <h1>{{ user.fname }} {{ user.lname }}</h1>
+      <div class="page-header">
+        <h1>{{ user.fname }} {{ user.lname }}</h1>
+      </div>
 
       <div>
-        <h4 id='twitter_id'>Twitter: {{ user.twitter }}</h4>
+        <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
       </div>       
 
       <div>
-        <h4 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h4>
+        <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
       </div> 
 
       <div>
-        <h4 id='website_url_id'>Website: {{ user.website_url }}</h4>
+        <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
       </div>  
 
       <div>
@@ -30,7 +32,7 @@
     <div id='school-info'>
       <h2>Education</h2>
       {% for school in schools %}
-        <h3>{{ school.school_name }}, {{ school.year }}</h3>
+        <h4>{{ school.school_name }}, {{ school.year }}</h4>
         <p>{{ school.city }}, {{ school.school_state }}</p>
         <h4>{{ school.major }}, {{ school.degree_level }}</h4>  
       {% endfor %} 
@@ -46,7 +48,7 @@
     <div id='language-info'>
       <h2>Languages</h2>
       {% for language in languages %}
-        <h5>{{ language.language_name }}</h5>
+        <h4>{{ language.language_name }}</h4>
       {% endfor %}
     </div> 
 
@@ -56,13 +58,11 @@
     </div> 
  
   </div>
-
-
     
   <div id='description-container'>
       <div id='description-info'>
         <h2>Description</h2>
-         <p>{{ user.description }}</p>
+         <h5>{{ user.description }}</h5>
       </div>
 
       <input class="btn btn-primary" id='edit-decription' type="submit" value="EDIT DESCRIPTION">
@@ -70,9 +70,7 @@
       </div> 
   </div>
 
-    
-
-  <div>
+  <div id='mentor-or-active'>
     <div id='for_display'>
       <div id='is_active'>
         <h4>Active</h4>
@@ -85,7 +83,6 @@
       </div>
     </div>
   </div>   
-
 
 <script src="../static/user_profile.js"></script>
 </div>

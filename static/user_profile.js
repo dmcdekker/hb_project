@@ -23,7 +23,7 @@ function getData(evt) {
   
 function addElement(e){ 
     e.preventDefault();
-    $('#social-div').append('<form submit="/edit-profile.json" id="social-new"><input type="text" name="linkedin" id="linkedin-field"/><br><input type="text" name="twitter" id="twit-field"/><br><input type="text" name="website_url" id="web-field"/><br><input type="submit" value="Submit"></form>');
+    $('#social-div').append('<form submit="/edit-profile.json" id="social-new"><input type="text" name="linkedin" id="linkedin-field" placeholder="linkedin id"/><br><input type="text" name="twitter" id="twit-field" placeholder="twitter handle"/><br><input type="text" name="website_url" id="web-field" placeholder="website url"/><br><input type="submit" value="Submit"></form>');
   }
   $('#edit-social').one('click', addElement);
 
