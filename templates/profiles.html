@@ -17,7 +17,6 @@
     <ul>
       {% for user in users %}
         {% if user.is_mentor %}
-
           <li>
            <a href="/profiles/{{ user.user_id }}">
               {{ user.fname }} {{ user.lname }} <br>

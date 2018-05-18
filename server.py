@@ -2,6 +2,7 @@
 
 from pprint import pformat
 import os
+import requests
 
 from jinja2 import StrictUndefined
 
@@ -20,7 +21,8 @@ app.jinja_env.undefined = StrictUndefined
 
 EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
 
-EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
+EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/'
+
 
 @app.route('/')
 def index():
@@ -203,33 +205,35 @@ def user_detail(user_id):
     return render_template("user_profile.html", user=user, schools=schools, languages=languages)
 
         
-# @app.route("/events")
-# def show_events():
-#     """Show events from Eventbite"""
+@app.route("/events")
+def show_events():
+    """Show events from Eventbite"""
 
-#     query = request.args.get('query')
+    query = 'women+tech&sort_by=best&location.address=san+francisco'
 
-#     payload = {'q': query}
+    payload = {'q': query} 
 
-#     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
+    headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
-#     response = requests.get(EVENTBRITE_URL + "events/search/",
-#                                 params=payload,
-#                                 headers=headers)
-
-#     data = response.json()
-
-#     if response.ok:
-#             events = data['events']
-
-#     else:
-#         flash(":( No parties: {}".format(data['error_description']))
-#         events = []        
+    # https://www.eventbriteapi.com/v3/events/search/?q=women+tech&sort_by=best&location.address=san+francisco&token=ZXQO2NPVKNLZ6MASPFFU
 
 
+    response = requests.get(EVENTBRITE_URL + "events/search/",
+                            params=payload,
+                            headers=headers)
 
-#     return render_template("events.html", data=pformat(data),
-#                                results=events)
+    data = response.json()
+
+    if response.ok:
+            events = data['events']
+
+    else:
+        flash("Nothing found: {}".format(data['error_description']))
+        events = []        
+
+
+    return render_template("events.html", data=pformat(data),
+                               results=events)
 
 
 
