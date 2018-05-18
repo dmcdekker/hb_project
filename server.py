@@ -24,6 +24,7 @@ EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
 EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/'
 
 
+
 @app.route('/')
 def index():
     """Homepage"""
@@ -209,18 +210,29 @@ def user_detail(user_id):
 def show_events():
     """Show events from Eventbite"""
 
-    query = 'women+tech&sort_by=best&location.address=san+francisco'
+    query = 'women+tech'
 
-    payload = {'q': query} 
+    location = 'oakland'
+
+    distance = '75mi'
+
+    sort = 'date'
+
+    payload = {'q': query,
+                'location.address': location,
+                   'location.within': distance,
+                   'sort_by': sort,}
+                   
 
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
     # https://www.eventbriteapi.com/v3/events/search/?q=women+tech&sort_by=best&location.address=san+francisco&token=ZXQO2NPVKNLZ6MASPFFU
 
 
-    response = requests.get(EVENTBRITE_URL + "events/search/",
+    response = requests.get(EVENTBRITE_URL + 'events/search/',
                             params=payload,
                             headers=headers)
+
 
     data = response.json()
 
