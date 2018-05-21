@@ -227,7 +227,33 @@ def edit_languages():
             db.session.add(LanguageMiddle(language=lang, user=user)) 
             db.session.commit()
 
-        return jsonify(languages)    
+        return jsonify(languages)
+
+    # else:
+    #     flash("You can't edit other user's profiles")
+    #     return redirect('/user_profile')         
+
+
+@app.route('/edit-description.json', methods=['POST'])
+def edit_description():
+    """User can edit description"""
+
+    user_id = session.get('user_id')
+
+    if user_id:
+        user = User.query.get(user_id)
+        description = request.form.get('description')
+       
+        if description != '':
+            user.description = description
+
+        db.session.commit()
+
+        return jsonify(description)
+
+    # else:
+    #     flash("You can't edit other user's profiles")
+    #     return redirect('/user_profile')               
 
 
 @app.route("/profiles")

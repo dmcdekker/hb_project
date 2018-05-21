@@ -68,7 +68,6 @@ function editSchool(e){
 // <--------------update languages----------------> 
 
 function updateLangs(results){
-  console.log('test')
   $('#languages-div').hide(); 
   $('#user_languages').html(results);
 }
@@ -110,6 +109,29 @@ $(document).ready(function() {
 
 // <--------------update description----------------> 
 
+function updateDescription(results){
+  console.log('test3');
+  $('#description_id').html(results);
+}
 
 
+
+function getDescriptionData(evt) {
+  console.log('test2');
+  evt.preventDefault(); 
+  $('#description-div').hide(); 
     
+  let formInputs = {
+    'description': $('#description-field').val(),
+  };  
+
+  $.post('/edit-description.json', formInputs, updateDescription);
+}
+  $('#description-div').on('submit', '#description-new', getDescriptionData);
+
+function editDescription(e){
+  console.log('test1');
+  e.preventDefault();
+  $('#description-div').append('<form action="/edit-description.json" id="description-new"><input type="submit" value="submit"></form><br><textarea rows="4" cols="50" name="description" id="description-field" placeholder="Enter text here....." form="description-new"</textarea>');
+}
+$('#edit-description').one('click', editDescription); 

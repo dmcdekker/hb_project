@@ -74,14 +74,14 @@
       </form>
     </div> 
    
-    <div id='user-languages'>
+  <div id='user-languages'>
       {% for language in user_languages %}
         <h5>{{ language.language_name }}</h5>
       {% endfor %}
     </div> 
   </div>
     
- <!--  <div id='description-container'>
+  <div id='description-container'>
       <div id='description-info'>
         <h2>Description<a href=""><i class="fas fa-pencil-alt" id='edit-description'></i></a></h2> 
       </div>
@@ -90,9 +90,9 @@
       <div id='description-div'></div>
       
       <div>    
-         <h5>{{ user.description }}</h5>
+         <h5 id='description_id'>{{ user.description }}</h5>
       </div>
-  </div> -->
+  </div>
 
  <!--  <div id='mentor-or-active'>
     <div id='for_display'>
@@ -107,9 +107,10 @@
       </div>
     </div>
   </div>   
- -->
-
+-->
 
 <script src="../static/user_profile.js"></script>
+
+
 </div>
 {% endblock %}
