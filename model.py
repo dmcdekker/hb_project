@@ -76,14 +76,14 @@ class LanguageMiddle(db.Model):
     language_id = db.Column(db.Integer, db.ForeignKey('languages.language_id'), nullable=False)  
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
-    user = db.relationship("User", backref="key_middles")
-    language = db.relationship("Language", backref="key_middles")
+    user = db.relationship("User", backref="lang_middles")
+    language = db.relationship("Language", backref="lang_middles")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Key Middle ID: {id}\n{key_id} {user}>".format(id=self.key_middle_id,
-                                                            key_id=self.language_id,
+        return "<Lang Middle ID: {id}\n{lang_id} {user}>".format(id=self.lang_middle_id,
+                                                            lang_id=self.language_id,
                                                             user=self.user_id)
 
 
@@ -93,7 +93,7 @@ class Education(db.Model):
     
     education_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     school_name = db.Column(db.String(64), nullable=True)
-    city = db.Column(db.String(64), nullable=True)
+    school_city = db.Column(db.String(64), nullable=True)
     school_state = db.Column(db.String(2), nullable=True)
     degree_level = db.Column(db.String(64), nullable=True)
     major = db.Column(db.String(64), nullable=True)
@@ -104,8 +104,8 @@ class Education(db.Model):
         """Provide helpful representation when printed."""
 
         return "<Education ID: {id}\n{name} {city} {state} {degree} {major} {date} >".format(id=self.education_id,
-                                                                    name=self.school_name, 
-                                                                    city=self.city,
+                                                                    name=self.school_name,
+                                                                    city=self.school_city,
                                                                     state=self.school_state,
                                                                     degree= self.degree_level,
                                                                     major=self.major,
@@ -173,7 +173,7 @@ def seed_data():
     
     language_id = LanguageMiddle(language_id=3, user=user_1)
 
-    education = Education(school_name='Mills College', city='Oakland', school_state='CA', degree_level='BA',
+    education = Education(school_name='Mills College', school_city='Oakland', school_state='CA', degree_level='BA',
                   major='CS', year='2017')
 
     ed_id = EducationMiddle(education=education, user=user_1)

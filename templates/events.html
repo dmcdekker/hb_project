@@ -15,7 +15,7 @@
                 {% for event in results %}
                   <h3><a href="{{ event.url }}">{{ event.name.text }}</a></h3>
                       <!-- <p>{{ event.description.text }}</p> -->
-                      <p>{{ event.start.local }}</p>
+                      <p>{{ event.start.local | replace("T", " @ ") }}</p>
                 {% endfor %}
               </ul>
 

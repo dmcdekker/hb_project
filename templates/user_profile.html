@@ -5,72 +5,96 @@
   
     <div id='social-container'>
       <div class="page-header">
-        <h1>{{ user.fname }} {{ user.lname }}</h1>
+        <h1>{{ user.fname }} {{ user.lname }}<a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h1> 
       </div>
 
-      <div>
+    
+      <div id='social-div'></div>
+    
+
+      <div id='social-media-group'>
+      <div>  
         <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
       </div>       
-
       <div>
         <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
       </div> 
-
       <div>
         <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
       </div>  
-
-      <div>
-        <input class="btn btn-primary" id='edit-social' type="submit" value="EDIT SOCIAL">
-      <div id='social-div'></div>
-    </div> 
-
-</div>   
-
+    </div>     
+    <br>
+    <br>
 
   <div id='education-container'> 
+    
     <div id='school-info'>
-      <h2>Education</h2>
-      {% for school in schools %}
-        <h4>{{ school.school_name }}, {{ school.year }}</h4>
-        <p>{{ school.city }}, {{ school.school_state }}</p>
-        <h4>{{ school.major }}, {{ school.degree_level }}</h4>  
-      {% endfor %} 
+      <h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a></h2> 
     </div>
-    <div>
-      <input class="btn btn-primary" id='edit-education' type="submit" value="EDIT EDU">
-        <div id='education-div'></div>
-    </div> 
+    <br>  
+          
+    <div id='edit-education-div'></div>
+      
+     <!--  <div>
+        <a href=""><i class="fas fa-plus" id='add-education'></i></a> 
+        <div id='add-education-div'></div>
+      </div> -->
+      
+      <div id='name-and-year'>
+      {% for school in schools %}
+        <h4 id='school_name_id'>{{ school.school_name }}</h4>
+        <h4 id='school_year_id'> {{ school.year }}</h4>
+      </div>
+      <div id='school-loc'>
+        <p id='school_city_state_id'>{{ school.school_city }}</p>
+        <p id='school_state_id'>{{ school.school_state }}</p>
+        <h5 id='major_id'>{{ school.major }}<h5>
+        <h5 id='degree_level'>{{ school.degree_level }}</h5>
+      {% endfor %}  
+      </div>          
   </div>
+  <br>
+  <br>
 
-  
-  <div id='language-container'>
-    <div id='language-info'>
-      <h2>Languages</h2>
-      {% for language in languages %}
-        <h4>{{ language.language_name }}</h4>
+
+  <div id='languages-container'>
+    <div id='languages-info'>
+      <h2>Languages<a href=""><i class="fas fa-pencil-alt" id='edit-languages'></i></a></h2> 
+    </div>
+    <br>  
+          
+ 
+    <div id='languages-div'>
+      <form submit="/edit-languages.json" id="languages-new">
+        Languages
+          {% for language in all_languages %}
+          <input type='checkbox' id='languages-field' name="language_name" value='{{ language.language_id }}'>{{ language.language_name }}
+          {% endfor %}
+          <input type='submit' value='Submit'>
+      </form>
+    </div> 
+   
+    <div id='user-languages'>
+      {% for language in user_languages %}
+        <h5>{{ language.language_name }}</h5>
       {% endfor %}
     </div> 
-
-    <div>
-    <input class="btn btn-primary" id='edit-language' type="submit" value="EDIT LANGUAGES">
-      <div id='language-div'></div>
-    </div> 
- 
   </div>
     
-  <div id='description-container'>
+ <!--  <div id='description-container'>
       <div id='description-info'>
-        <h2>Description</h2>
+        <h2>Description<a href=""><i class="fas fa-pencil-alt" id='edit-description'></i></a></h2> 
+      </div>
+        <br>
+
+      <div id='description-div'></div>
+      
+      <div>    
          <h5>{{ user.description }}</h5>
       </div>
+  </div> -->
 
-      <input class="btn btn-primary" id='edit-decription' type="submit" value="EDIT DESCRIPTION">
-        <div id='description-div'></div>
-      </div> 
-  </div>
-
-  <div id='mentor-or-active'>
+ <!--  <div id='mentor-or-active'>
     <div id='for_display'>
       <div id='is_active'>
         <h4>Active</h4>
@@ -83,6 +107,8 @@
       </div>
     </div>
   </div>   
+ -->
+
 
 <script src="../static/user_profile.js"></script>
 </div>

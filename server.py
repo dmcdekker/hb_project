@@ -2,11 +2,11 @@
 
 from pprint import pformat
 import os
-import requests
+import requests, json
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session, jsonify
+from flask import Flask, render_template, request, flash, redirect, session, jsonify 
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Language, LanguageMiddle 
@@ -22,7 +22,6 @@ app.jinja_env.undefined = StrictUndefined
 EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
 
 EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/'
-
 
 
 @app.route('/')
@@ -83,7 +82,6 @@ def profile_setup():
     
     user = User.query.filter_by(user_id=user_id).first()
 
-
     if user_id:
         # update column values instead of creating new user
         user.twitter = request.form['twitter']
@@ -104,10 +102,9 @@ def profile_setup():
         elif get_is_mentor == 'False':
             user.is_mentor = False
 
-
         # Get form variables for education
         school_name = request.form['school_name']
-        city = request.form['city']
+        school_city = request.form['school_city']
         school_state = request.form['school_state']
         degree_level = request.form['degree_level']
         major = request.form['major']
@@ -121,7 +118,7 @@ def profile_setup():
             db.session.commit()
 
         # create new education object
-        education = Education(school_name=school_name, city=city, school_state=school_state, degree_level=degree_level,
+        education = Education(school_name=school_name, school_city=school_city, school_state=school_state, degree_level=degree_level,
                               major=major, year=year)
         
         # create new education id object s
@@ -141,16 +138,14 @@ def profile_setup():
     return redirect("/")
 
 
-@app.route('/edit-profile.json', methods=['POST'])
-def edit_profile():
-    """User can edit profile"""
+@app.route('/edit-social.json', methods=['POST'])
+def edit_social():
+    """User can edit social media"""
 
     user_id = session.get('user_id')
-    
+
     if user_id:
-
         user = User.query.get(user_id)
-
         twitter = request.form.get('twitter')
         linkedin = request.form.get('linkedin')
         website_url = request.form.get('website_url')
@@ -166,7 +161,73 @@ def edit_profile():
 
         db.session.commit()
 
-        return jsonify(twitter, linkedin, website_url)    
+        return jsonify(twitter, linkedin, website_url)
+
+    else:
+        flash("You can't edit other user's profiles")
+        return redirect('/user_profile')        
+
+
+@app.route('/edit-education.json', methods=['POST'])
+def edit_education():
+    """User can edit social education details"""
+
+    user_id = session.get('user_id')
+
+    if user_id:
+
+        user = Education.query.get(user_id)
+
+        school = request.form.get('school_name')
+        year = request.form.get('year')
+        school_city = request.form.get('school_city')
+        school_state = request.form.get('school_state')
+        degree = request.form.get('degree_level')
+        major = request.form.get('major')
+
+        if school != '':
+            user.school_name = school
+        
+        if year != '':    
+            user.year = year
+
+        if school_city != '':    
+            user.school_city = school_city
+
+        if school_state != '':    
+            user.school_state = school_state
+        
+        if degree != '':    
+            user.degree_level = degree
+
+        if major != '':    
+            user.major = major           
+
+        db.session.commit()
+
+        return jsonify(school, year, school_city, school_state, degree, major )
+
+
+@app.route('/edit-languages.json', methods=['POST'])
+def edit_languages():
+    """User can edit languages"""
+
+    user_id = session.get('user_id')
+
+    if user_id:
+
+        user = User.query.get(user_id)
+
+        languages = json.loads(request.form.get('language_name'))
+
+        for language_id in languages:
+            if language_id == '':
+                continue
+            lang = Language.query.get(int(language_id))
+            db.session.add(LanguageMiddle(language=lang, user=user)) 
+            db.session.commit()
+
+        return jsonify(languages)    
 
 
 @app.route("/profiles")
@@ -191,9 +252,8 @@ def user_list():
 def user_detail(user_id):
     """Show info about user."""
 
-    # user_id = session.get('user_id')
 
-    # if not user_id:
+    # if session['user_id'] != user_id:
     #     flash("Please log in or register to view profiles")
     #     return redirect('/')
 
@@ -201,38 +261,33 @@ def user_detail(user_id):
 
     schools = Education.query.join(EducationMiddle).filter_by(user_id=user.user_id).all()
 
-    languages = Language.query.join(LanguageMiddle).filter_by(user_id=user.user_id).all()
+    user_languages = Language.query.join(LanguageMiddle).filter_by(user_id=user.user_id).all()
 
-    return render_template("user_profile.html", user=user, schools=schools, languages=languages)
+    all_languages = Language.query.all()
+
+    return render_template("user_profile.html", user=user, schools=schools, user_languages=user_languages, all_languages=all_languages)
 
         
 @app.route("/events")
 def show_events():
     """Show events from Eventbite"""
 
-    query = 'women+tech'
-
-    location = 'oakland'
-
+    query = 'women+technology'
+    location = 'san francisco'
     distance = '75mi'
-
     sort = 'date'
-
+    category_id ='101,102'
     payload = {'q': query,
                 'location.address': location,
                    'location.within': distance,
+                   'categories': category_id,
                    'sort_by': sort,}
                    
-
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
-
-    # https://www.eventbriteapi.com/v3/events/search/?q=women+tech&sort_by=best&location.address=san+francisco&token=ZXQO2NPVKNLZ6MASPFFU
-
 
     response = requests.get(EVENTBRITE_URL + 'events/search/',
                             params=payload,
                             headers=headers)
-
 
     data = response.json()
 
@@ -246,7 +301,6 @@ def show_events():
 
     return render_template("events.html", data=pformat(data),
                                results=events)
-
 
 
 

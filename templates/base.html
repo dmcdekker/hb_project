@@ -4,27 +4,49 @@
     <title>SHERO</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- <link href="/static/project.css" rel="stylesheet"> -->
+    <link href="/static/styles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
 </head>
 <body>
 
-SHERO
+ 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand text-lg" href="/">SHERO</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<a href="/">HOME</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/events">EVENTS<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          {% if "user_id" in session %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/profiles">PROFILES<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/logout">LOGOUT<span class="sr-only">(current)</span></a>
+        </li>
+        
+          {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">LOGIN<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/register">REGISTER<span class="sr-only">(current)</span></a>
+        </li>  
+        {% endif %}<span class="sr-only">(current)</span></a>
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+    </div>
+  </nav>
 
-{% if "user_id" in session %}
-  <a href="/profiles">Profiles</a>
-  <a href="/logout">Logout</a>
-{% else %}
-  <a href="/login">Login</a>
-  <a href="/register">Register</a>
-{% endif %}
-
-<a href="/events">EVENTS</a>
-
-
-<hr>
 
 {% for flash in get_flashed_messages() %}
   {{ flash }}
