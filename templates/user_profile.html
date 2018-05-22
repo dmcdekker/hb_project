@@ -26,33 +26,37 @@
     <br>
     <br>
 
-  <div id='education-container'> 
+  <div id='school-container'> 
     
     <div id='school-info'>
-      <h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a></h2> 
+      <h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a></h2> 
     </div>
     <br>  
-          
+    
+    <div id='add-education-div'></div>      
     <div id='edit-education-div'></div>
       
-     <!--  <div>
-        <a href=""><i class="fas fa-plus" id='add-education'></i></a> 
-        <div id='add-education-div'></div>
-      </div> -->
-      
-      <div id='name-and-year'>
-      {% for school in schools %}
-        <h4 id='school_name_id'>{{ school.school_name }}</h4>
-        <h4 id='school_year_id'> {{ school.year }}</h4>
-      </div>
-      <div id='school-loc'>
-        <p id='school_city_state_id'>{{ school.school_city }}</p>
-        <p id='school_state_id'>{{ school.school_state }}</p>
-        <h5 id='major_id'>{{ school.major }}<h5>
-        <h5 id='degree_level'>{{ school.degree_level }}</h5>
-      {% endfor %}  
-      </div>          
+    <div id='name-and-year'>
+    {% for school in schools %}
+      <h4 id='school_name_id'>{{ school.school_name }}</h4>
+      <h4 id='school_year_id'> {{ school.year }}</h4>
+    </div>
+    <div id='school-loc'>
+      <p id='school_city_state_id'>{{ school.school_city }}</p>
+      <p id='school_state_id'>{{ school.school_state }}</p>
+      <h5 id='major_id'>{{ school.major }}<h5>
+      <h5 id='degree_level'>{{ school.degree_level }}</h5>
+    {% endfor %}  
+    </div>
+
+              
+  
+
+
+
   </div>
+    
+    
   <br>
   <br>
 
@@ -61,9 +65,8 @@
     <div id='languages-info'>
       <h2>Languages<a href=""><i class="fas fa-pencil-alt" id='edit-languages'></i></a></h2> 
     </div>
-    <br>  
-          
- 
+    <br> 
+        
     <div id='languages-div'>
       <form submit="/edit-languages.json" id="languages-new">
         Languages
@@ -72,14 +75,17 @@
           {% endfor %}
           <input type='submit' value='Submit'>
       </form>
-    </div> 
-   
-  <div id='user-languages'>
+    </div>
+    <div id='user-languages'>
       {% for language in user_languages %}
-        <h5>{{ language.language_name }}</h5>
-      {% endfor %}
-    </div> 
+        <h5 id='language_id'>{{ language.language_name }}</h5>
+      {% endfor %} 
+    </div>  
+  
+
   </div>
+  <br>
+  <br>
     
   <div id='description-container'>
       <div id='description-info'>
@@ -93,21 +99,43 @@
          <h5 id='description_id'>{{ user.description }}</h5>
       </div>
   </div>
+  <br>
+  <br>
 
- <!--  <div id='mentor-or-active'>
-    <div id='for_display'>
+  <div id='mentor-or-active'>
       <div id='is_active'>
-        <h4>Active</h4>
-        {{ user.is_active }}
-      </div> 
-
-    <div id='is_mentor'>
-        <h4>Mentor?</h4>
-        {{ user.is_mentor }}
+      <br>
+      {% if user.is_active %}  
+        <h5>Active</h5>
+        <label class="switch">
+          <input id='checked' type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      {% elif not user.is_active %}
+        <h5>Inactive</h5>
+        <label class="switch">
+          <input id='not-checked' type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        
+      {% endif %}  
       </div>
-    </div>
+      <div id='is_mentor'>
+      <br>
+      <br>
+        <label>
+          {% if user.is_mentor %}  
+          <input type='radio' name='mentor' value=True checked> Mentor
+          <input type='radio' name='mentor' value=False> Mentee
+          {% elif not user.is_mentor %} 
+          <input type='radio' name='mentee' value=True> Mentor
+          <input type='radio' name='mentee' value=False checked> Mentee
+          {% endif %}
+        </label>
+         
+      </div>
   </div>   
--->
+
 
 <script src="../static/user_profile.js"></script>
 

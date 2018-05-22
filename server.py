@@ -220,14 +220,18 @@ def edit_languages():
 
         languages = json.loads(request.form.get('language_name'))
 
+        lang_json = ''
+        
         for language_id in languages:
             if language_id == '':
                 continue
             lang = Language.query.get(int(language_id))
+            lang_json += lang.language_name
             db.session.add(LanguageMiddle(language=lang, user=user)) 
-            db.session.commit()
+            db.session.commit()   
 
-        return jsonify(languages)
+        return jsonify(lang_json)
+    
 
     # else:
     #     flash("You can't edit other user's profiles")
@@ -305,9 +309,9 @@ def show_events():
     category_id ='101,102'
     payload = {'q': query,
                 'location.address': location,
-                   'location.within': distance,
-                   'categories': category_id,
-                   'sort_by': sort,}
+                'location.within': distance,
+                'categories': category_id,
+                'sort_by': sort,}
                    
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
