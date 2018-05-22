@@ -26,6 +26,8 @@ class User(db.Model):
     engineer_type = db.Column(db.Integer, nullable=True)
     is_active = db.Column(db.Boolean, nullable=True)
     is_mentor = db.Column(db.Boolean, nullable=True)
+    photo = db.Column(db.String(128), nullable=True)
+
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -166,7 +168,7 @@ def seed_data():
     user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', user_name='dmcdekker', password='xxxxxx',
                   city='Oakland', state='CA', twitter='dmcdekker', linkedin='denise-m-dekker', 
                   website_url='dmdekker.io', description='Some long and lovely text about me', 
-                  engineer_type=3, is_active=True, is_mentor=False)
+                  engineer_type=3, is_active=True, is_mentor=False, photo='/static/images/denise_dekker.jpg')
 
 
     #relationship = Relationship(mentee_id=user_1)

@@ -109,6 +109,8 @@ $(document).ready(function() {
 
 // <--------------update description----------------> 
 
+// <--------------update description----------------> 
+
 function updateDescription(results){
   console.log('test3');
   $('#description_id').html(results);
