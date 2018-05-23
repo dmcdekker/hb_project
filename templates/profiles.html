@@ -15,11 +15,11 @@
 
 
   <div class='container'>
-    <div class='row'>
-      <div class='card-deck'>
+      <div class='row'>
         {% for user in users %}
           {% if not user.is_mentor %}
-            <div class='card' id='mentee-profiles'>
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4">
+            <div class='card' style='height:100%' id='mentee-profiles'>
               <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
               <div class='card-body'>
                 <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
@@ -32,12 +32,14 @@
                   {% endif %}
                 {% endfor %}
               </div>
+            </div>  
           </div> 
           {% endif %}
         {% endfor %}
         {% for user in users %}
           {% if user.is_mentor %}
-            <div class='card' id='mentor-profiles'>
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4">
+            <div class='card' style='height:100%' id='mentor-profiles'>
               <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
               <div class='card-body'>
                 <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
@@ -50,11 +52,11 @@
                   {% endif %}
                 {% endfor %}
               </div>
+            </div>  
           </div> 
           {% endif %}
         {% endfor %}
      </div>
-    </div>
   </div>                         
          
       

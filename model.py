@@ -3,6 +3,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
+from faker import Faker
+
+
 
 db = SQLAlchemy()
 
@@ -37,22 +40,22 @@ class User(db.Model):
                                                     
 
 
-class Relationship(db.Model):
+# class Relationship(db.Model):
 
-    __tablename__ = "relationships"
+#     __tablename__ = "relationships"
 
-    relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
-    mentor_id = db.Column(db.Integer, db.ForeignKey('mentors.mentor_id'))
+#     relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
+#     mentor_id = db.Column(db.Integer, db.ForeignKey('mentors.mentor_id'))
 
-    mentee = db.relationship("Mentee", backref="relationships")
-    mentor = db.relationship("Mentor", backref="relationships")
+#     mentee = db.relationship("Mentee", backref="relationships")
+#     mentor = db.relationship("Mentor", backref="relationships")
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-        return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
-                                                        mentee=mentee_id)                                                                          
+#         return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
+#                                                         mentee=mentee_id)                                                                          
 
 
 class Language(db.Model):
@@ -172,7 +175,9 @@ def seed_data():
 
     #relationship = Relationship(mentee_id=user_1)
     
-    language_id = LanguageMiddle(language_id=3, user=user_1)
+    language_id_1 = LanguageMiddle(language_id=3, user=user_1)
+    language_id_2 = LanguageMiddle(language_id=6, user=user_1)
+    language_id_3 = LanguageMiddle(language_id=10, user=user_1)
 
     education = Education(school_name='Mills College', school_city='Oakland', school_state='CA', degree_level='BA',
                   major='CS', year='2017')
@@ -180,8 +185,35 @@ def seed_data():
     ed_id = EducationMiddle(education=education, user=user_1)
 
 
-    db.session.add_all([user_1, language_id, education, ed_id])
+    db.session.add_all([user_1, language_id_1, language_id_2, language_id_3, education, ed_id])
     db.session.commit()
+
+def fake_profiles(fake):
+    """Create fake data"""
+
+    for i in range(10):
+        random_int = randint(1, 16)
+
+
+        user = User(fname=fake.first_name_female(), lname=fake.last_name(), email=fake.email(), user_name=fake.user_name(), password='test1',
+                      city=fake.city(), state=fake.state_abbr(), twitter=fake.user_name(), linkedin=fake.user_name(), 
+                      website_url=fake.url(), description=fake.text(), 
+                      engineer_type=random_int, is_active=True, is_mentor=fake.boolean(), photo=fake.image_url())
+
+        education = Education(school_name='fake.name()', school_city=fake.city(), school_state=fake.state_abbr(), degree_level='BA',
+                      major=fake.name(), year=fake.year())
+
+        language_id_1 = LanguageMiddle(language_id=random_int, user=user)
+        language_id_2 = LanguageMiddle(language_id=random_int, user=user)
+        language_id_3 = LanguageMiddle(language_id=random_int, user=user)
+
+        ed_id = EducationMiddle(education=education, user=user)
+
+        db.session.add_all([user, language_id_1, language_id_2, language_id_3, education, ed_id])
+        db.session.commit()
+
+
+
 
 
 #########################################################################################
@@ -204,6 +236,9 @@ if __name__ == "__main__":
     from server import app
     connect_to_db(app)
     print "Connected to DB."
+
+    fake = Faker()
+    fake_profiles(fake)
 
 
 
