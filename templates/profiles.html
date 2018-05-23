@@ -3,7 +3,7 @@
 
 <div class='container'>
 
-  <div class="page-header">
+  <div class='page-header'>
         <h1>Profiles</h1>
   </div>
 
@@ -15,39 +15,38 @@
 
 
   <div class='container'>
-    <div class="row">
+    <div class='row'>
       <div class='card-deck'>
         {% for user in users %}
-          {% if user.is_mentor %}
-            <div class="card" id='mentor-profiles'>
-              <!-- <img class="card-img-top" src="..." alt="User image"> -->
-              <div class="card-body">
-                <h3 class="card-title"><a href="/profiles/{{ user.user_id }}">
+          {% if not user.is_mentor %}
+            <div class='card' id='mentee-profiles'>
+              <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
+              <div class='card-body'>
+                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
                     {{ user.fname }} {{ user.lname }} <br>
                 </a></h3>
-                <p class="card-text">{{ user.city }}, {{ user.state }}</p>
+                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
                 {% for eng_type in engineer_types %}
                   {% if user.engineer_type == eng_type.engineer_type_id %}   
-                  <h5 class="card-text">{{ eng_type.engineer_type }}</h5>
+                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
                   {% endif %}
                 {% endfor %}
               </div>
           </div> 
           {% endif %}
         {% endfor %}
-
         {% for user in users %}
-          {% if not user.is_mentor %}
-            <div class="card" id='mentee-profiles'>
-              <!-- <img class="card-img-top" src="..." alt="User image"> -->
-              <div class="card-body">
-                <h3 class="card-title"><a href="/profiles/{{ user.user_id }}">
+          {% if user.is_mentor %}
+            <div class='card' id='mentor-profiles'>
+              <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
+              <div class='card-body'>
+                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
                     {{ user.fname }} {{ user.lname }} <br>
                 </a></h3>
-                <p class="card-text">{{ user.city }}, {{ user.state }}</p>
+                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
                 {% for eng_type in engineer_types %}
                   {% if user.engineer_type == eng_type.engineer_type_id %}   
-                  <h5 class="card-text">{{ eng_type.engineer_type }}</h5>
+                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
                   {% endif %}
                 {% endfor %}
               </div>
@@ -59,7 +58,7 @@
   </div>                         
          
       
-<script type="text/javascript">
+<script type='text/javascript'>
 
 $('#mentor-page').click(function(){
   $('#mentor-profiles').show()

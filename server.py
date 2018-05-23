@@ -8,11 +8,16 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify 
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 from model import connect_to_db, db, User, Language, LanguageMiddle 
 from model import Education, EducationMiddle, EngineeringType
 
 app = Flask(__name__)
+
+photos = UploadSet('photos', IMAGES)
+app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
+configure_uploads(app, photos)
 
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "SHERO_app"
@@ -132,11 +137,28 @@ def profile_setup():
         db.session.commit()
 
     else:
-        flash("No user logged in")   
+        flash("No user logged in")
 
-    flash("Congrats, {}! You've successfully added your profile!".format(session['fname']))
-    return redirect("/")
+    return render_template('upload.html')
 
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+
+    user_id = session.get('user_id')
+    path = str(user_id) + ".jpg"
+    if request.method == 'POST' and 'photo' in request.files:
+        request.files['photo'].filename = path
+        filename = photos.save(request.files['photo'])
+        user = User.query.get(user_id)
+        user.photo = '/' + app.config['UPLOADED_PHOTOS_DEST'] + '/' + path
+        db.session.commit()
+        
+    flash("Congrats, {}! You've successfully added your profile!".format(session['fname']))    
+    return redirect('/')    
+    
+
+        
 
 @app.route('/edit-social.json', methods=['POST'])
 def edit_social():
@@ -231,7 +253,7 @@ def edit_languages():
             db.session.commit()   
 
         return jsonify(lang_json)
-    
+
 
     # else:
     #     flash("You can't edit other user's profiles")

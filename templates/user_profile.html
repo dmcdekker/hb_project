@@ -6,23 +6,26 @@
     <div id='social-container'>
       <div class="page-header">
         <h1>{{ user.fname }} {{ user.lname }}<a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h1> 
-      </div>
-
-    
+      </div>   
       <div id='social-div'></div>
+
+      <div id='user-photo'>
+        <img class='img-thumbnail' src='{{ user.photo }}' alt='user photo' style='height:25%, width:25%'>
+        <!-- <img class='img-thumbnail' src='/static/images/denise_dekker.jpg'> -->
+      </div>  
     
 
       <div id='social-media-group'>
-      <div>  
-        <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
-      </div>       
-      <div>
-        <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
-      </div> 
-      <div>
-        <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
-      </div>  
-    </div>     
+        <div>
+          <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
+        </div>       
+        <div>
+          <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
+        </div> 
+        <div>
+          <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
+        </div>  
+      </div>     
     <br>
     <br>
 
