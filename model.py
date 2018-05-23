@@ -37,23 +37,22 @@ class User(db.Model):
                                                     
 
 
+class Relationship(db.Model):
 
-# class Relationship(db.Model):
+    __tablename__ = "relationships"
 
-#     __tablename__ = "relationships"
+    relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
+    mentor_id = db.Column(db.Integer, db.ForeignKey('mentors.mentor_id'))
 
-#     relationship_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     mentee_id = db.Column(db.Integer, db.ForeignKey('mentees.mentee_id'))
-#     mentor_id = db.Column(db.Integer, db.ForeignKey('mentors.mentor_id'))
+    mentee = db.relationship("Mentee", backref="relationships")
+    mentor = db.relationship("Mentor", backref="relationships")
 
-#     mentee = db.relationship("Mentee", backref="relationships")
-#     mentor = db.relationship("Mentor", backref="relationships")
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
-#     def __repr__(self):
-#         """Provide helpful representation when printed."""
-
-#         return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
-#                                                         mentee=mentee_id)                                                                          
+        return "<Relationship: {rel}\t{mentee}>".format(rel=self.relationship_id,
+                                                        mentee=mentee_id)                                                                          
 
 
 class Language(db.Model):
