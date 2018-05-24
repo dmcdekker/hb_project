@@ -96,15 +96,15 @@ def profile_setup():
         user.engineer_type = request.form['engineer_type'] 
 
         get_active = request.form['is_active']
-        if get_active == 'True':
+        if get_active:
             user.is_active = True
-        elif get_active == 'False':
+        elif not get_active:
             user.is_active = False
 
         get_is_mentor = request.form['is_mentor']
-        if get_is_mentor == 'True':
+        if get_is_mentor:
             user.is_mentor = True
-        elif get_is_mentor == 'False':
+        elif not get_is_mentor:
             user.is_mentor = False
 
         # Get form variables for education

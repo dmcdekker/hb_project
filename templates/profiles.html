@@ -17,10 +17,10 @@
   <div class='container'>
       <div class='row'>
         {% for user in users %}
-          {% if not user.is_mentor %}
-          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4">
-            <div class='card' style='height:100%' id='mentee-profiles'>
-              <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
+          {% if user.is_mentor == True %}
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentor-profiles">
+            <div class='card' style='height:100%'>
+              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
               <div class='card-body'>
                 <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
                     {{ user.fname }} {{ user.lname }} <br>
@@ -34,13 +34,10 @@
               </div>
             </div>  
           </div> 
-          {% endif %}
-        {% endfor %}
-        {% for user in users %}
-          {% if user.is_mentor %}
-          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4">
-            <div class='card' style='height:100%' id='mentor-profiles'>
-              <img class='card-img-top' src='{{ user.photo }}' alt='User image'>
+          {% elif user.is_mentor == False %}
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentee-profiles">
+            <div class='card' style='height:100%'>
+              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
               <div class='card-body'>
                 <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
                     {{ user.fname }} {{ user.lname }} <br>
@@ -63,18 +60,18 @@
 <script type='text/javascript'>
 
 $('#mentor-page').click(function(){
-  $('#mentor-profiles').show()
-  $('#mentee-profiles').hide()
+  $('.mentor-profiles').show()
+  $('.mentee-profiles').hide()
   });
 
 $('#mentee-page').click(function(){
-  $('#mentee-profiles').show()
-  $('#mentor-profiles').hide()
+  $('.mentee-profiles').show()
+  $('.mentor-profiles').hide()
   });
 
 $('#all-page').click(function(){
-  $('#mentor-profiles').show()
-  $('#mentee-profiles').show()
+  $('.mentor-profiles').show()
+  $('.mentee-profiles').show()
   });
 
 </script>

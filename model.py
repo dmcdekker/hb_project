@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
 from faker import Faker
-
+from random import randint, choice
 
 
 db = SQLAlchemy()
@@ -178,6 +178,8 @@ def seed_data():
     language_id_1 = LanguageMiddle(language_id=3, user=user_1)
     language_id_2 = LanguageMiddle(language_id=6, user=user_1)
     language_id_3 = LanguageMiddle(language_id=10, user=user_1)
+    language_id_3 = LanguageMiddle(language_id=16, user=user_1)
+    language_id_3 = LanguageMiddle(language_id=8, user=user_1)
 
     education = Education(school_name='Mills College', school_city='Oakland', school_state='CA', degree_level='BA',
                   major='CS', year='2017')
@@ -191,29 +193,27 @@ def seed_data():
 def fake_profiles(fake):
     """Create fake data"""
 
-    for i in range(10):
-        random_int = randint(1, 16)
-
+    for i in range(15):
 
         user = User(fname=fake.first_name_female(), lname=fake.last_name(), email=fake.email(), user_name=fake.user_name(), password='test1',
                       city=fake.city(), state=fake.state_abbr(), twitter=fake.user_name(), linkedin=fake.user_name(), 
                       website_url=fake.url(), description=fake.text(), 
-                      engineer_type=random_int, is_active=True, is_mentor=fake.boolean(), photo=fake.image_url())
+                      engineer_type=randint(1, 16), is_active=True, is_mentor=choice([True, False]), photo='https://placeimg.com/640/480/any')
 
-        education = Education(school_name='fake.name()', school_city=fake.city(), school_state=fake.state_abbr(), degree_level='BA',
+        education = Education(school_name=fake.name(), school_city=fake.city(), school_state=fake.state_abbr(), degree_level='BA',
                       major=fake.name(), year=fake.year())
 
-        language_id_1 = LanguageMiddle(language_id=random_int, user=user)
-        language_id_2 = LanguageMiddle(language_id=random_int, user=user)
-        language_id_3 = LanguageMiddle(language_id=random_int, user=user)
+        
+        language_id_1 = LanguageMiddle(language_id=randint(1, 16), user=user)
+        language_id_2 = LanguageMiddle(language_id=randint(1, 16), user=user)
+        language_id_3 = LanguageMiddle(language_id=randint(1, 16), user=user)
+        language_id_4 = LanguageMiddle(language_id=randint(1, 16), user=user)
+        language_id_5 = LanguageMiddle(language_id=randint(1, 16), user=user)
 
         ed_id = EducationMiddle(education=education, user=user)
 
-        db.session.add_all([user, language_id_1, language_id_2, language_id_3, education, ed_id])
+        db.session.add_all([user, language_id_1, language_id_2, language_id_3, language_id_4, language_id_5, education, ed_id])
         db.session.commit()
-
-
-
 
 
 #########################################################################################
@@ -235,10 +235,13 @@ if __name__ == "__main__":
 
     from server import app
     connect_to_db(app)
-    print "Connected to DB."
+    print "Connected to DB"
 
     fake = Faker()
+    db.create_all()
+    seed_data()
     fake_profiles(fake)
+    print "DB populated"
 
 
 
