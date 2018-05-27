@@ -1,65 +1,68 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Register</h1>
 
-<form action="register" method="POST">
 
-  <h3>Please register and move on to create your profile page</h3>
+<div class='container'>
+  <h1>Register</h1>
+  <form action="register" method="POST">
 
-  <div>
-    <label>
-      First Name
-      <input type="text" name="fname">
-    </label>
-  </div>
+    <h3>Please register and move on to create your profile page</h3>
 
-  <div>
-    <label>
-      Last Name
-      <input type="text" name="lname">
-    </label>
-  </div>
+    <div>
+      <label>
+        First Name
+        <input type="text" class='form-control' name="fname">
+      </label>
+    </div>
 
-  <div>
-    <label>
-      User Name
-      <input type="text" name="user_name">
-    </label>
-  </div>
+    <div>
+      <label>
+        Last Name
+        <input type="text" class='form-control' name="lname">
+      </label>
+    </div>
 
-  <div>
-    <label>
-      Email
-      <input type="email" name="email">
-    </label>
-  </div>
+    <div>
+      <label>
+        User Name
+        <input type="text" class='form-control' name="user_name">
+      </label>
+    </div>
 
-  <div>
-    <label>
-      Password
-      <input type="password" name="password">
-    </label>
-  </div>
+    <div>
+      <label>
+        Email
+        <input type="email" class='form-control' name="email">
+      </label>
+    </div>
 
-  <div>
-    <label>
-      City
-      <input type="text" name="city">
-    </label>
-  </div>
+    <div>
+      <label>
+        Password
+        <input type="password" class='form-control' name="password">
+      </label>
+    </div>
 
-  <div>
-    <label>
-      State
-      <input type="text" name="state">
-    </label>
-  </div>
+    <div>
+      <label>
+        City
+        <input type="text" class='form-control' name="city">
+      </label>
+    </div>
 
-  <div>
-    <input type="submit" value="Submit">
-  </div>
+    <div>
+      <label>
+        State
+        <input type="text" class='form-control' name="state">
+      </label>
+    </div>
 
-</form>
+    <div>
+      <input type="submit" class='btn btn-primary' value="Submit">
+    </div>
+
+  </form>
+</div>
 
 {% endblock %}

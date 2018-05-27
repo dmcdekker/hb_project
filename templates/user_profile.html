@@ -7,22 +7,24 @@
       <div class="page-header">
         <h1>{{ user.fname }} {{ user.lname }}<a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h1> 
       </div>   
-      <div id='social-div'></div>
+    <div id='social-div'></div>
 
-      <div id='user-photo'>
-        <img class='img-thumbnail' src='{{ user.photo }}' alt='user photo' style='height:25%, width:25%'>
+    <div id='photo-and-social'>  
+      <div class='col-lg-6' id='user-photo'>
+        <img class='img-responsive' src='{{ user.photo }}' alt='user photo' style='height:25%, width:25%'>
         <!-- <img class='img-thumbnail' src='/static/images/denise_dekker.jpg'> -->
       </div>  
     
 
-      <div id='social-media-group'>
+      <div class='col-lg-6' id='social-media-group'>
         <div>
           <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
           <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
           <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
-          <h5 id='email'>Website: {{ user.email }}</h5>
+          <h5 id='email'>Email: {{ user.email }}</h5>
         </div>  
-      </div>     
+      </div>
+    </div>       
     <br>
     <br>
 
@@ -39,21 +41,15 @@
     <div id='name-and-year'>
     {% for school in schools %}
       <h4 id='school_name_id'>{{ school.school_name }}</h4>
-      <h4 id='school_year_id'> {{ school.year }}</h4>
+      <h4 id='year_id'> {{ school.year }}</h4>
     </div>
     <div id='school-loc'>
-      <p id='school_city_state_id'>{{ school.school_city }}</p>
+      <p id='school_city_id'>{{ school.school_city }}</p>
       <p id='school_state_id'>{{ school.school_state }}</p>
       <h5 id='major_id'>{{ school.major }}<h5>
       <h5 id='degree_level'>{{ school.degree_level }}</h5>
     {% endfor %}  
     </div>
-
-              
-  
-
-
-
   </div>
     
     
@@ -73,7 +69,7 @@
           {% for language in all_languages %}
           <input type='checkbox' id='languages-field' name="language_name" value='{{ language.language_id }}'>{{ language.language_name }}
           {% endfor %}
-          <input type='submit' value='Submit'>
+          <input type='submit' class="btn btn-primary" value='Submit'>
       </form>
     </div>
     <div id='user-languages'>

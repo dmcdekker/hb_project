@@ -1,5 +1,3 @@
-"""Shero"""
-
 from pprint import pformat
 import os
 import requests, json
@@ -10,7 +8,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
-from model import connect_to_db, db, User, Language, LanguageMiddle 
+from model import connect_to_db, db, User, Language, LanguageMiddle
 from model import Education, EducationMiddle, EngineeringType
 
 app = Flask(__name__)
@@ -45,7 +43,6 @@ def register_form():
 @app.route('/register', methods=['POST'])
 def register_process():
     """Process registration."""
- 
     # Get form variables for user
     fname = request.form['fname']
     lname = request.form['lname']
@@ -138,6 +135,7 @@ def profile_setup():
 
     else:
         flash("No user logged in")
+        redirect('/login')
 
     return render_template('upload.html')
 
@@ -154,11 +152,9 @@ def upload():
         user.photo = '/' + app.config['UPLOADED_PHOTOS_DEST'] + '/' + path
         db.session.commit()
         
-    flash("Congrats, {}! You've successfully added your profile!".format(session['fname']))    
-    return redirect('/')    
+    flash("Congrats, {}! You've successfully created your profile!".format(session['fname']))    
+    return redirect("/profiles/{}".format(user.user_id))
     
-
-        
 
 @app.route('/edit-social.json', methods=['POST'])
 def edit_social():
@@ -304,7 +300,6 @@ def user_list():
 def user_detail(user_id):
     """Show info about user."""
 
-
     # if session['user_id'] != user_id:
     #     flash("Please log in or register to view profiles")
     #     return redirect('/')
@@ -400,6 +395,7 @@ def logout():
 
 if __name__ == "__main__":
 
+
     app.debug = True
 
     # make sure templates, etc. are not cached in debug mode
@@ -413,10 +409,5 @@ if __name__ == "__main__":
 
     connect_to_db(app)
 
+
     app.run(host="0.0.0.0")
-
-
-
-
-
-

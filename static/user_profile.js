@@ -24,7 +24,7 @@ function getSocialData(evt) {
 
 function editSocial(e){ 
     e.preventDefault();
-    $('#social-div').append('<form submit="/edit-social.json" id="social-new"><input type="text" name="linkedin" id="linkedin-field" placeholder="linkedin id"/><br><input type="text" name="twitter" id="twit-field" placeholder="twitter handle"/><br><input type="text" name="website_url" id="web-field" placeholder="website url"/><br><input type="submit" value="Submit"></form>');
+    $('#social-div').append('<form submit="/edit-social.json" id="social-new"><input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="linkedin id" style="width:15em"/><br><input type="text" class="form-control" name="twitter" id="twit-field" placeholder="twitter handle" style="width:15em"/><br><input type="text" name="website_url" class="form-control" id="web-field" placeholder="website url" style="width:15em"/><br><input type="submit" class="btn btn-primary" value="Submit"></form>');
   }
   $('#edit-social').one('click', editSocial);
 
@@ -32,18 +32,18 @@ function editSocial(e){
 // <--------------update or add education info----------------> 
 
 function updateSchool(results){
-  $('#school_name_id').html('School:' + results[0]);
-  $('#year_id').html('Year graduated:' + results[1]);
-  $('#school_city_id').html('City:' + results[2]);
-  $('#school_state_id').html('State:' + results[3]);
-  $('#major_id').html('Major:' + results[4]);
-  $('#degree_level').html('Degree Levle:' + results[5]);
+  $('#school_name_id').html(results[0]);
+  $('#year_id').html(results[1]);
+  $('#school_city_id').html(results[2]);
+  $('#school_state_id').html(results[3]);
+  $('#major_id').html(results[4]);
+  $('#degree_level').html(results[5]);
 }
 
 function getSchoolData(evt) {
     
     evt.preventDefault(); 
-    $('#school-div').hide(); 
+    $('#edit-education-div').hide(); 
     
     let formInputs = {
       'school_name': $('#school-name-field').val(),
@@ -60,7 +60,7 @@ function getSchoolData(evt) {
 
 function editSchool(e){ 
     e.preventDefault();
-    $('#edit-education-div').append('<form submit="/edit-education.json" id="education-new"><input type="text" name="school_name" id="school-name-field" placeholder="school name"/><br><input type="text" name="year" id="year-field" placeholder="year graduated"/><br><input type="text" name="school_city" id="school-city-field" placeholder="school city"/><br><input type="text" name="school_state" id="school-state-field" placeholder="school state"/><br><input type="text" name="major" id="major-field" placeholder="major"/><br><input type="text" name="degree_level" id="degree-level-field" placeholder="degree level"/><br><input type="submit" value="Submit"></form>');
+    $('#edit-education-div').append('<form submit="/edit-education.json" id="education-new" style="width:15em"><input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br><input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br><input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br><input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br><input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br><input type="submit" class="btn btn-primary" value="Submit"></form>');
   }
   $('#edit-education').one('click', editSchool); 
 
@@ -68,7 +68,6 @@ function editSchool(e){
 // <--------------update languages----------------> 
 
 function updateLangs(results){
-  console.log('test');
   $('#language_id').html(results);
 }
 
@@ -106,19 +105,14 @@ $(document).ready(function() {
 });
 
 
-
-// <--------------update description----------------> 
-
 // <--------------update description----------------> 
 
 function updateDescription(results){
-  console.log('test3');
   $('#description_id').html(results);
 
 }
 
 function getDescriptionData(evt) {
-  console.log('test2');
   evt.preventDefault(); 
   $('#description-div').hide(); 
     
@@ -131,9 +125,8 @@ function getDescriptionData(evt) {
   $('#description-div').on('submit', '#description-new', getDescriptionData);
 
 function editDescription(e){
-  console.log('test1');
   e.preventDefault();
-  $('#description-div').append('<form action="/edit-description.json" id="description-new"><input type="submit" value="submit"></form><br><textarea rows="4" cols="50" name="description" id="description-field" placeholder="Enter text here....." form="description-new"</textarea>');
+  $('#description-div').append('<form action="/edit-description.json" id="description-new"><input type-"text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter text here....." form="description-new"><input type="submit" class="btn btn-primary" value="submit"></form>');
 }
 $('#edit-description').one('click', editDescription); 
 
