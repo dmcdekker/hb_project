@@ -1,11 +1,11 @@
 """Models and database functions for HB project."""
 
 from flask_sqlalchemy import SQLAlchemy
+
 from flask import Flask
 
 from faker import Faker
 from random import randint, choice
-
 
 db = SQLAlchemy()
 
@@ -37,8 +37,8 @@ class User(db.Model):
 
         return "<User: {fname}\t{lname}\tEmail:{email}\t{city}>".format(fname=self.fname, lname=self.lname,
                                                                 email=self.email, city=self.city)
-                                                    
 
+                                                
 
 # class Relationship(db.Model):
 

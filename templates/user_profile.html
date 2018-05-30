@@ -44,10 +44,13 @@
       <h4 id='year_id'> {{ school.year }}</h4>
     </div>
     <div id='school-loc'>
-      <p id='school_city_id'>{{ school.school_city }}</p>
-      <p id='school_state_id'>{{ school.school_state }}</p>
-      <h5 id='major_id'>{{ school.major }}<h5>
-      <h5 id='degree_level'>{{ school.degree_level }}</h5>
+      <div>
+      <p id='school_city_id'>{{ school.school_city }},</p><p id='school_state_id'> {{ school.school_state }}</p>
+      </div>
+      <div>
+      <h5 id='major_id'>{{ school.major }},<h5>
+      <h5 id='degree_level'> {{ school.degree_level }}</h5>
+      </div>
     {% endfor %}  
     </div>
   </div>

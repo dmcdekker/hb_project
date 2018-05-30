@@ -13,7 +13,7 @@ connect_to_db(app)
 # stop user editing other profiles
 # cannot go to user add-profile if profile already created
 # access to info when not logged in
-# 89-134: Post method for add-profile
+# 89-134: Post method for add-profile 
 # 146-156: Upload method
 # 163-280: .json methods
 # 322-349: events
@@ -67,6 +67,8 @@ class MockFlaskTests(unittest.TestCase):
         result = self.client.get("/profiles?user_id=1")
         self.assertIn("Denise", result.data)
 
+
+    
     # def test_events(self):
     #     """Test events api"""
     #     self.client.get('/events')
@@ -104,7 +106,6 @@ class DBTests(unittest.TestCase):
         db.session.close()
         db.drop_all()
 
-
     def test_homepage(self):
         """Homepage"""
         result = self.client.get('/')
@@ -119,13 +120,7 @@ class DBTests(unittest.TestCase):
     def test_add_profile_get(self):
         result = self.client.get('/add-profile')
         self.assertEqual(result.status_code, 200)
-        self.assertIn('<form action="add-profile" method="POST">', result.data)
-
-    # def test_add_profile_post(self):
-    #     result = self.client.post('/add-profile', follow_redirects=False)
-    #     self.assertEqual(result.status_code, 200)
-    #     self.assertIn("<h1>Upload Your profile photo</h1>", result.data)     
-
+        self.assertIn('<form action="add-profile" method="POST">', result.data)   
 
     def test_user_profile(self):
         result = self.client.get("/profiles/1")
@@ -148,7 +143,68 @@ class DBTests(unittest.TestCase):
                                         "password": "xxxxxx"},
                                   follow_redirects=True)
         self.assertEqual(result.status_code, 200)
-        self.assertIn("<div id='photo-and-social'>", result.data)        
+        self.assertIn("<div id='photo-and-social'>", result.data) 
+
+
+    # uncommented as test is good (can't keep adding same data)
+    def test_add_profile_post(self):
+        result = self.client.post('/add-profile',
+                                    data={'twitter': 'test',
+                                          'linkedin': 'test',
+                                          'website_url': 'test',
+                                          'description': 'test',
+                                          'engineer_type': 1,
+                                          'school_name': 'test',
+                                          'school_city': 'test',
+                                          'school_state': 'ca',
+                                          'degree_level': 'test',
+                                          'major': 'test',
+                                          'year': 'test',
+                                          'get_langs': 2,
+                                          'is_active': 'True',
+                                          'is_mentor': 'False'
+                                          } )
+    
+
+        self.assertIn("<div id='photo-container'>", result.data) 
+
+
+    def test_edit_social_json(self):
+        result = self.client.post('/edit-social.json',
+                                    data={'twitter' : 'dmcdekker',
+                                          'linkedin' : 'denise-m-dekker',
+                                          'website_url' : 'dmdekker.io'})
+
+        self.assertIn('dmcdekker', result.data)
+
+    def test_edit_education_json(self):
+        result = self.client.post('/edit-education.json',
+                                    data={'school_name' : 'mills college',
+                                          'year' : '2017',
+                                          'school_city': 'oakland',
+                                          'school_state' : 'ca',
+                                          'degree_level': 'ba',
+                                          'major': 'cs'})
+
+        self.assertIn('mills college', result.data)  
+
+
+    # def test_edit_languages_json(self):
+    #     result = self.client.post('/edit-languages.json',
+    #                                 data={'language_name' : '3',
+    #                                       })
+
+    #     self.assertIn('3', result.data)        
+
+
+    def test_edit_description(self):
+        result = self.client.post('/edit-description.json',
+                                    data={'description' : 'Some long and lovely text about me',
+                                          })
+
+        self.assertIn('Some long and lovely text about me', result.data)        
+
+                
     
     
 
@@ -178,48 +234,30 @@ class NoSessionServerTests(unittest.TestCase):
 
 
     #uncommented as test is good (can't keep adding same data)
-    def test_register_post(self):
-        result = self.client.post('/register', follow_redirects=True,
-                                    data={'fname': 'this',
-                                          'lname': 'name',
-                                          'user_name': 'you7',
-                                          'email': 'me7@this.com',
-                                          'password': 'test',
-                                          'city': 'oakland',
-                                          'state': 'CA'
-                                          })
-        self.assertIn('<form action="add-profile" method="POST">', result.data)
+    # def test_register_post(self):
+    #     result = self.client.post('/register', follow_redirects=True,
+    #                                 data={'fname': 'this',
+    #                                       'lname': 'name',
+    #                                       'user_name': 'you7',
+    #                                       'email': 'me7@this.com',
+    #                                       'password': 'test',
+    #                                       'city': 'oakland',
+    #                                       'state': 'CA'
+    #                                       })
+    #     self.assertIn('<form action="add-profile" method="POST">', result.data)
 
-    #uncommented as test is good (can't keep adding same data)
-    def test_add_profile_post(self):
-        result = self.client.post('/add-profile', follow_redirects=True,
-                                    data={'user.twitter': 'twitter',
-                                          'user.linkedin': 'linkedin',
-                                          'user.website_url': 'weburl',
-                                          'user.description': 'description',
-                                          'school_name': 'test',
-                                          'school_city': 'test',
-                                          'school_state': 'test',
-                                          'degree_level': 'test',
-                                          'major': 'test',
-                                          'year': 'test',
-                                          'get_langs': 'test',
-                                          'is_active': 'True',
-                                          'is_mentor': 'False'
-                                          } )
+    
 
-        self.assertIn("<div id='photo-container'>", result.data)
+    # cannot get this test to pass
+    # def test_upload(self):
+    #     with open('static/images/denise_dekker.jpg', 'rb') as test:
+    #         testStringIO = StringIO(test.read())
 
-#     # cannot get this test to pass
-#     # def test_upload(self):
-#     #     with open('static/images/denise_dekker.jpg', 'rb') as test:
-#     #         testStringIO = StringIO(test.read())
+    #     result = self.client.post('/upload', 
+    #                                 content_type='multipart/form-data', follow_redirects=True, 
+    #                                 data={'photo': (testStringIO('test'), 'denise_dekker.jpg')})
 
-#     #     result = self.client.post('/upload', 
-#     #                                 content_type='multipart/form-data', follow_redirects=True, 
-#     #                                 data={'photo': (testStringIO('test'), 'denise_dekker.jpg')})
-
-#     #     self.assertEquals(result.status_code, 200)   
+    #     self.assertEquals(result.status_code, 200)   
 
 
     def test_profiles_loggedout(self):
@@ -228,9 +266,22 @@ class NoSessionServerTests(unittest.TestCase):
         self.assertIn("Please log in or register to view profiles", result.data) 
 
     def test_login_get(self):
-        result = self.client.get("/login", follow_redirects=True)
+        result = self.client.get('/login', follow_redirects=True)
         self.assertEqual(result.status_code, 200)
         self.assertIn("<h1>Login</h1>", result.data)
+
+    def test_add_profile_post(self):
+        result = self.client.post('/add-profile', follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        self.assertIn('<h1>Login</h1>', result.data)
+
+    def test_edit_social_json(self):
+        result = self.client.post('/edit-social.json', follow_redirects=True
+                                    )
+
+        self.assertIn("<div id='social-container'>", result.data)          
+    
+
 
 
 
@@ -238,78 +289,7 @@ class NoSessionServerTests(unittest.TestCase):
 
 
     
-    # def test_profile_user(self):
-    #     client = server.app.test_client()
-    #     result = client.post('/profiles/<int:user_id>', data={'twitter': 'dmcdekker'})
-    #     self.assertIn('Twitter:', result.data)
-
-    # def test_edit_profile(self):
-    #     client = server.app.test_client()
-    #     result = self.client.get("/edit-social.json")
-    #     return client.get('/user_profile', follow_redirects=True)
-
-    # def login(self):
-    #     client = server.app.test_client()
-    #     return client.post('/login', data=dict(email=email,
-    #                                            password=password), follow_redirects=True)
-
-    # def logout(client):
-    #     client = server.app.test_client()
-    #     return client.get('/logout', follow_redirects=True)
-
-
-
-
-        
-
-    # def test_rsvp(self):
-    #     result = self.client.post("/rsvp",
-    #                               data={"name": "Jane",
-    #                                     "email": "jane@jane.com"},
-    #                               follow_redirects=True)
-    #     self.assertNotIn("Please RSVP", result.data)
-    #     self.assertIn("Party Details", result.data)
-
-
-# class FlaskTests(unittest.TestCase):
-#     """Flask tests that use the database."""
-
-#     def setUp(self):
-#         """Stuff to do before every test."""
-
-#         self.client = app.test_client()
-#         app.config['TESTING'] = True
-
-#         with self.client as c:
-#                 with c.session_transaction() as sess:
-#                     sess['user_id'] = True
-
-#         # Connect to test database (uncomment when testing database)
-#         connect_to_db(app, "postgresql:///testdb")
-
-#         # Create tables and add sample data (uncomment when testing database)
-#         db.create_all()
-#         seed_data()
-
-#     def tearDown(self):
-#         """Do at end of every test."""
-
-#         # (uncomment when testing database)
-#         db.session.close()
-#         db.drop_all()
-
-
-#     def test_find_user(self):
-#         """Can we find a user in the sample data?"""
-
-#         denise = User.query.filter(Employee.name == "Denise").first()
-#         self.assertEqual(denise.name, "Denise")  
-
-#     # def test_games(self):
-#     #     #FIXME: test that the games page displays the user info from seed_data()
-#     #     result = self.client.get("/profiles")
-#     #     self.assertIn("Denise Dekker", result.data)
-        
+   
 
 if __name__ == "__main__":
     import unittest

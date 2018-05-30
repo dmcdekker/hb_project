@@ -43,6 +43,7 @@ def register_form():
 @app.route('/register', methods=['POST'])
 def register_process():
     """Process registration."""
+
     # Get form variables for user
     fname = request.form['fname']
     lname = request.form['lname']
@@ -81,7 +82,7 @@ def profile_setup():
     """Process profile setup"""
 
     user_id = session.get('user_id')
-    
+
     user = User.query.filter_by(user_id=user_id).first()
 
     if user_id:
@@ -91,7 +92,7 @@ def profile_setup():
         user.website_url = request.form['website_url']
         user.description = request.form['description']
         user.engineer_type = request.form['engineer_type'] 
-
+        
         get_active = request.form['is_active']
         if get_active:
             user.is_active = True
@@ -135,7 +136,7 @@ def profile_setup():
 
     else:
         flash("No user logged in")
-        redirect('/login')
+        return redirect('/login')
 
     return render_template('upload.html')
 
@@ -329,7 +330,7 @@ def show_events():
                 'location.within': distance,
                 'categories': category_id,
                 'sort_by': sort,}
-                   
+
     headers = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
     response = requests.get(EVENTBRITE_URL + 'events/search/',
