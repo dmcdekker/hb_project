@@ -3,7 +3,7 @@
 // <--------------update social media info---------------->
 
 function updateSocial(results){
-  
+
   $('#twitter_id').html('Your twitter handle has been updated to: ' + results[0]);
   $('#linkedin_id').html('Your linkedIn id has been updated to: '  + results[1]);
   $('#website_url_id').html('Your website URL has been updated to: ' + results[2]);
@@ -135,25 +135,31 @@ $('#edit-description').one('click', editDescription);
 
 // <--------------update mentor/mentee----------------> 
 
-function updateActive(results){
-  console.log('test')
+function updateMentor(results){
 }
 
 $('input[name=mentor]').change(function(){
   let value = $(this).val();
   let formInputs = {
     'is_mentor' : value
-  }
-  alert(value);
-  $.post('/edit-is_mentor.json', formInputs, updateActive);
+  };
+  $.post('/edit-is_mentor.json', formInputs, updateMentor);
 });
 
-$('input[name=mentee]').change(function(){
+
+// <--------------update active/not active----------------> 
+
+function updateActive(results){
+  console.log('test')
+}
+
+$('input[name=active]').change(function(){
   let value = $(this).val();
   let formInputs = {
-    'is_mentor' : value
-  }
+    'is_active' : value
+  };
   alert(value);
-  $.post('/edit-is_mentor.json', formInputs, updateActive);
+  $.post('/edit-is_active.json', formInputs, updateActive);
 });
+
     

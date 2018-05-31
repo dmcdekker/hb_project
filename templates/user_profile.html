@@ -20,7 +20,7 @@
             <img class='img-responsive' src='{{ user.photo }}' alt='user photo'>
           </div> <!-- end user photo -->
           <br>
-          <div class="card-body"> 
+
             <div class='col' id='social-media-group '> 
                 <h4 class='d-inline-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h4>
                 <h4 class='d-inline-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h4>
@@ -30,7 +30,6 @@
                 
                 <br>
             </div> <!-- end social-media-group -->
-          </div>  
         </div> <!-- end photo-and-social -->  
           
         
@@ -132,41 +131,38 @@
     <div class="card-body"> 
       <div id='is_active'>
       <br>
-      {% if user.is_active %}  
-        <h5>Active</h5>
-        <label class="switch">
-          <input id='checked' type="checkbox" checked>
-          <span class="slider round"></span>
-        </label>
-      {% elif not user.is_active %}
-        <h5>Inactive</h5>
-        <label class="switch">
-          <input id='not-checked' type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        
-      {% endif %}  
+        <h5>Account</h5>
+        <label>
+          {% if user.is_active %} 
+          <input type='radio' name='active' value=True checked>Active
+          <input type='radio' name='active' value=False>Inactive
+          {% elif not user.is_active %} 
+          <input type='radio' name='active' value=True>Active
+          <input type='radio' name='active' value=False checked>Inactive
+          {% endif %}  
+        </label>   
+          
       </div> <!-- end is_active -->
     </div>
+    <br>
+    <br>
     
     <div class="card-body">   
       <div id='is_mentor'>
-      <br>
-      <br>
+        <h5>Mentor or Mentee</h5>
         <label>
           {% if user.is_mentor %}  
           <input type='radio' name='mentor' value=True checked> Mentor
           <input type='radio' name='mentor' value=False> Mentee
           {% elif not user.is_mentor %} 
-          <input type='radio' name='mentee' value=True> Mentee
-          <input type='radio' name='mentee' value=False checked> Mentor
+          <input type='radio' name='mentor' value=True > Mentor
+          <input type='radio' name='mentor' value=False checked> Mentee
           {% endif %}
         </label>
          
       </div> <!-- end is_mentor -->
     </div>  
   </div> <!-- end mentor-or-active -->
-
 
 
 <script src="../static/user_profile.js"></script>

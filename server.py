@@ -308,15 +308,36 @@ def edit_mentor():
     if user_id:
         user = User.query.get(user_id)
         get_is_mentor = request.form['is_mentor']
-        print '|||||', get_is_mentor
-        if get_is_mentor:
+        if get_is_mentor == 'True':
             user.is_mentor = True
-        elif not get_is_mentor:
+        elif get_is_mentor == 'False':
             user.is_mentor = False
-
+        
         db.session.commit()
+        user2 = User.query.get(user_id)
 
-        return jasonify(get_is_mentor)            
+        return jsonify(user.is_mentor)
+
+
+@app.route('/edit-is_active.json', methods=['POST'])
+def edit_active():
+    """User can edit whether profile is active or not"""
+
+    user_id = session.get('user_id')
+
+    if user_id:
+        user = User.query.get(user_id)
+        get_is_active = request.form['is_active']
+        print '|||||', get_is_active
+        if get_is_active == 'True':
+            user.is_active = True
+        elif get_is_active == 'False':
+            user.is_active = False
+        
+        db.session.commit()
+        
+        return jsonify(user.is_active)        
+         
 
 
 @app.route("/profiles")
