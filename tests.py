@@ -275,17 +275,7 @@ class NoSessionServerTests(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertIn('<h1>Login</h1>', result.data)
 
-    def test_edit_social_json(self):
-        result = self.client.post('/edit-social.json', follow_redirects=True
-                                    )
 
-        self.assertIn("<div id='social-container'>", result.data)          
-    
-
-
-
-
-    ##<<<<<<_________________to do_________________>>>>>>>>>>    
 
 
     

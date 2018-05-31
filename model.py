@@ -238,10 +238,10 @@ if __name__ == "__main__":
     print "Connected to DB"
 
     fake = Faker()
-    # db.create_all()
-    # seed_data()
-    # fake_profiles(fake)
-    # print "DB populated"
+    db.create_all()
+    seed_data()
+    fake_profiles(fake)
+    print "DB populated"
 
 
 

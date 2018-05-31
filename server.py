@@ -276,7 +276,47 @@ def edit_description():
 
     # else:
     #     flash("You can't edit other user's profiles")
-    #     return redirect('/user_profile')               
+    #     return redirect('/user_profile')
+
+
+# @app.route('/edit-active.json', methods=['POST'])
+# def edit_active():
+#     """User can edit description"""
+
+#     user_id = session.get('user_id')
+
+#     if user_id:
+#         user = User.query.get(user_id)
+#         get_active = request.form['is_active']
+#         if get_active:
+#             user.is_active = True
+#         elif not get_active:
+#             user.is_active = False
+
+
+#         db.session.commit()
+
+#         return jasonify(get_active)    
+
+
+@app.route('/edit-is_mentor.json', methods=['POST'])
+def edit_mentor():
+    """User can edit whether is mentor or mentee"""
+
+    user_id = session.get('user_id')
+
+    if user_id:
+        user = User.query.get(user_id)
+        get_is_mentor = request.form['is_mentor']
+        print '|||||', get_is_mentor
+        if get_is_mentor:
+            user.is_mentor = True
+        elif not get_is_mentor:
+            user.is_mentor = False
+
+        db.session.commit()
+
+        return jasonify(get_is_mentor)            
 
 
 @app.route("/profiles")

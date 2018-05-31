@@ -2,58 +2,83 @@
 {% block content %}
 
 <div class='container'>
-  
+  <div class="card" >
     <div id='social-container'>
-      <div class="page-header">
-        <h1>{{ user.fname }} {{ user.lname }}<a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h1> 
-      </div>   
-    <div id='social-div'></div>
-
-    <div id='photo-and-social'>  
-      <div class='col-lg-6' id='user-photo'>
-        <img class='img-responsive' src='{{ user.photo }}' alt='user photo' style='height:25%, width:25%'>
-        <!-- <img class='img-thumbnail' src='/static/images/denise_dekker.jpg'> -->
-      </div>  
-    
-
-      <div class='col-lg-6' id='social-media-group'>
-        <div>
-          <h5 id='twitter_id'>Twitter: {{ user.twitter }}</h5>
-          <h5 id='linkedin_id'>LinkedIn: {{ user.linkedin }}</h5>
-          <h5 id='website_url_id'>Website: {{ user.website_url }}</h5>
-          <h5 id='email'>Email: {{ user.email }}</h5>
-        </div>  
-      </div>
-    </div>       
-    <br>
-    <br>
-
-  <div id='school-container'> 
-    
-    <div id='school-info'>
-      <h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a></h2> 
-    </div>
-    <br>  
-    
-    <div id='add-education-div'></div>      
-    <div id='edit-education-div'></div>
       
-    <div id='name-and-year'>
-    {% for school in schools %}
-      <h4 id='school_name_id'>{{ school.school_name }}</h4>
-      <h4 id='year_id'> {{ school.year }}</h4>
-    </div>
-    <div id='school-loc'>
-      <div>
-      <p id='school_city_id'>{{ school.school_city }},</p><p id='school_state_id'> {{ school.school_state }}</p>
-      </div>
-      <div>
-      <h5 id='major_id'>{{ school.major }},<h5>
-      <h5 id='degree_level'> {{ school.degree_level }}</h5>
-      </div>
-    {% endfor %}  
-    </div>
-  </div>
+        <div class="card-header">
+          <div class="page-header">
+            <h1>{{ user.fname }} {{ user.lname }}</h1> 
+          </div> 
+        </div>
+      
+      <br>
+      <br> 
+
+      <div class='row'>
+        <div class='d-inline' id='photo-and-social'>  
+          <div class='col-md-3 col-sm-6' id='user-photo'>
+            <img class='img-responsive' src='{{ user.photo }}' alt='user photo'>
+          </div> <!-- end user photo -->
+          <br>
+          <div class="card-body"> 
+            <div class='col' id='social-media-group '> 
+                <h4 class='d-inline-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h4>
+                <h4 class='d-inline-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h4>
+                <h4 class='d-inline-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h4>
+                <h4 class='d-inline-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h4>
+                <h4 class='d-inline-block'><a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h4>
+                
+                <br>
+            </div> <!-- end social-media-group -->
+          </div>  
+        </div> <!-- end photo-and-social -->  
+          
+        
+
+        <div id='social-div'></div>
+          <br>
+        <div id='twitter_id'></div>
+        <div id='linkedin_id'></div>
+        <div id='website_url_id'></div>
+        
+      </div> <!-- end row  -->
+    </div> <!-- end social container -->
+
+    
+
+    <br>
+    <br>
+
+    <!-- <ul class="list-group list-group-flush"> -->
+      <div id='school-container'> 
+        
+        <div id='school-info'>
+          <li class="list-group-item"><h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a></h2></li> 
+        </div>
+        <br>  
+        
+        <!-- <div id='add-education-div'></div>       -->
+        <div id='edit-education-div'></div>
+
+        <div class="card-body">  
+          <div id='name-and-year'>
+          {% for school in schools %}
+            <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
+            <h4 class='d-inline' id='year_id'> {{ school.year }}</h4>
+          </div>
+          <div id='school-loc'>
+            <div>
+              <p class='d-inline' id='school_city_id'>{{ school.school_city }}, </p>
+              <p class='d-inline' id='school_state_id'> {{ school.school_state }}</p>
+            </div>
+            <div class='d-inline'>
+              <h5 class='d-inline' id='major_id'>{{ school.major }}, </h5>
+              <h5 class='d-inline' id='degree_level'> {{ school.degree_level }}</h5>
+            </div>
+            {% endfor %}  
+          </div> <!-- end school loc -->
+        </div> <!-- end card body -->
+      </div> <!-- end school-container -->
     
     
   <br>
@@ -62,7 +87,7 @@
 
   <div id='languages-container'>
     <div id='languages-info'>
-      <h2>Languages<a href=""><i class="fas fa-pencil-alt" id='edit-languages'></i></a></h2> 
+      <li class="list-group-item"><h2>Languages<a href=""><i class="fas fa-pencil-alt" id='edit-languages'></i></a></h2></li> 
     </div>
     <br> 
         
@@ -75,33 +100,36 @@
           <input type='submit' class="btn btn-primary" value='Submit'>
       </form>
     </div>
-    <div id='user-languages'>
-      {% for language in user_languages %}
-        <h5 id='language_id'>{{ language.language_name }}</h5>
-      {% endfor %} 
-    </div>  
+    <div class="card-body"> 
+      <div id='user-languages'>
+        {% for language in user_languages %}
+          <h5 class='d-inline' id='language_id'>{{ language.language_name }} </h5>
+        {% endfor %} 
+      </div>
+    </div> <!-- end card body  -->   
   
 
-  </div>
+  </div> <!-- end languages-container -->
   <br>
   <br>
     
   <div id='description-container'>
       <div id='description-info'>
-        <h2>Description<a href=""><i class="fas fa-pencil-alt" id='edit-description'></i></a></h2> 
+        <li class="list-group-item"><h2>Description<a href=""><i class="fas fa-pencil-alt" id='edit-description'></i></a></h2></li> 
       </div>
         <br>
 
       <div id='description-div'></div>
       
-      <div>    
+      <div class="card-body">     
          <h5 id='description_id'>{{ user.description }}</h5>
       </div>
-  </div>
+  </div> <!-- end description container -->
   <br>
   <br>
 
   <div id='mentor-or-active'>
+    <div class="card-body"> 
       <div id='is_active'>
       <br>
       {% if user.is_active %}  
@@ -118,7 +146,10 @@
         </label>
         
       {% endif %}  
-      </div>
+      </div> <!-- end is_active -->
+    </div>
+    
+    <div class="card-body">   
       <div id='is_mentor'>
       <br>
       <br>
@@ -127,17 +158,19 @@
           <input type='radio' name='mentor' value=True checked> Mentor
           <input type='radio' name='mentor' value=False> Mentee
           {% elif not user.is_mentor %} 
-          <input type='radio' name='mentee' value=True> Mentor
-          <input type='radio' name='mentee' value=False checked> Mentee
+          <input type='radio' name='mentee' value=True> Mentee
+          <input type='radio' name='mentee' value=False checked> Mentor
           {% endif %}
         </label>
          
-      </div>
-  </div>   
+      </div> <!-- end is_mentor -->
+    </div>  
+  </div> <!-- end mentor-or-active -->
+
 
 
 <script src="../static/user_profile.js"></script>
 
-
-</div>
+ </div> <!-- end card     -->
+</div> <!-- end container -->
 {% endblock %}
