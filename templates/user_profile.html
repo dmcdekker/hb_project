@@ -7,7 +7,7 @@
       
         <div class="card-header">
           <div class="page-header">
-            <h1>{{ user.fname }} {{ user.lname }}</h1> 
+            <h1>{{ user.fname }} {{ user.lname }}</h1>
           </div> 
         </div>
       
@@ -26,7 +26,12 @@
                 <h4 class='d-inline-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h4>
                 <h4 class='d-inline-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h4>
                 <h4 class='d-inline-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h4>
-                <h4 class='d-inline-block'><a href=""><i class="fas fa-pencil-alt" id='edit-social'></i></a></h4>
+
+                <h4 class='d-inline-block'>
+                  <a href="">
+                  {% if user.user_id == session['user_id'] %}
+                  <i class="fas fa-pencil-alt" id='edit-social'></i>
+                  {% endif %}</a></h4>
                 
                 <br>
             </div> <!-- end social-media-group -->
@@ -52,7 +57,11 @@
       <div id='school-container'> 
         
         <div id='school-info'>
-          <li class="list-group-item"><h2>Education<a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a></h2></li> 
+          <li class="list-group-item"><h2>Education
+            {% if user.user_id == session['user_id'] %}
+            <a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a>
+            {% endif %}
+          </h2></li> 
         </div>
         <br>  
         
@@ -86,7 +95,11 @@
 
   <div id='languages-container'>
     <div id='languages-info'>
-      <li class="list-group-item"><h2>Languages<a href=""><i class="fas fa-pencil-alt" id='edit-languages'></i></a></h2></li> 
+      <li class="list-group-item"><h2>Languages<a href="">
+        {% if user.user_id == session['user_id'] %}
+        <i class="fas fa-pencil-alt" id='edit-languages'></i>
+        {% endif %}
+      </a></h2></li> 
     </div>
     <br> 
         
@@ -114,7 +127,11 @@
     
   <div id='description-container'>
       <div id='description-info'>
-        <li class="list-group-item"><h2>Description<a href=""><i class="fas fa-pencil-alt" id='edit-description'></i></a></h2></li> 
+        <li class="list-group-item"><h2>Description<a href="">
+          {% if user.user_id == session['user_id'] %}
+          <i class="fas fa-pencil-alt" id='edit-description'></i>
+          {% endif %}
+        </a></h2></li> 
       </div>
         <br>
 
@@ -127,6 +144,7 @@
   <br>
   <br>
 
+  {% if user.user_id == session['user_id'] %}
   <div id='mentor-or-active'>
     <div class="card-body"> 
       <div id='is_active'>
@@ -163,6 +181,7 @@
       </div> <!-- end is_mentor -->
     </div>  
   </div> <!-- end mentor-or-active -->
+  {% endif %}
 
 
 <script src="../static/user_profile.js"></script>

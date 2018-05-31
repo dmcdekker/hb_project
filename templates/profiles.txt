@@ -1,0 +1,92 @@
+profiles back up
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='container'>
+
+  <div class='page-header'>
+        <h1>Profiles</h1>
+  </div>
+
+  <div id='user-type'>
+    <button id='all-page'>All</button>
+    <button id='mentor-page'>Mentors</button>
+    <button id='mentee-page'>Mentees</button>
+  </div>
+
+  <!-- have for loop that adds components to array
+       search return via ajax
+       react manages state: render elements based on data in state
+       search again, state changes
+
+       top level component in div
+       search form (descendent)
+       component for result list
+       state held at top level (names, object (js obj from server))
+       render method of results: for loop that will go through data displayed on page form profiles
+       generate array of components -->
+
+  <div class='container'>
+      <div class='row'>
+        {% for user in users %}
+          {% if user.is_mentor == True %}
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentor-profiles">
+            <div class='card' style='height:100%'>
+              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
+              <div class='card-body'>
+                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
+                    {{ user.fname }} {{ user.lname }} <br>
+                </a></h3>
+                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
+                {% for eng_type in engineer_types %}
+                  {% if user.engineer_type == eng_type.engineer_type_id %}   
+                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>  
+          </div> 
+          {% elif user.is_mentor == False %}
+          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentee-profiles">
+            <div class='card' style='height:100%'>
+              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
+              <div class='card-body'>
+                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
+                    {{ user.fname }} {{ user.lname }} <br>
+                </a></h3>
+                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
+                {% for eng_type in engineer_types %}
+                  {% if user.engineer_type == eng_type.engineer_type_id %}   
+                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>  
+          </div> 
+          {% endif %}
+        {% endfor %}
+     </div>
+  </div>                         
+         
+      
+<script type='text/javascript'>
+
+$('#mentor-page').click(function(){
+  $('.mentor-profiles').show()
+  $('.mentee-profiles').hide()
+  });
+
+$('#mentee-page').click(function(){
+  $('.mentee-profiles').show()
+  $('.mentor-profiles').hide()
+  });
+
+$('#all-page').click(function(){
+  $('.mentor-profiles').show()
+  $('.mentee-profiles').show()
+  });
+
+</script>
+
+{% endblock %}

@@ -125,7 +125,7 @@ class DBTests(unittest.TestCase):
     def test_user_profile(self):
         result = self.client.get("/profiles/1")
         self.assertEqual(result.status_code, 200)
-        self.assertIn("<div id='photo-and-social'>", result.data)
+        self.assertIn("<div id='social-container'>", result.data)
 
     def test_profiles_loggedin(self):
         result = self.client.get("/profiles", follow_redirects=False)
@@ -143,7 +143,7 @@ class DBTests(unittest.TestCase):
                                         "password": "xxxxxx"},
                                   follow_redirects=True)
         self.assertEqual(result.status_code, 200)
-        self.assertIn("<div id='photo-and-social'>", result.data) 
+        self.assertIn("<div id='social-container'>", result.data) 
 
 
     # uncommented as test is good (can't keep adding same data)
@@ -191,10 +191,10 @@ class DBTests(unittest.TestCase):
 
     # def test_edit_languages_json(self):
     #     result = self.client.post('/edit-languages.json',
-    #                                 data={'language_name' : '3',
+    #                                 data={'language_name' : 'AGOL',
     #                                       })
 
-    #     self.assertIn('3', result.data)        
+    #     self.assertIn('AGOL', result.data)        
 
 
     def test_edit_description(self):
@@ -202,11 +202,23 @@ class DBTests(unittest.TestCase):
                                     data={'description' : 'Some long and lovely text about me',
                                           })
 
-        self.assertIn('Some long and lovely text about me', result.data)        
+        self.assertIn('Some long and lovely text about me', result.data)  
 
-                
-    
-    
+
+    def test_edit_is_mentor(self):
+        result = self.client.post('/edit-is_mentor.json',
+                                    data={'is_mentor' : 'false',
+                                          })
+
+        self.assertIn('false', result.data)  
+
+
+    def test_edit_is_active(self):
+        result = self.client.post('/edit-is_active.json',
+                                    data={'is_active' : 'true',
+                                          })
+
+        self.assertIn('true', result.data)                
 
 
 class NoSessionServerTests(unittest.TestCase):

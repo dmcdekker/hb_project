@@ -252,11 +252,6 @@ def edit_languages():
         return jsonify(lang_json)
 
 
-    # else:
-    #     flash("You can't edit other user's profiles")
-    #     return redirect('/user_profile')         
-
-
 @app.route('/edit-description.json', methods=['POST'])
 def edit_description():
     """User can edit description"""
@@ -273,30 +268,6 @@ def edit_description():
         db.session.commit()
 
         return jsonify(description)
-
-    # else:
-    #     flash("You can't edit other user's profiles")
-    #     return redirect('/user_profile')
-
-
-# @app.route('/edit-active.json', methods=['POST'])
-# def edit_active():
-#     """User can edit description"""
-
-#     user_id = session.get('user_id')
-
-#     if user_id:
-#         user = User.query.get(user_id)
-#         get_active = request.form['is_active']
-#         if get_active:
-#             user.is_active = True
-#         elif not get_active:
-#             user.is_active = False
-
-
-#         db.session.commit()
-
-#         return jasonify(get_active)    
 
 
 @app.route('/edit-is_mentor.json', methods=['POST'])
@@ -328,7 +299,7 @@ def edit_active():
     if user_id:
         user = User.query.get(user_id)
         get_is_active = request.form['is_active']
-        print '|||||', get_is_active
+
         if get_is_active == 'True':
             user.is_active = True
         elif get_is_active == 'False':
@@ -336,8 +307,8 @@ def edit_active():
         
         db.session.commit()
         
-        return jsonify(user.is_active)        
-         
+        return jsonify(user.is_active)
+
 
 
 @app.route("/profiles")
@@ -361,10 +332,6 @@ def user_list():
 @app.route("/profiles/<int:user_id>")
 def user_detail(user_id):
     """Show info about user."""
-
-    # if session['user_id'] != user_id:
-    #     flash("Please log in or register to view profiles")
-    #     return redirect('/')
 
     user = User.query.get(user_id)
 
@@ -410,7 +377,6 @@ def show_events():
 
     return render_template("events.html", data=pformat(data),
                                results=events)
-
 
 
 @app.route('/login', methods=['GET'])
