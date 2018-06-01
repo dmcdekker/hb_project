@@ -311,7 +311,7 @@ def edit_active():
 
 
 
-@app.route("/profiles")
+@app.route('/profiles')
 def user_list():
     """Show list of all profiles"""
 
