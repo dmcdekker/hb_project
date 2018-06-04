@@ -1,10 +1,11 @@
 from pprint import pformat
 import os
-import requests, json
+import requests
+import json
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session, jsonify 
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -344,7 +345,7 @@ def user_detail(user_id):
     return render_template("user_profile.html", user=user, schools=schools, user_languages=user_languages, all_languages=all_languages)
 
         
-@app.route("/events")
+@app.route('/events')
 def show_events():
     """Show events from Eventbite"""
 
@@ -406,7 +407,7 @@ def login_process():
 
     session["user_id"] = user.user_id
 
-    flash("Logged in")
+    flash("You are now logged in")
     return redirect("/profiles/{}".format(user.user_id))
 
 
@@ -414,10 +415,10 @@ def login_process():
 def logout():
     """Log out."""
 
-    del session["user_id"]
-    flash("You are now logged Out")
+    del session['user_id']
+    flash('You are now logged out')
 
-    return redirect("/")
+    return redirect('/')
 
 
 

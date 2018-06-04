@@ -13,10 +13,50 @@
 }
 
 html, body {
+  padding-top: 2em;
+
   width: 100vw;
   height: 100vh;
 }
 
+/*------------------typograhy------------------------*/
+
+.h1, .h2, .h3, .h4, .h5, .h6{
+  color: #222a1d;
+}
+
+/* unvisited link */
+a:link {
+    color: #445a7c;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: #90aacd;
+}
+
+/* mouse over link */
+a:hover {
+    color: #21272d;
+}
+
+/*------------------navbar------------------------*/
+.bg-light {
+    background-color: white!important;
+}
+
+.navbar{
+  padding top: 1em;
+}
+
+.navbar-brand{
+  font-size: 1.5em; 
+}
+
+.navbar-light .navbar-brand{
+  color: #222a1d;
+}
 
 
 /*------------------homepage------------------------*/
@@ -30,61 +70,21 @@ div.jumbotron.jumbotron-fluid {
     padding-top: 0;
 }
 
-/*------------------profile page------------------------*/
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+
+/*------------------events------------------------*/
+
+.list-group-item {
+  border: 1.25px solid #4b7223!important;
 }
 
-.switch input {display:none;}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+#date-color{
+  color: #445a7c;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+/*------------------profiles------------------------*/
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+.card{
+  margin-bottom: 2em;
 }
 
 /*------------------profile page------------------------*/
@@ -124,7 +124,6 @@ input:checked + .slider:before {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
-
 }
 
 

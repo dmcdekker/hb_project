@@ -4,12 +4,20 @@
     <title>SHERO</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="/static/styles.css" rel="stylesheet">
+  
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
     
 </head>
 <body>
 
  
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand text-lg" href="/">SHERO</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -45,21 +53,23 @@
     </div>
   </nav>
 
+  <div id='flash' class='container font-weight-light'>
+    <h5>{% for flash in get_flashed_messages() %}
+      {{ flash }}
+    {% endfor %}</h5>
+  </div>  
 
-{% for flash in get_flashed_messages() %}
-  {{ flash }}
-{% endfor %}
+    {% block content %}
+      Put your body here.
+    {% endblock %}
 
-{% block content %}
-  Put your body here.
-{% endblock %}
+  <script type="text/javascript">
+    $('#flash').hide().delay(800).fadeIn(1500).delay(4000).fadeOut(800)
+  </script>   
+   
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link href="/static/styles.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 

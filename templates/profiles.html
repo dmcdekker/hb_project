@@ -1,59 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class='container'>
+<div class='container mx-auto'>
 
-  <div class='page-header'>
-        <h1>Profiles</h1>
+  <div class='text-center' id='user-type'>
+    <button class="btn btn-link" id='all-page'>All</button>
+    <button class="btn btn-link" id='mentor-page'>Mentors</button>
+    <button class="btn btn-link" id='mentee-page'>Mentees</button>
   </div>
+  <br>
 
-  <div id='user-type'>
-    <button id='all-page'>All</button>
-    <button id='mentor-page'>Mentors</button>
-    <button id='mentee-page'>Mentees</button>
-  </div>
-
-  <div class='container'>
-      <div class='row'>
-        {% for user in users %}
-          {% if user.is_mentor == True %}
-          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentor-profiles">
-            <div class='card' style='height:100%'>
-              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
-              <div class='card-body'>
-                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
-                    {{ user.fname }} {{ user.lname }} <br>
-                </a></h3>
-                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
-                {% for eng_type in engineer_types %}
-                  {% if user.engineer_type == eng_type.engineer_type_id %}   
-                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>  
-          </div> 
-          {% elif user.is_mentor == False %}
-          <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentee-profiles">
-            <div class='card' style='height:100%'>
-              <img class='card-img-top img-responsive' style='height:300px' src='{{ user.photo }}' alt='User image'>
-              <div class='card-body'>
-                <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
-                    {{ user.fname }} {{ user.lname }} <br>
-                </a></h3>
-                <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
-                {% for eng_type in engineer_types %}
-                  {% if user.engineer_type == eng_type.engineer_type_id %}   
-                  <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>  
-          </div> 
-          {% endif %}
-        {% endfor %}
-     </div>
-  </div>                         
+  <div class='card-group'>
+    {% for user in users %}
+      {% if user.is_mentor == True and user.is_active == True %}
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentor-profiles">
+        <div class='card'>
+          <img class='card-img-top img-responsive' style='height:12em' src='{{ user.photo }}' alt='User image'>
+          <div class='card-body'>
+            <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
+                {{ user.fname }} {{ user.lname }} <br>
+            </a></h3>
+            <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
+            {% for eng_type in engineer_types %}
+              {% if user.engineer_type == eng_type.engineer_type_id %}   
+              <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>  
+      </div> 
+      {% elif user.is_mentor == False and user.is_active == True %}
+      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentee-profiles">
+        <div class='card'>
+          <img class='card-img-top img-responsive' style='height:12em' src='{{ user.photo }}' alt='User image'>
+          <div class='card-body'>
+            <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
+                {{ user.fname }} {{ user.lname }} <br>
+            </a></h3>
+            <p class='card-text'>{{ user.city }}, {{ user.state }}</p>
+            {% for eng_type in engineer_types %}
+              {% if user.engineer_type == eng_type.engineer_type_id %}   
+              <h5 class='card-text'>{{ eng_type.engineer_type }}</h5>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>  
+      </div> 
+      {% endif %}
+    {% endfor %}
+ </div>
+                        
          
       
 <script type='text/javascript'>

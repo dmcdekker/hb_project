@@ -3,19 +3,19 @@
 {% block content %}
 
 <div class='container'>
-
-  
-
     <div class='page-header'>
-        <h1>Events: Meet Other Women in Tech!</h1>
+        <h1 class='page-header'>Meet Other Women in Tech!</h1>
     </div>
+    <br>
         <div class='row'>
             <div class='col-md-12'>
-              <ul class='events'>
+              <ul class='list-group'>
                 {% for event in results %}
-                  <h3><a href='{{ event.url }}'>{{ event.name.text }}</a></h3>
-                      <!-- <p>{{ event.description.text }}</p> -->
-                      <p>{{ event.start.local | replace('T', ' @ ') }}</p>
+
+                  <li class="list-group-item">
+                    <h4><a href='{{ event.url }}'>{{ event.name.text }}</a></h4>
+                    <h6 id='date-color'>{{ event.start.local | replace('T', ' @ ') }}</h6>
+                  </li>
                 {% endfor %}
               </ul>
 

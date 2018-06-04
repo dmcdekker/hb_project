@@ -1,8 +1,7 @@
 """Models and database functions for HB project."""
+from flask import Flask
 
 from flask_sqlalchemy import SQLAlchemy
-
-from flask import Flask
 
 from faker import Faker
 from random import randint, choice
@@ -34,6 +33,8 @@ class User(db.Model):
 
     def __repr__(self):
         """Provide helpful representation when printed."""
+
+
 
         return "<User: {fname}\t{lname}\tEmail:{email}\t{city}>".format(fname=self.fname, lname=self.lname,
                                                                 email=self.email, city=self.city)
@@ -237,11 +238,11 @@ if __name__ == "__main__":
     connect_to_db(app)
     print "Connected to DB"
 
-    fake = Faker()
-    db.create_all()
-    seed_data()
-    fake_profiles(fake)
-    print "DB populated"
+    # fake = Faker()
+    # db.create_all()
+    # seed_data()
+    # fake_profiles(fake)
+    # print "DB populated"
 
 
 
