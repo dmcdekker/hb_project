@@ -38,12 +38,12 @@ p, .p {
 }
 
 a {
-  color: #442d3f;
+  color: #7c587f;
 }
 
 /* mouse over link */
 a:hover {
-    color: #7c587f;
+    color: #442d3f;
     text-decoration: none!important;
 }
 
@@ -97,12 +97,12 @@ div.jumbotron.jumbotron-fluid {
 .btn-link{
   font-size: 1.25em;
   text-decoration: none!important;  
-  color: #442d3f;
+  color: #7c587f;
 }
 
 /* mouse over link */
 .btn-link:hover {
-    color: #7c587f;
+    color: #442d3f;
 }
 
 .card{

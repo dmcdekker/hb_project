@@ -33,7 +33,6 @@ function editSocial(e){
 // <--------------update or add education info----------------> 
 
 function updateSchool(results){
-  console.log('test1');
   $('#school_name_id').html(results[0]);
   $('#year_id').html(results[1]);
   $('#school_city_id').html(results[2]);
@@ -43,7 +42,6 @@ function updateSchool(results){
 }
 
 function getSchoolData(evt) {
-    console.log('test2');
     evt.preventDefault(); 
     $('#edit-education-div').hide(); 
     
@@ -61,7 +59,6 @@ function getSchoolData(evt) {
   $('#edit-education-div').on('submit', '#education-new', getSchoolData);
 
 function editSchool(e){ 
-  console.log('test3');
     e.preventDefault();
     $('#edit-education-div').append('<form submit="/edit-education.json" id="education-new" style="width:15em"><input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br><input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br><input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br><input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br><input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br><input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel"><input type="submit" class="btn btn-primary d-line" value="Save Changes"></form>');
   }
@@ -69,11 +66,13 @@ function editSchool(e){
   
 
 function closeEduDiv(e) {
+  console.log('test');
   e.preventDefault();
+  // alert();
   $('#edit-education-div').hide();
   $('#edu-og').show();
 }
-  $('#cancel-education').on('click', closeEduDiv);
+  $('body').on('click', '#cancel-education', closeEduDiv);
 
 
 // <--------------update languages----------------> 
