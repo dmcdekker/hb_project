@@ -2,53 +2,54 @@
 <html>
 <head>
     <title>SHERO</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
+    <script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8='
+      crossorigin='anonymous'></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="/static/styles.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Muli|Open+Sans" rel="stylesheet">
+    <link href='/static/styles.css' rel='stylesheet'>
   
     
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp' crossorigin='anonymous'>  
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  
     
 </head>
 <body>
 
  
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand text-lg" href="/">SHERO</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
+    <a class='navbar-brand text-lg' href='/'>SHERO</a>
+    <button class='navbar-toggler navbar-toggler-right' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/events">EVENTS<span class="sr-only">(current)</span></a>
+    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+      <ul class='navbar-nav ml-auto'>
+        <li class='nav-item active'>
+          <a class='nav-link' href='/events'>EVENTS<span class='sr-only'>(current)</span></a>
         </li>
-        <li class="nav-item active">
-          {% if "user_id" in session %}
-        <li class="nav-item active">
-          <a class="nav-link" href="/profiles">PROFILES<span class="sr-only">(current)</span></a>
+        <li class='nav-item active'>
+          {% if 'user_id' in session %}
+        <li class='nav-item active'>
+          <a class='nav-link' href='/profiles'>PROFILES<span class='sr-only'>(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/logout">LOGOUT<span class="sr-only">(current)</span></a>
+        <li class='nav-item active'>
+          <a class='nav-link' href='/logout'>LOGOUT<span class='sr-only'>(current)</span></a>
         </li>
         
           {% else %}
-        <li class="nav-item active">
-          <a class="nav-link" href="/login">LOGIN<span class="sr-only">(current)</span></a>
+        <li class='nav-item active'>
+          <a class='nav-link' href='/login'>LOGIN<span class='sr-only'>(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/register">REGISTER<span class="sr-only">(current)</span></a>
+        <li class='nav-item active'>
+          <a class='nav-link' href='/register'>REGISTER<span class='sr-only'>(current)</span></a>
         </li>  
-        {% endif %}<span class="sr-only">(current)</span></a>
+        {% endif %}<span class='sr-only'>(current)</span></a>
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <!-- <form class='form-inline my-2 my-lg-0'>
+        <input class='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>
+        <button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>
       </form> -->
     </div>
   </nav>
@@ -63,15 +64,15 @@
       Put your body here.
     {% endblock %}
 
-  <script type="text/javascript">
+  <script type='text/javascript'>
     $('#flash').hide().delay(800).fadeIn(1500).delay(4000).fadeOut(800)
   </script>   
    
 
   
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
 
 
 </body>

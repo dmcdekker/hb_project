@@ -1,8 +1,9 @@
-/*#222a1d dark blue/black
-#21272d dark blue
-#445a7c med blue
-#90aacd light blue
-#4b7223 green*/
+/*#051126 dark blue/black
+##442d3f darker purple
+#4c3f77 dark purple
+#7c587f lilac
+#a4bcbc light blue
+#007f97 aquamarine*/
 
 
 /*------------------body------------------------*/
@@ -14,31 +15,36 @@
 
 html, body {
   padding-top: 2em;
-
   width: 100vw;
   height: 100vh;
 }
 
 /*------------------typograhy------------------------*/
 
-.h1, .h2, .h3, .h4, .h5, .h6{
-  color: #222a1d;
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1.2;
+    color: inherit;
+    font-family: 'Muli', sans-serif;
+    color: #442d3f;
+    letter-spacing: .5px;
 }
 
-/* unvisited link */
-a:link {
-    color: #445a7c;
-    text-decoration: none;
+
+p, .p {
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* visited link */
-a:visited {
-    color: #90aacd;
+a {
+  color: #442d3f;
 }
 
 /* mouse over link */
 a:hover {
-    color: #21272d;
+    color: #7c587f;
+    text-decoration: none!important;
 }
 
 /*------------------navbar------------------------*/
@@ -51,11 +57,16 @@ a:hover {
 }
 
 .navbar-brand{
-  font-size: 1.5em; 
+  font-size: 2em;
+  margin-left: 1em; 
 }
 
 .navbar-light .navbar-brand{
   color: #222a1d;
+}
+
+.navbar-nav{
+  margin-right: 1.5em;
 }
 
 
@@ -74,7 +85,7 @@ div.jumbotron.jumbotron-fluid {
 /*------------------events------------------------*/
 
 .list-group-item {
-  border: 1.25px solid #4b7223!important;
+  background-color: #442d3f;
 }
 
 #date-color{
@@ -83,18 +94,58 @@ div.jumbotron.jumbotron-fluid {
 
 /*------------------profiles------------------------*/
 
+.btn-link{
+  font-size: 1.25em;
+  text-decoration: none!important;  
+  color: #442d3f;
+}
+
+/* mouse over link */
+.btn-link:hover {
+    color: #7c587f;
+}
+
 .card{
   margin-bottom: 2em;
+  border: 1px solid #007f97;
+  box-shadow: 2px 2px 5px #e6e6e6;
+}
+
+.card-text{
+  margin-bottom: .60em;
+
 }
 
 /*------------------profile page------------------------*/
+
+.card-header{
+  background-color: #442d3f!important;
+  border-bottom: none!important;
+}
 
 .img-responsive {
     width: 100%;
     height: 100%;
 }  
 
-@media (min-width: 576px) {
+.i{
+  font-size: 5em;
+  margin: 5em;
+}
+
+#language_id{
+  margin: .6em;
+}
+
+div#social-media-group .col{
+  padding-top: 2em;
+}
+
+#mentor-or-active{
+  border-top: 5px solid #442d3f;
+  padding-bottom: 2em;
+}
+/*@media (min-width: 576px) {
     .card-columns {
         column-count: 2;
     }
@@ -116,7 +167,7 @@ div.jumbotron.jumbotron-fluid {
     .card-columns {
         column-count: 5;
     }
-}
+}*/
 
 .card-img-top {
     width: 100%;

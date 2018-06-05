@@ -10,35 +10,32 @@
       >
         <div class="card-header">
           <div class="page-header">
-            <h1>{{ user.fname }} {{ user.lname }}</h1>
+            <h1 style="color:white;">{{ user.fname }} {{ user.lname }}</h1>
           </div> 
         </div>
-      
-      <br>
-      <br> 
-
-      <div class='row'>
-        <div class='d-inline' id='photo-and-social'>  
-          <div class='col-md-6 col-xs-12 col-lg-6' id='user-photo'>
-            <img class='img-responsive' src='{{ user.photo }}' alt='user photo'>
+    
+      <div id='photo-and-social' class='row'>
+        <!-- <div id='photo-and-social'>   -->
+          <div class='col-4' id='user-photo'>
+            <img class='img-responsive'  src='{{ user.photo }}' alt='user photo'>
           </div> <!-- end user photo -->
           <br>
 
-            <div class='col' id='social-media-group '> 
-                <h4 class='d-inline-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h4>
-                <h4 class='d-inline-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h4>
-                <h4 class='d-inline-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h4>
-                <h4 class='d-inline-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h4>
+          <div class='col' id='social-media-group' style='margin:2em;'> 
+            <h2 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h2>
+            <h2 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h2>
+            <h2 class='d-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h2>
+            <h2 class='d-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h2>
 
-                <h4 class='d-inline-block'>
-                  <a href="">
-                  {% if user.user_id == session['user_id'] %}
-                  <i class="fas fa-pencil-alt" id='edit-social'></i>
-                  {% endif %}</a></h4>
-                
-                <br>
-            </div> <!-- end social-media-group -->
-        </div> <!-- end photo-and-social -->  
+            <h4 class='d-inline-block'>
+              <a href="">
+              {% if user.user_id == session['user_id'] %}
+              <a href=""><i class="fas fa-pencil-alt" id='edit-social'></i>
+              {% endif %}</a></h4>
+            
+            <br>
+          <!-- </div> end social-media-group -->
+      </div> <!-- end photo-and-social -->  
           
         
 
@@ -51,18 +48,14 @@
       </div> <!-- end row  -->
     </div> <!-- end social container -->
 
-    
-
-    <br>
-    <br>
-
     <!-- <ul class="list-group list-group-flush"> -->
       <div id='school-container'> 
         
         <div id='school-info'>
-          <li class="list-group-item"><h2>Education
+          <li class='list-group-item'><h2 style='color:white;'>Education
             {% if user.user_id == session['user_id'] %}
-            <a href=""><i class="fas fa-pencil-alt" id='edit-education'></i></a><a href=""><i class="fas fa-plus" id='add-education'></i></a>
+            <!-- <i class="fa fa-plus float-sm-right" style="color:white;" id='add-education'></i> -->
+            <a href=''><i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-education'></i></a>
             {% endif %}
           </h2></li> 
         </div>
@@ -71,7 +64,7 @@
         <!-- <div id='add-education-div'></div>       -->
         <div id='edit-education-div'></div>
 
-        <div class="card-body">  
+        <div class='card-body' id='edu-og'>  
           <div id='name-and-year'>
           {% for school in schools %}
             <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
@@ -98,9 +91,9 @@
 
   <div id='languages-container'>
     <div id='languages-info'>
-      <li class="list-group-item"><h2>Languages<a href="">
+      <li class="list-group-item"><h2 style="color:white;">Languages<a href="">
         {% if user.user_id == session['user_id'] %}
-        <i class="fas fa-pencil-alt" id='edit-languages'></i>
+        <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-languages'></i>
         {% endif %}
       </a></h2></li> 
     </div>
@@ -130,9 +123,9 @@
     
   <div id='description-container'>
       <div id='description-info'>
-        <li class="list-group-item"><h2>Description<a href="">
+        <li class="list-group-item"><h2 style="color:white;">Description<a href="">
           {% if user.user_id == session['user_id'] %}
-          <i class="fas fa-pencil-alt" id='edit-description'></i>
+          <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-description'></i>
           {% endif %}
         </a></h2></li> 
       </div>
@@ -149,8 +142,7 @@
 
   {% if user.user_id == session['user_id'] %}
   <div id='mentor-or-active'>
-    <div class="card-body"> 
-      <div id='is_active'>
+    <div class="card-body" id='is_active'> 
       <br>
         <h5>Account</h5>
         <label>
@@ -161,28 +153,22 @@
           <input type='radio' name='active' value=True>Active
           <input type='radio' name='active' value=False checked>Inactive
           {% endif %}  
-        </label>   
-          
-      </div> <!-- end is_active -->
-    </div>
-    <br>
-    <br>
+        </label>          
+    </div> <!-- end is_active -->
     
-    <div class="card-body">   
-      <div id='is_mentor'>
-        <h5>Mentor or Mentee</h5>
-        <label>
-          {% if user.is_mentor %}  
-          <input type='radio' name='mentor' value=True checked> Mentor
-          <input type='radio' name='mentor' value=False> Mentee
-          {% elif not user.is_mentor %} 
-          <input type='radio' name='mentor' value=True > Mentor
-          <input type='radio' name='mentor' value=False checked> Mentee
-          {% endif %}
-        </label>
-         
-      </div> <!-- end is_mentor -->
-    </div>  
+  
+    <div class="card-body" id='is_mentor'>   
+      <h5>Mentor or Mentee</h5>
+      <label>
+        {% if user.is_mentor %}  
+        <input type='radio' name='mentor' value=True checked> Mentor
+        <input type='radio' name='mentor' value=False> Mentee
+        {% elif not user.is_mentor %} 
+        <input type='radio' name='mentor' value=True > Mentor
+        <input type='radio' name='mentor' value=False checked> Mentee
+        {% endif %}
+      </label>
+    </div> <!-- end is_mentor --> 
   </div> <!-- end mentor-or-active -->
   {% endif %}
 
