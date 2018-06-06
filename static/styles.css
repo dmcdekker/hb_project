@@ -5,9 +5,13 @@
 #a4bcbc light blue
 #007f97 aquamarine*/
 
-#social-new{
+/*from page:
+000060 dark blue
+4692d3 light blue
+0d0daa blue 
+ff0000 red
+a1fcf2 aquamarine*/
 
-}
 /*------------------body------------------------*/
 * {
   margin: 0;
@@ -25,6 +29,22 @@ html, body {
   border: 1px solid #4c3f77;
 }
 
+* {
+  border-radius: 0 !important;
+}
+
+#bg {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  
+  object-fit: cover;
+
+  /* Preserve aspect ratio */
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /*------------------typograhy------------------------*/
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -34,7 +54,7 @@ html, body {
     line-height: 1.2;
     color: inherit;
     font-family: 'Muli', sans-serif;
-    color: #051126;
+    color: #000060;
     letter-spacing: .5px;
 }
 
@@ -44,12 +64,12 @@ p, .p {
 }
 
 a {
-  color: #7c587f;
+  color: #1d507c;
 }
 
 /* mouse over link */
 a:hover {
-    color: #442d3f;
+    color: #3085cf;
     text-decoration: none!important;
 }
 
@@ -68,11 +88,17 @@ a:hover {
 }
 
 .navbar-light .navbar-brand{
-  color: #222a1d;
+  color: #000060;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #000060;
+    size: 1em;
+    font-weight: 500;
 }
 
 .navbar-nav{
-  margin-right: 1.5em;
+  margin-right: 2em;
 }
 
 
@@ -87,16 +113,22 @@ div.jumbotron.jumbotron-fluid {
     padding-top: 0;
 }
 
-
+/*body .container-fluid { 
+  background: url('images/homepage_1.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/
 /*------------------events------------------------*/
 
-.list-group-item {
-  background-color: #442d3f;
+
+.list-group {
+  border: 2px solid #d6c2d2;
+  padding: .5em;
 }
 
-* {
-  border-radius: 0 !important;
-}
 
 #date-color{
   color: #445a7c;
@@ -105,33 +137,36 @@ div.jumbotron.jumbotron-fluid {
 /*------------------profiles------------------------*/
 
 .btn-link{
-  font-size: 1.25em;
+  font-size: 1.5em;
   text-decoration: none!important;  
-  color: #7c587f;
+  color: #1d507c;
 }
 
 /* mouse over link */
 .btn-link:hover {
-    color: #442d3f;
+    color: #3085cf;
 }
 
 .card{
   margin-bottom: 2em;
-  border: 1px solid #007f97;
-  box-shadow: 2px 2px 5px #e6e6e6;
+  border: 2px solid #007f97;
+  box-shadow: 3px 3px 5px #e6e6e6;
 }
 
 .card-text{
   margin-bottom: .60em;
 }
 
+.list-group-item {
+  background-color: #6b4763;
+}
 
 
 
 /*------------------profile page------------------------*/
 
 .card-header{
-  background-color: #442d3f!important;
+  background-color: #6b4763!important;
   border-bottom: none!important;
 }
 
@@ -145,11 +180,11 @@ div.jumbotron.jumbotron-fluid {
 }
 
 .fa-twitter-square{
-  color: #007f97;
+  color: #00aced;
 }
 
 .fa-linkedin{
-  color: #a4bcbc ;
+  color: ##0e76a8  ;
 }
 
 .fa-envelope-square{
@@ -157,7 +192,7 @@ div.jumbotron.jumbotron-fluid {
 }
 
 i:hover {
-    color: #442d3f;
+    color: #1d507c;
     text-decoration: none!important;
 }
 
@@ -175,8 +210,10 @@ div#social-update{
   padding-right: 2.5em;
 }*/
 
+
+
 #mentor-or-active{
-  border-top: 5px solid #442d3f;
+  border-top: 5px solid #6b4763;
   padding-bottom: 2em;
 }
 /*@media (min-width: 576px) {
