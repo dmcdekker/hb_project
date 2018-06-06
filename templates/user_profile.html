@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class='container'>
+<div class='container mx-auto'>
   <div><a href="/profiles"><i class="fas fa-arrow-left"></i>  Back to Profiles</a></div>
   <br>
   <br>
@@ -10,79 +10,102 @@
       >
         <div class="card-header">
           <div class="page-header">
-            <h1 style="color:white;">{{ user.fname }} {{ user.lname }}</h1>
+            <h2 style="color:white;">{{ user.fname }} {{ user.lname }}</h2>
+
           </div> 
         </div>
     
       <div id='photo-and-social' class='row'>
         <!-- <div id='photo-and-social'>   -->
-          <div class='col-4' id='user-photo'>
+          <div class='col-sm-6 col-md-4 d-inline' id='user-photo'>
             <img class='img-responsive'  src='{{ user.photo }}' alt='user photo'>
           </div> <!-- end user photo -->
           <br>
 
-          <div class='col' id='social-media-group' style='margin:2em;'> 
-            <h2 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h2>
-            <h2 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h2>
-            <h2 class='d-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h2>
-            <h2 class='d-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h2>
+          <div class='col d-block' id='social-media-group' style='margin:2em;'> 
+            <h3 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h3>
+            <h3 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h3>
+            <h3 class='d-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h3>
+            <h3 class='d-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h3>
 
-            <h4 class='d-inline-block'>
-              <a href="">
+            <h4 class='d-block'>
+              
               {% if user.user_id == session['user_id'] %}
-              <a href=""><i class="fas fa-pencil-alt" id='edit-social'></i>
+              <a><i class="fas fa-pencil-alt" id='edit-social'></i>
               {% endif %}</a></h4>
             
             <br>
-          <!-- </div> end social-media-group -->
-      </div> <!-- end photo-and-social -->  
-          
-        
 
-        <div id='social-div'></div>
-          <br>
-        <div id='twitter_id'></div>
-        <div id='linkedin_id'></div>
-        <div id='website_url_id'></div>
+            <div class='social-div-and-update col'>  
+              <div id='social-div'>
+                <form submit="/edit-social.json" id="social-new" class='mx-auto'>
+                  <input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="new linkedin id" style="width:15em"/><br>
+                  <input type="text" class="form-control" name="twitter" id="twit-field" placeholder="new twitter handle" style="width:15em"/><br>
+                  <input type="text" name="website_url" class="form-control" id="web-field" placeholder="new website url" style="width:15em"/><br>
+                  <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-social">&nbsp;
+                  <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+              </div> <!-- end social div -->
+
+              <div id='social-update'>
+                <div id='twitter_id'></div>
+                <div id='linkedin_id'></div>
+                <div id='website_url_id'></div>
+              </div>
+            </div> <!-- end social-div-and-update   -->  
+          
+          </div> <!-- end photo-and-social -->     
         
       </div> <!-- end row  -->
     </div> <!-- end social container -->
 
-    <!-- <ul class="list-group list-group-flush"> -->
-      <div id='school-container'> 
-        
-        <div id='school-info'>
-          <li class='list-group-item'><h2 style='color:white;'>Education
-            {% if user.user_id == session['user_id'] %}
-            <!-- <i class="fa fa-plus float-sm-right" style="color:white;" id='add-education'></i> -->
-            <a href=''><i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-education'></i></a>
-            {% endif %}
-          </h2></li> 
-        </div>
-        <br>  
-        
-        <!-- <div id='add-education-div'></div>       -->
-        <div id='edit-education-div'></div>
+           
 
-        <div class='card-body' id='edu-og'>  
-          <div id='name-and-year'>
-          {% for school in schools %}
-            <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
-            <h4 class='d-inline' id='year_id'> {{ school.year }}</h4>
+    <div id='school-container'> 
+        
+      <div id='school-info'>
+        <li class='list-group-item'><h2 style='color:white;'>Education
+          {% if user.user_id == session['user_id'] %}
+          <!-- <i class="fa fa-plus float-sm-right" style="color:white;" id='add-education'></i> -->
+          <a><i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-education'></i></a>
+          {% endif %}
+        </h2></li> 
+      </div>
+      <br>  
+
+        <!-- <div id='add-education-div'></div>       -->        
+
+      <div class='card-body' id='edu-og'>  
+        <div id='name-and-year'>
+        {% for school in schools %}
+          <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
+          <h4 class='d-inline' id='year_id'> {{ school.year }}</h4>
+        </div>
+        <div id='school-loc'>
+          <div>
+            <p class='d-inline' id='school_city_id'>{{ school.school_city }}, </p>
+            <p class='d-inline' id='school_state_id'> {{ school.school_state }}</p>
           </div>
-          <div id='school-loc'>
-            <div>
-              <p class='d-inline' id='school_city_id'>{{ school.school_city }}, </p>
-              <p class='d-inline' id='school_state_id'> {{ school.school_state }}</p>
-            </div>
-            <div class='d-inline'>
-              <h5 class='d-inline' id='major_id'>{{ school.major }}, </h5>
-              <h5 class='d-inline' id='degree_level'> {{ school.degree_level }}</h5>
-            </div>
-            {% endfor %}  
-          </div> <!-- end school loc -->
-        </div> <!-- end card body -->
-      </div> <!-- end school-container -->
+          <div class='d-inline'>
+            <h5 class='d-inline' id='major_id'>{{ school.major }}, </h5>
+            <h5 class='d-inline' id='degree_level'> {{ school.degree_level }}</h5>
+          </div>
+          {% endfor %}  
+        </div> <!-- end school loc -->
+      </div> <!-- end card body -->
+        
+      <div id='edit-education-div'>
+         <form submit="/edit-education.json" id="education-new" class='mx-auto' style="width:15em">
+          <input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br>
+          <input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br>
+          <input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br>
+          <input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br>
+          <input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br>
+          <input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel">&nbsp;<input type="submit" class="btn btn-primary d-line" value="Save">
+        </form> 
+      </div> <!-- end edit-education -->
+      
+    </div> <!-- end school-container -->
     
     
   <br>
@@ -91,7 +114,7 @@
 
   <div id='languages-container'>
     <div id='languages-info'>
-      <li class="list-group-item"><h2 style="color:white;">Languages<a href="">
+      <li class="list-group-item"><h2 style="color:white;">Languages<a>
         {% if user.user_id == session['user_id'] %}
         <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-languages'></i>
         {% endif %}
@@ -99,44 +122,51 @@
     </div>
     <br> 
         
-    <div id='languages-div'>
-      <form submit="/edit-languages.json" id="languages-new">
-        Languages
-          {% for language in all_languages %}
-          <input type='checkbox' id='languages-field' name="language_name" value='{{ language.language_id }}'>{{ language.language_name }}
-          {% endfor %}
-          <input type='submit' class="btn btn-primary" value='Submit'>
-      </form>
-    </div>
     <div class="card-body"> 
       <div id='user-languages'>
         {% for language in user_languages %}
           <h5 class='d-inline' id='language_id'>{{ language.language_name }} </h5>
         {% endfor %} 
       </div>
-    </div> <!-- end card body  -->   
-  
-
+    </div> <!-- end card body  -->
+    <div id='languages-div'>
+      <form submit="/edit-languages.json" id="languages-new">    
+          {% for language in all_languages %}
+          <h5 class='d-inline-block' style='padding:.1em;'><input type='checkbox' style='font-size:3em;' id='languages-field' name="language_name" value='{{ language.language_id }}'>{{ language.language_name }}</h5> 
+          {% endfor %}
+          <br>
+          <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-langs">&nbsp;
+          <input type='submit' class="btn btn-primary" value='Submit'>
+      </form>
+    </div>   <!-- end languages-div -->
   </div> <!-- end languages-container -->
   <br>
   <br>
+
     
   <div id='description-container'>
       <div id='description-info'>
-        <li class="list-group-item"><h2 style="color:white;">Description<a href="">
+        <li class="list-group-item border-0"><h2 style="color:white;">Description
           {% if user.user_id == session['user_id'] %}
           <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-description'></i>
           {% endif %}
-        </a></h2></li> 
+        </h2></li> 
       </div>
         <br>
-
-      <div id='description-div'></div>
-      
       <div class="card-body">     
          <h5 id='description_id'>{{ user.description }}</h5>
       </div>
-  </div> <!-- end description container -->
+  
+
+      <div id='description-div'>
+        <form action="/edit-description.json" id="description-new" class='mx-auto'>
+          <textarea rows="4" cols="50" type="text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter text here....."  form="description-new"></textarea>
+          <input type="submit" id="cancel-description" class="btn btn-secondary d-line" value="Cancel">&nbsp;
+          <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+      </div>
+      
+        </div> <!-- end description container -->
   <br>
   <br>
 
@@ -147,11 +177,11 @@
         <h5>Account</h5>
         <label>
           {% if user.is_active %} 
-          <input type='radio' name='active' value=True checked>Active
-          <input type='radio' name='active' value=False>Inactive
+          <input type='radio' name='active' value=True checked> Active &nbsp;
+          <input type='radio' name='active' value=False> Inactive
           {% elif not user.is_active %} 
-          <input type='radio' name='active' value=True>Active
-          <input type='radio' name='active' value=False checked>Inactive
+          <input type='radio' name='active' value=True> Active &nbsp;
+          <input type='radio' name='active' value=False checked> Inactive
           {% endif %}  
         </label>          
     </div> <!-- end is_active -->
@@ -161,17 +191,17 @@
       <h5>Mentor or Mentee</h5>
       <label>
         {% if user.is_mentor %}  
-        <input type='radio' name='mentor' value=True checked> Mentor
+        <input type='radio' name='mentor' value=True checked> Mentor &nbsp;
         <input type='radio' name='mentor' value=False> Mentee
+
         {% elif not user.is_mentor %} 
-        <input type='radio' name='mentor' value=True > Mentor
+        <input type='radio' name='mentor' value=True > Mentor &nbsp;
         <input type='radio' name='mentor' value=False checked> Mentee
         {% endif %}
       </label>
     </div> <!-- end is_mentor --> 
   </div> <!-- end mentor-or-active -->
   {% endif %}
-
 
 <script src="../static/user_profile.js"></script>
 

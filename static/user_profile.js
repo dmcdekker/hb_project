@@ -2,12 +2,18 @@
 
 // <--------------update social media info---------------->
 
-function updateSocial(results){
+function closeSocialDiv(e) {
+  e.preventDefault();
+  $('#social-div').hide();
+}
+  $('body').on('click', '#cancel-social', closeSocialDiv);
 
+function updateSocial(results){
   $('#twitter_id').html('Your twitter handle has been updated to: ' + results[0]);
   $('#linkedin_id').html('Your linkedIn id has been updated to: '  + results[1]);
   $('#website_url_id').html('Your website URL has been updated to: ' + results[2]);
 }
+
 
 function getSocialData(evt) {
     evt.preventDefault(); 
@@ -21,16 +27,27 @@ function getSocialData(evt) {
 
     $.post('/edit-social.json', formInputs, updateSocial);
   }
-  $('#social-div').on('submit', '#social-new', getSocialData);
+  $('#social-div').one('submit', '#social-new', getSocialData);
 
 function editSocial(e){ 
     e.preventDefault();
-    $('#social-div').append('<form submit="/edit-social.json" id="social-new"><input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="linkedin id" style="width:15em"/><br><input type="text" class="form-control" name="twitter" id="twit-field" placeholder="twitter handle" style="width:15em"/><br><input type="text" name="website_url" class="form-control" id="web-field" placeholder="website url" style="width:15em"/><br><input type="submit" class="btn btn-primary" value="Submit"></form>');
+    $('#social-div').show();
   }
-  $('#edit-social').one('click', editSocial);
+  $('#edit-social').on('click', editSocial);
+
+  $(document).ready(function() {
+    $("#social-div").hide();
+  });  
 
 
 // <--------------update or add education info----------------> 
+
+function closeEduDiv(e) {
+  e.preventDefault();
+  $('#edit-education-div').hide();
+  $('#edu-og').show();
+}
+  $('body').on('click', '#cancel-education', closeEduDiv);
 
 function updateSchool(results){
   $('#school_name_id').html(results[0]);
@@ -58,21 +75,16 @@ function getSchoolData(evt) {
   }
   $('#edit-education-div').on('submit', '#education-new', getSchoolData);
 
-function editSchool(e){ 
-    e.preventDefault();
-    $('#edit-education-div').append('<form submit="/edit-education.json" id="education-new" style="width:15em"><input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br><input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br><input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br><input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br><input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br><input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel"><input type="submit" class="btn btn-primary d-line" value="Save Changes"></form>');
+function editSchool(ev){ 
+    ev.preventDefault();
+    $('#edit-education-div').show();
   }
   $('#edit-education').one('click', editSchool); 
-  
 
-function closeEduDiv(e) {
-  console.log('test');
-  e.preventDefault();
-  // alert();
-  $('#edit-education-div').hide();
-  $('#edu-og').show();
-}
-  $('body').on('click', '#cancel-education', closeEduDiv);
+  $(document).ready(function() {
+    $("#edit-education-div").hide();
+  });    
+
 
 
 // <--------------update languages----------------> 
@@ -115,13 +127,23 @@ $(document).ready(function() {
 });
 
 
-// <--------------update description----------------> 
+// <--------------update description---------------->
+
+function closeDescriptionDiv(e) {
+  console.log('test3');
+  e.preventDefault();
+  $('#description-div').hide();
+  $('#description_id').show();
+}
+  $('body').on('click', '#cancel-description', closeDescriptionDiv); 
 
 function updateDescription(results){
+  console.log('test2');
   $('#description_id').html(results);
 }
 
 function getDescriptionData(evt) {
+  console.log('test1');
   evt.preventDefault(); 
   $('#description-div').hide(); 
     
@@ -131,13 +153,17 @@ function getDescriptionData(evt) {
  
   $.post('/edit-description.json', formInputs, updateDescription);
 }
-  $('#description-div').on('submit', '#description-new', getDescriptionData);
+  $('body').on('submit', '#description-new', getDescriptionData);
 
 function editDescription(e){
   e.preventDefault();
-  $('#description-div').append('<form action="/edit-description.json" id="description-new"><input type-"text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter text here....." form="description-new"><input type="submit" class="btn btn-primary" value="submit"></form>');
+  $('#description-div').show();
 }
-$('#edit-description').one('click', editDescription); 
+$('#edit-description').on('click', editDescription); 
+
+$(document).ready(function() {
+  $("#description-div").hide();
+});
 
 
 // <--------------update mentor/mentee----------------> 

@@ -5,7 +5,9 @@
 #a4bcbc light blue
 #007f97 aquamarine*/
 
+#social-new{
 
+}
 /*------------------body------------------------*/
 * {
   margin: 0;
@@ -19,6 +21,10 @@ html, body {
   height: 100vh;
 }
 
+.flash{
+  border: 1px solid #4c3f77;
+}
+
 /*------------------typograhy------------------------*/
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -28,7 +34,7 @@ html, body {
     line-height: 1.2;
     color: inherit;
     font-family: 'Muli', sans-serif;
-    color: #442d3f;
+    color: #051126;
     letter-spacing: .5px;
 }
 
@@ -88,6 +94,10 @@ div.jumbotron.jumbotron-fluid {
   background-color: #442d3f;
 }
 
+* {
+  border-radius: 0 !important;
+}
+
 #date-color{
   color: #445a7c;
 }
@@ -113,8 +123,10 @@ div.jumbotron.jumbotron-fluid {
 
 .card-text{
   margin-bottom: .60em;
-
 }
+
+
+
 
 /*------------------profile page------------------------*/
 
@@ -128,18 +140,40 @@ div.jumbotron.jumbotron-fluid {
     height: 100%;
 }  
 
-.i{
-  font-size: 5em;
-  margin: 5em;
+.fa-link{
+  color: black;
 }
+
+.fa-twitter-square{
+  color: #007f97;
+}
+
+.fa-linkedin{
+  color: #a4bcbc ;
+}
+
+.fa-envelope-square{
+  color: #4c3f77;
+}
+
+i:hover {
+    color: #442d3f;
+    text-decoration: none!important;
+}
+
 
 #language_id{
   margin: .6em;
 }
 
-div#social-media-group .col{
+/*div#social-media-group .col{
   padding-top: 2em;
 }
+
+div#social-update{
+  padding-top: 2em;
+  padding-right: 2.5em;
+}*/
 
 #mentor-or-active{
   border-top: 5px solid #442d3f;
