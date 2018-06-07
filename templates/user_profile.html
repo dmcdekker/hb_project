@@ -8,61 +8,56 @@
   <div class="card" >
     <div id='social-container'
       >
-        <div class="card-header">
-          <div class="page-header">
-            <h2 style="color:white;">{{ user.fname }} {{ user.lname }}</h2>
+      <div class="card-header">
+        <div class="page-header">
+          <h2 style="color:white;">{{ user.fname }} {{ user.lname }}</h2>
 
-          </div> 
-        </div>
+        </div> 
+      </div>
     
       <div id='photo-and-social' class='row'>
         <!-- <div id='photo-and-social'>   -->
-          <div class='col-sm-6 col-md-4 d-inline' id='user-photo'>
-            <img class='img-responsive'  src='{{ user.photo }}' alt='user photo'>
+          <div class='col d-inline ' id='user-photo'>
+            <img class='img-responsive' style='width: 21em;height:21em;object-fit:cover; padding: .25rem;background-color: #fff; border: 1px solid #dee2e6; margin:auto;' src='{{ user.photo }}' alt='user photo'>
           </div> <!-- end user photo -->
           <br>
 
-          <div class='col d-block' id='social-media-group' style='margin:2em;'> 
+          <div class='col-1 d-inline' id='social-media-group' style='margin:2em;'> 
             <h3 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h3>
             <h3 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h3>
             <h3 class='d-block'><a href='{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h3>
             <h3 class='d-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h3>
 
-            <h4 class='d-block'>
-              
+            <h4 class='d-block'> 
               {% if user.user_id == session['user_id'] %}
               <a><i class="fas fa-pencil-alt" id='edit-social'></i>
-              {% endif %}</a></h4>
+              {% endif %}</a>
+            </h4>
+          </div>        
             
             <br>
 
-            <div class='social-div-and-update col'>  
-              <div id='social-div'>
-                <form submit="/edit-social.json" id="social-new" class='mx-auto'>
-                  <input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="new linkedin id" style="width:15em"/><br>
-                  <input type="text" class="form-control" name="twitter" id="twit-field" placeholder="new twitter handle" style="width:15em"/><br>
-                  <input type="text" name="website_url" class="form-control" id="web-field" placeholder="new website url" style="width:15em"/><br>
-                  <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-social">&nbsp;
-                  <input type="submit" class="btn btn-primary" value="Save">
-                </form>
-              </div> <!-- end social div -->
+          <div id='social-div-and-update' class='col d-inline' style='margin:2em;'>  
+            <div id='social-div' style='display:none;'>
+              <form submit="/edit-social.json" id="social-new" class='mx-auto'>
+                <input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="new linkedin id" style="width:15em"/><br>
+                <input type="text" class="form-control" name="twitter" id="twit-field" placeholder="new twitter handle" style="width:15em"/><br>
+                <input type="text" name="website_url" class="form-control" id="web-field" placeholder="new website url" style="width:15em"/><br>
+                <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-social">&nbsp;
+                <input type="submit" class="btn btn-primary" value="Save">
+              </form>
+            </div> <!-- end social div -->
 
-              <div id='social-update'>
+              <div id='social-update'></div>
                 <div id='twitter_id'></div>
                 <div id='linkedin_id'></div>
                 <div id='website_url_id'></div>
-              </div>
-            </div> <!-- end social-div-and-update   -->  
-          
-          </div> <!-- end photo-and-social -->     
-        
-      </div> <!-- end row  -->
-    </div> <!-- end social container -->
-
-           
-
-    <div id='school-container'> 
-        
+            
+          </div><!-- end social-div-and-update   -->  
+      </div>  <!-- end photo-and-social -->
+    </div> <!-- end social-container -->     
+  
+    <div id='school-container'>     
       <div id='school-info'>
         <li class='list-group-item'><h2 style='color:white;'>Education
           {% if user.user_id == session['user_id'] %}
@@ -75,37 +70,45 @@
 
         <!-- <div id='add-education-div'></div>       -->        
 
-      <div class='card-body' id='edu-og'>  
-        <div id='name-and-year'>
-        {% for school in schools %}
-          <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
-          <h4 class='d-inline' id='year_id'> {{ school.year }}</h4>
-        </div>
-        <div id='school-loc'>
-          <div>
-            <p class='d-inline' id='school_city_id'>{{ school.school_city }}, </p>
-            <p class='d-inline' id='school_state_id'> {{ school.school_state }}</p>
-          </div>
-          <div class='d-inline'>
-            <h5 class='d-inline' id='major_id'>{{ school.major }}, </h5>
-            <h5 class='d-inline' id='degree_level'> {{ school.degree_level }}</h5>
-          </div>
-          {% endfor %}  
-        </div> <!-- end school loc -->
-      </div> <!-- end card body -->
-        
-      <div id='edit-education-div'>
-         <form submit="/edit-education.json" id="education-new" class='mx-auto' style="width:15em">
-          <input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br>
-          <input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br>
-          <input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br>
-          <input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br>
-          <input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br>
-          <input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel">&nbsp;<input type="submit" class="btn btn-primary d-line" value="Save">
-        </form> 
-      </div> <!-- end edit-education -->
-      
-    </div> <!-- end school-container -->
+      <div class='row'>
+
+        <div class='col-6 d-inline'>
+          <div class='card-body' id='edu-og'>    
+            <div id='name-and-year'>
+            {% for school in schools %}
+              <h4 class='d-inline' id='school_name_id'>{{ school.school_name }}, </h4>
+              <h4 class='d-inline' id='year_id'> {{ school.year }}</h4>
+            </div>
+            <div id='school-loc'>
+              <div>
+                <p class='d-inline' id='school_city_id'>{{ school.school_city }}, </p>
+                <p class='d-inline' id='school_state_id'> {{ school.school_state }}</p>
+              </div>
+              <div class='d-inline'>
+                <h5 class='d-inline' id='major_id'>{{ school.major }}, </h5>
+                <h5 class='d-inline' id='degree_level'> {{ school.degree_level }}</h5>
+              </div>
+              {% endfor %}  
+            </div> <!-- end school loc -->
+          </div> <!-- end card body -->
+        </div> <!-- end col -->
+            
+        <div class='col-6 d-inline'> 
+         <div id='edit-education-div' style='display:none;margin:2em;'>
+           <form submit="/edit-education.json" id="education-new">
+            <input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br>
+            <input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br>
+            <input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br>
+            <input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br>
+            <input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br>
+            <input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel">&nbsp;<input type="submit" class="btn btn-primary d-line" value="Save">
+          </form> 
+        </div> <!-- end edit-education -->
+       </div> <!-- end col  -->
+
+        </div> <!-- end row -->
+      </div> <!-- end school container -->
+    <!-- </div>  -->
     
     
   <br>
@@ -129,6 +132,7 @@
         {% endfor %} 
       </div>
     </div> <!-- end card body  -->
+
     <div id='languages-div'>
       <form submit="/edit-languages.json" id="languages-new">    
           {% for language in all_languages %}
@@ -158,15 +162,15 @@
       </div>
   
 
-      <div id='description-div'>
+      <div id='description-div' style='display:none;'>
         <form action="/edit-description.json" id="description-new" class='mx-auto'>
-          <textarea rows="4" cols="50" type="text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter text here....."  form="description-new"></textarea>
+          <textarea style='padding: 1em;' rows="4" cols="50" type="text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter new description here....."  form="description-new"></textarea>
           <input type="submit" id="cancel-description" class="btn btn-secondary d-line" value="Cancel">&nbsp;
           <input type="submit" class="btn btn-primary" value="submit">
         </form>
       </div>
       
-        </div> <!-- end description container -->
+  </div> <!-- end description container -->
   <br>
   <br>
 
@@ -203,8 +207,9 @@
   </div> <!-- end mentor-or-active -->
   {% endif %}
 
-<script src="../static/user_profile.js"></script>
 
+  </div> <!-- end card -->
  </div> <!-- end card     -->
-</div> <!-- end container -->
+<!-- </div> end container -->
+<script src="../static/user_profile.js"></script>
 {% endblock %}

@@ -196,6 +196,11 @@ i:hover {
     text-decoration: none!important;
 }
 
+/*.img-thumbnail{
+  height: 21em!important;
+  width: 21em!important;
+  object-fit: cover;
+}*/
 
 #language_id{
   margin: .6em;

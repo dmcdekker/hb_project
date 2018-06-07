@@ -35,7 +35,8 @@ function editSocial(e){
   }
   $('#edit-social').on('click', editSocial);
 
-  $(document).ready(function() {
+
+$(document).ready(function() {
     $("#social-div").hide();
   });  
 
@@ -50,9 +51,9 @@ function closeEduDiv(e) {
   $('body').on('click', '#cancel-education', closeEduDiv);
 
 function updateSchool(results){
-  $('#school_name_id').html(results[0]);
+  $('#school_name_id').html(results[0] + ', ');
   $('#year_id').html(results[1]);
-  $('#school_city_id').html(results[2]);
+  $('#school_city_id').html(results[2] + ', ');
   $('#school_state_id').html(results[3]);
   $('#major_id').html(results[4]);
   $('#degree_level').html(results[5]);
@@ -164,7 +165,6 @@ $('#edit-description').on('click', editDescription);
 $(document).ready(function() {
   $("#description-div").hide();
 });
-
 
 // <--------------update mentor/mentee----------------> 
 
