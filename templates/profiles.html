@@ -15,7 +15,7 @@
       {% if user.is_mentor == True and user.is_active == True %}
       <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 mentor-profiles">
         <div class='card'>
-          <img class='card-img-top img-responsive' style='height:12em' src='{{ user.photo }}' alt='User image'>
+          <img class='card-img-top img-responsive' style='height:12em;'  src='{{ user.photo }}' alt='User image'>
           <div class='card-body'>
             <h3 class='card-title'><a href='/profiles/{{ user.user_id }}'>
                 {{ user.fname }} {{ user.lname }} <br>

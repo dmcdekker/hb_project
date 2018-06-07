@@ -25,10 +25,6 @@ html, body {
   height: 100vh;
 }
 
-.flash{
-  border: 1px solid #4c3f77;
-}
-
 * {
   border-radius: 0 !important;
 }
@@ -44,6 +40,18 @@ html, body {
   max-width: 100%;
   max-height: 100%;
 }
+
+/*.btn-primary {
+    color: #fff;
+    background-color: #000060;
+    border-color: #000060;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #4c3f77;
+}*/
+
 
 /*------------------typograhy------------------------*/
 
@@ -69,8 +77,8 @@ a {
 
 /* mouse over link */
 a:hover {
-    color: #3085cf;
-    text-decoration: none!important;
+  color: #3085cf;
+  text-decoration: none!important;
 }
 
 /*------------------navbar------------------------*/
@@ -113,16 +121,7 @@ div.jumbotron.jumbotron-fluid {
     padding-top: 0;
 }
 
-/*body .container-fluid { 
-  background: url('images/homepage_1.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-*/
 /*------------------events------------------------*/
-
 
 .list-group {
   border: 2px solid #d6c2d2;

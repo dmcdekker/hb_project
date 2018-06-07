@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <div class='container'>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-
+  <div class='container mx-auto'>
+  <br>
+  <br>
+  <br>
+  <br>  
+   <div class='row'>
+    <form action="/login" method="POST" class='mx-auto'>
+      <h1 class='text-center'>SHERO</h1>
       <div>
-        <label>Email:
-          <input type="email" class='form-control' name="email" required>
+        <label>
+          <input type="email" class='form-control' style='width:15rem; ' name="email" placeholder='email' required>
         </label>
       </div>
 
       <div>
-        <label>Password:
-          <input type="password" class='form-control' name="password" required>
+        <label>
+          <input type="password" class='form-control' name="password" style='width:15rem;' placeholder='password' required>
         </label>
       </div>
 
       <div>
-        <input type="submit" class='btn btn-primary' value="Log In">
+        <input type="submit" class='btn btn-primary' style='width:15rem; background-color: #000060; border-color: #000060;' value="Next">
       </div>
-
     </form>
-  </div>  
+   </div> <!-- end row -->
+  </div> <!-- end container  -->
 {% endblock %}
