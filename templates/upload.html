@@ -8,8 +8,9 @@
     <div class='container'>
         <div id='photo-container'>
             <div class="page-header">
-                <h1>Upload Your profile photo</h1>
+                <h3>Upload Your profile photo</h3>
             </div>
+            <br>
             <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
                 <input type='file' name='photo'>
                 <input type="submit" class='btn btn-primary' value="Submit">
