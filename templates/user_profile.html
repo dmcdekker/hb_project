@@ -2,15 +2,15 @@
 {% block content %}
 
 <div class='container mx-auto'>
-  <div><a href="/profiles"><i class="fas fa-arrow-left"></i>  Back to Profiles</a></div>
+  <div><a href='/profiles'><i class='fas fa-arrow-left'></i>  Back to Profiles</a></div>
   <br>
   <br>
-  <div class="card" >
+  <div class='card' >
     <div id='social-container'
       >
-      <div class="card-header">
-        <div class="page-header">
-          <h2 style="color:white;">{{ user.fname }} {{ user.lname }}</h2>
+      <div class='card-header'>
+        <div class='page-header'>
+          <h2 style='color:white;'>{{ user.fname }} {{ user.lname }}</h2>
 
         </div> 
       </div>
@@ -23,14 +23,14 @@
           <br>
 
           <div class='col-1 d-inline' id='social-media-group' style='margin:2em;'> 
-            <h3 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class="fab fa-twitter-square"></i></i></a></h3>
-            <h3 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class="fab fa-linkedin"></i></a></h3>
-            <h3 class='d-block'><a href='http://{{user.website_url}}' target='_blank'<i class="fas fa-link"></i></i></a></h3>
-            <h3 class='d-block'><a href="mailto:{{ user.email }}"><i class="fas fa-envelope-square"></i></a></h3>
+            <h3 class='d-block'><a href='https://twitter.com/{{user.twitter}}' target='_blank'><i class='fab fa-twitter-square'></i></i></a></h3>
+            <h3 class='d-block'><a href='https://www.linkedin.com/in/{{user.linkedin}}' target='_blank'><i class='fab fa-linkedin'></i></a></h3>
+            <h3 class='d-block'><a href='http://{{user.website_url}}' target='_blank'<i class='fas fa-link'></i></i></a></h3>
+            <h3 class='d-block'><a href='mailto:{{ user.email }}'><i class='fas fa-envelope-square'></i></a></h3>
 
             <h4 class='d-block'> 
               {% if user.user_id == session['user_id'] %}
-              <a><i class="fas fa-pencil-alt" id='edit-social'></i>
+              <a><i class='fas fa-pencil-alt' id='edit-social'></i>
               {% endif %}</a>
             </h4>
           </div>        
@@ -39,12 +39,12 @@
 
           <div id='social-div-and-update' class='col d-inline' style='margin:2em;'>  
             <div id='social-div' style='display:none;'>
-              <form submit="/edit-social.json" id="social-new" class='mx-auto'>
-                <input type="text" class="form-control" name="linkedin" id="linkedin-field" placeholder="new linkedin id" style="width:15em"/><br>
-                <input type="text" class="form-control" name="twitter" id="twit-field" placeholder="new twitter handle" style="width:15em"/><br>
-                <input type="text" name="website_url" class="form-control" id="web-field" placeholder="new website url" style="width:15em"/><br>
-                <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-social">&nbsp;
-                <input type="submit" class="btn btn-primary" value="Save">
+              <form submit='/edit-social.json' id='social-new' class='mx-auto'>
+                <input type='text' class='form-control' name='linkedin' id='linkedin-field' placeholder='new linkedin id' style='width:15em'/><br>
+                <input type='text' class='form-control' name='twitter' id='twit-field' placeholder='new twitter handle' style='width:15em'/><br>
+                <input type='text' name='website_url' class='form-control' id='web-field' placeholder='new website url' style='width:15em'/><br>
+                <input type='submit' class='btn btn-secondary' value='Cancel' id='cancel-social'>&nbsp;
+                <input type='submit' class='btn btn-primary' value='Save'>
               </form>
             </div> <!-- end social div -->
 
@@ -61,8 +61,8 @@
       <div id='school-info'>
         <li class='list-group-item'><h2 style='color:white;'>Education
           {% if user.user_id == session['user_id'] %}
-          <!-- <i class="fa fa-plus float-sm-right" style="color:white;" id='add-education'></i> -->
-          <a><i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-education'></i></a>
+          <!-- <i class='fa fa-plus float-sm-right' style='color:white;' id='add-education'></i> -->
+          <a><i class='fas fa-pencil-alt float-sm-right' style='color:white;' id='edit-education'></i></a>
           {% endif %}
         </h2></li> 
       </div>
@@ -95,13 +95,13 @@
             
         <div class='col d-inline'> 
          <div id='edit-education-div' style='display:none;margin:1em;'>
-           <form submit="/edit-education.json" id="education-new">
-            <input type="text" name="school_name" id="school-name-field" class="form-control" placeholder="school name" style="width:15em"/><br>
-            <input type="text" name="year" id="year-field" class="form-control" placeholder="year graduated" style="width:15em"/><br>
-            <input type="text" name="school_city" id="school-city-field" class="form-control" placeholder="school city" style="width:15em"/><br>
-            <input type="text" name="school_state" id="school-state-field" class="form-control" placeholder="school state" style="width:15em"/><br>
-            <input type="text" name="major" id="major-field" class="form-control" placeholder="major" style="width:15em"/><br><input type="text" name="degree_level" id="degree-level-field" class="form-control" placeholder="degree level" style="width:15em"/><br>
-            <input type="submit" id="cancel-education" class="btn btn-secondary d-line" value="Cancel">&nbsp;<input type="submit" class="btn btn-primary d-line" value="Save">
+           <form submit='/edit-education.json' id='education-new'>
+            <input type='text' name='school_name' id='school-name-field' class='form-control' placeholder='school name' style='width:15em'/><br>
+            <input type='text' name='year' id='year-field' class='form-control' placeholder='year graduated' style='width:15em'/><br>
+            <input type='text' name='school_city' id='school-city-field' class='form-control' placeholder='school city' style='width:15em'/><br>
+            <input type='text' name='school_state' id='school-state-field' class='form-control' placeholder='school state' style='width:15em'/><br>
+            <input type='text' name='major' id='major-field' class='form-control' placeholder='major' style='width:15em'/><br><input type='text' name='degree_level' id='degree-level-field' class='form-control' placeholder='degree level' style='width:15em'/><br>
+            <input type='submit' id='cancel-education' class='btn btn-secondary d-line' value='Cancel'>&nbsp;<input type='submit' class='btn btn-primary d-line' value='Save'>
           </form> 
         </div> <!-- end edit-education -->
        </div> <!-- end col  -->
@@ -109,23 +109,19 @@
         </div> <!-- end row -->
       </div> <!-- end school container -->
     <!-- </div>  -->
-    
-    
   <br>
   <br>
-
-
   <div id='languages-container'>
     <div id='languages-info'>
-      <li class="list-group-item"><h2 style="color:white;">Languages<a>
+      <li class='list-group-item'><h2 style='color:white;'>Languages<a>
         {% if user.user_id == session['user_id'] %}
-        <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-languages'></i>
+        <i class='fas fa-pencil-alt float-sm-right' style='color:white;' id='edit-languages'></i>
         {% endif %}
       </a></h2></li> 
     </div>
     <br> 
         
-    <div class="card-body"> 
+    <div class='card-body'> 
       <div id='user-languages'>
         {% for language in user_languages %}
           <h5 class='d-inline' id='language_id'>{{ language.language_name }} </h5>
@@ -134,13 +130,13 @@
     </div> <!-- end card body  -->
 
     <div id='languages-div'>
-      <form submit="/edit-languages.json" id="languages-new">    
+      <form submit='/edit-languages.json' id='languages-new'>    
           {% for language in all_languages %}
-          <h5 class='d-inline-block' style='padding:.1em;'><input type='checkbox' style='font-size:3em;' id='languages-field' name="language_name" value='{{ language.language_id }}'>{{ language.language_name }}</h5> 
+          <h5 class='d-inline-block col-3' style='padding:.1em;'><input type='checkbox' style='font-size:3em;' id='languages-field' name='language_name' value='{{ language.language_id }}'>{{ language.language_name }}</h5> 
           {% endfor %}
           <br>
-          <input type="submit" class="btn btn-secondary" value="Cancel" id="cancel-langs">&nbsp;
-          <input type='submit' class="btn btn-primary" value='Submit'>
+          <input type='submit' class='btn btn-secondary' value='Cancel' id='cancel-langs'>&nbsp;
+          <input type='submit' class='btn btn-primary' value='Submit'>
       </form>
     </div>   <!-- end languages-div -->
   </div> <!-- end languages-container -->
@@ -150,23 +146,23 @@
     
   <div id='description-container'>
       <div id='description-info'>
-        <li class="list-group-item border-0"><h2 style="color:white;">Description
+        <li class='list-group-item border-0'><h2 style='color:white;'>Description
           {% if user.user_id == session['user_id'] %}
-          <i class="fas fa-pencil-alt float-sm-right" style="color:white;" id='edit-description'></i>
+          <i class='fas fa-pencil-alt float-sm-right' style='color:white;' id='edit-description'></i>
           {% endif %}
         </h2></li> 
       </div>
         <br>
-      <div class="card-body">     
+      <div class='card-body'>     
          <h5 id='description_id'>{{ user.description }}</h5>
       </div>
   
 
       <div id='description-div' style='display:none;'>
-        <form action="/edit-description.json" id="description-new" class='mx-auto'>
-          <textarea style='padding: 1em;' rows="4" cols="50" type="text" name="description" id="description-field" class="form-control" style="width:100%" placeholder="Enter new description here....."  form="description-new"></textarea>
-          <input type="submit" id="cancel-description" class="btn btn-secondary d-line" value="Cancel">&nbsp;
-          <input type="submit" class="btn btn-primary" value="submit">
+        <form action='/edit-description.json' id='description-new' class='mx-auto'>
+          <textarea style='padding: 1em;' rows='4' cols='50' type='text' name='description' id='description-field' class='form-control' style='width:100%' placeholder='Enter new description here.....'  form='description-new'></textarea>
+          <input type='submit' id='cancel-description' class='btn btn-secondary d-line' value='Cancel'>&nbsp;
+          <input type='submit' class='btn btn-primary' value='submit'>
         </form>
       </div>
       
@@ -176,7 +172,7 @@
 
   {% if user.user_id == session['user_id'] %}
   <div id='mentor-or-active'>
-    <div class="card-body" id='is_active'> 
+    <div class='card-body' id='is_active'> 
       <br>
         <h5>Account</h5>
         <label>
@@ -191,7 +187,7 @@
     </div> <!-- end is_active -->
     
   
-    <div class="card-body" id='is_mentor'>   
+    <div class='card-body' id='is_mentor'>   
       <h5>Mentor or Mentee</h5>
       <label>
         {% if user.is_mentor %}  
@@ -209,7 +205,6 @@
 
 
   </div> <!-- end card -->
- </div> <!-- end card     -->
-<!-- </div> end container -->
-<script src="../static/user_profile.js"></script>
+ </div> <!-- end container     -->
+<script src='../static/user_profile.js'></script>
 {% endblock %}

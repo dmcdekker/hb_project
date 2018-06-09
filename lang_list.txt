@@ -1,6 +1,6 @@
 Assembly
 Ada
-AGOL
+ALGOL
 Bash
 C
 C#

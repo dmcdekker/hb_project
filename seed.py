@@ -19,7 +19,7 @@ def seed_data():
         db.session.add(add_lang)
 
 
-    user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', user_name='dmcdekker', password='xxxxxx',
+    user_1 = User(fname='Denise', lname='Dekker', email='dd@me.com', password='xxxxxx',
                   city='Oakland', state='CA', twitter='dmcdekker', linkedin='denise-m-dekker', 
                   website_url='dmdekker.io', description='Some long and lovely text about me', 
                   engineer_type=3, is_active=True, is_mentor=False, photo='/static/images/denise_dekker.jpg')
@@ -47,7 +47,7 @@ def fake_profiles(fake):
 
     for i in range(15):
 
-        user = User(fname=fake.first_name_female(), lname=fake.last_name(), email=fake.email(), user_name=fake.user_name(), password='test1',
+        user = User(fname=fake.first_name_female(), lname=fake.last_name(), email=fake.email(), password='test1',
                       city=fake.city(), state=fake.state_abbr(), twitter=fake.user_name(), linkedin=fake.user_name(), 
                       website_url=fake.url(), description=fake.text(), 
                       engineer_type=randint(1, 15), is_active=True, is_mentor=choice([True, False]), photo='https://placeimg.com/640/480/any')

@@ -18,6 +18,17 @@
 
 <body>
 
+  <div class='container' id='flash'>
+      <h5>{% with messages = get_flashed_messages() %}
+       {% if messages %}
+          {% for message in messages %}
+             {{ message }}
+          {% endfor %}
+       {% endif %}
+    {% endwith %}
+    <h5>
+  </div>  
+
  
   <nav class='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
     <a class='navbar-brand text-lg' href='/'>SHERO</a>
@@ -55,23 +66,18 @@
     </div>
   </nav>
 
-  <div id='flash' class='container'>
-    <h5>{% for flash in get_flashed_messages() %}
-      {{ flash }}
-    {% endfor %}</h5>
-  </div>  
-
-    {% block content %}
-      Put your body here.
-    {% endblock %}
-
   <script type='text/javascript'>
-    $('#flash').hide().delay(800).fadeIn(1500).delay(4000).fadeOut(800)
-  </script>   
-   
 
+    $('#flash').delay(800).fadeIn(800).delay(3000).fadeOut(800)
   
+  </script>   
 
+{% block content %}
+  Put your body here.
+{% endblock %}
+
+   
+   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
 

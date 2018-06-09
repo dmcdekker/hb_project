@@ -20,7 +20,7 @@ a1fcf2 aquamarine*/
 }
 
 html, body {
-  padding-top: 2em;
+  padding-top: 2.5em;
   width: 100vw;
   height: 100vh;
 }
@@ -30,7 +30,7 @@ html, body {
 }
 
 #bg {
-  position: absolute; 
+  position: relative; 
   top: 0; 
   left: 0; 
   
@@ -86,9 +86,9 @@ a:hover {
     background-color: white!important;
 }
 
-.navbar{
+/*.navbar{
   padding top: 1em;
-}
+}*/
 
 .navbar-brand{
   font-size: 2em;
@@ -111,9 +111,7 @@ a:hover {
 
 
 /*------------------homepage------------------------*/
-.container{
-    margin: 5%;
-}
+
 
 div.jumbotron.jumbotron-fluid {
     background-color: transparent;

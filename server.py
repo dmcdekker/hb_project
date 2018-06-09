@@ -52,10 +52,9 @@ def register_process():
     password = request.form["password"]
     city = request.form["city"]
     state = request.form["state"]
-    user_name = request.form["user_name"]
 
     new_user = User(fname=fname, lname=lname, email=email, password=password,
-                    city=city, state=state, user_name=user_name)
+                    city=city, state=state)
 
 
     db.session.add(new_user)

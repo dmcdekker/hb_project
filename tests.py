@@ -250,7 +250,6 @@ class NoSessionServerTests(unittest.TestCase):
     #     result = self.client.post('/register', follow_redirects=True,
     #                                 data={'fname': 'this',
     #                                       'lname': 'name',
-    #                                       'user_name': 'you7',
     #                                       'email': 'me7@this.com',
     #                                       'password': 'test',
     #                                       'city': 'oakland',

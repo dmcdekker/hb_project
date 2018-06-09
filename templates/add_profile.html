@@ -2,64 +2,89 @@
 {% block content %}
 
 <div class='container'>
-  <h1>Profile</h1>
+   <h3>Complete your public profile</h3>
 
   <form action="add-profile" method="POST">
 
-    <h3>Please complete to make your public profile</h3>
+   
+    <br>
+    <br>
 
       <div id='social_media'>
+        <div class='d-inline'>
         <label>
-          Twitter Handle
+          <h6>Twitter Handle</h6>
           <input type="text" class='form-control' name="twitter">
         </label>
+        </div>
+        <div class='d-inline'>
         <label>
-          LinkedIn Handle
+          <h6>LinkedIn ID</h6>
           <input type="text" class='form-control' name="linkedin">
         </label>
+        </div>
+        <div class='d-inline'>
         <label>
-          Website URL
+          <h6>Website URL</h6>
           <input type="text" class='form-control' name="website_url">
         </label>
+        </div>
       </div>
-
+      <br>
       <div id='description'>
         <label>
-          About Me
-          <input type="text" class='form-control' name="description">
+          <h6>About Me</h6>
+          <textarea style='padding: 1em;' rows="4" cols="67" type="text" name="description" class="form-control" placeholder="Enter description here....." ></textarea>
         </label>
       </div>
-
+      <br>
       <div id='education'>
+        <div>
+          <div class='d-inline'>
+          <label>
+            <h6>Name of College</h6>
+            <input type="text" class='form-control' name="school_name">
+          </label>
+          </div>
+          <div class='d-inline'>
+          <label>
+            <h6>City</h6> 
+            <input type="text" class='form-control' name="school_city">
+          </label>
+          </div>
+          <div class='d-inline'>
+          <label>
+           <h6>State</h6>
+            <input type="text" class='form-control' name="school_state">
+          </label>
+          </div>
+        </div>
+       <br> 
+      <div>
+         <div class='d-inline'>
         <label>
-          Name of College
-          <input type="text" class='form-control' name="school_name">
-        </label>
-        <label>
-          College Location 
-          <input type="text" class='form-control' name="school_city">
-        </label>
-        <label>
-          College State 
-          <input type="text" class='form-control' name="school_state">
-        </label>
-        <label>
-          Degree Awarded
-          <input type="text" class='form-control' name="degree_level">
-        </label>
-        <label>
-          Degree Major
+          <h6>Degree Major</h6>
           <input type="text" class='form-control' name="major">
         </label>
+        </div>
+        <div class='d-inline'>  
         <label>
-          Year Graduated
+          <h6>Degree Awarded</h6>
+          <input type="text" class='form-control' name="degree_level">
+        </label>
+        </div>
+        <div class='d-inline'>
+        <label>
+          <h6>Year Graduated</h6>
           <input type="text" class='form-control' name="year">
         </label>
+        </div>
       </div>
-
+      <br>
       <div id='engineer_type'>
         <label>
-          Type of Engineering
+          <h5>Type of Engineering</h5>
+          
           <!-- for loop with jinja to go through values -->
           <select name='engineer_type'>
             {% for type in engineer_type %}
@@ -68,36 +93,39 @@
           </select>
         </label>
       </div>
-
+      <br>
       <div id='languages'>
-        <label>
-          Languages
+          <label>
+          <h5>Languages (check all that apply)</h5> 
             {% for language in languages %}
-            <input name='get_langs' type='checkbox' value='{{ language.language_id }}'>{{ language.language_name }}<br>
+            <h6 class='d-inline-block col-3' style='padding:.1em;'><input name='get_langs' type='checkbox' style='font-size:3em;' value='{{ language.language_id }}'>{{ language.language_name }}</h6> 
             {% endfor %}
         </label>
       </div>
+      <br>
 
       <div>
         <label>
-          Profile Active?
+          <h6>Profile Active?</h6>
           <input type='radio' name='is_active' value=True> Active
           <input type='radio' name='is_active' value=False> Inactive
         </label>
       </div>
-
+      <br>
       <div>
         <label>
-          Mentee or Mentor?
+          <h6>Mentee or Mentor?</h6>
           <input type='radio' name='is_mentor' value=True> Mentor
           <input type='radio' name='is_mentor' value=False> Mentee
         </label>
       </div>         
-
+      <br>
+      <br>
       <div>
         <input type="submit" class='btn btn-primary' value="Submit">
       </div>
-
+      <br>
+      <br>
     </form>
 </div>    
 

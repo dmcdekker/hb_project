@@ -16,7 +16,6 @@ class User(db.Model):
     lname = db.Column(db.String(32), nullable=True)
     email = db.Column(db.String(64), nullable=True, unique=True)
     password = db.Column(db.String(64), nullable=True)
-    user_name = db.Column(db.String(64), nullable=True, unique=True)
     city = db.Column(db.String(32), nullable=True)
     state = db.Column(db.String(2), nullable=True)
     twitter = db.Column(db.String(32), nullable=True)
