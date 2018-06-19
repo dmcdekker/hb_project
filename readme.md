@@ -4,7 +4,7 @@
 Shero is a mentoring app for women engineers; women can be mentors, find mentors, or events to meet other women in tech. Users can create and edit their profile and view other profiles.
 
 ## About the Developer
-Denise Dekker created Shero; connect with her on LinkedIn.
+Denise Dekker created Shero; connect with her on [LinkedIn](https://www.linkedin.com/in/denise-m-dekker).
 
 ## Technologies
 **Tech Stack:**
