@@ -49,7 +49,7 @@ def fake_profiles(fake):
 
         user = User(fname=fake.first_name_female(), lname=fake.last_name(), email=fake.email(), password='test1',
                       city=fake.city(), state=fake.state_abbr(), twitter=fake.user_name(), linkedin=fake.user_name(), 
-                      website_url=fake.url(), description=fake.text(), 
+                      website_url=fake.url(), description=fake.paragraph(), 
                       engineer_type=randint(1, 15), is_active=True, is_mentor=choice([True, False]), photo='https://placeimg.com/640/480/any')
 
         education = Education(school_name=fake.name(), school_city=fake.city(), school_state=fake.state_abbr(), degree_level='BA',

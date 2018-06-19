@@ -18,18 +18,16 @@
 
 <body>
 
-  <div class='container' id='flash'>
-      <h5>{% with messages = get_flashed_messages() %}
+  <div class='container' id='flash' style='margin-left:1.75em'>
+      {% with messages = get_flashed_messages() %}
        {% if messages %}
           {% for message in messages %}
              {{ message }}
           {% endfor %}
        {% endif %}
     {% endwith %}
-    <h5>
-  </div>  
+  </div>
 
- 
   <nav class='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
     <a class='navbar-brand text-lg' href='/'>SHERO</a>
     <button class='navbar-toggler navbar-toggler-right' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
@@ -59,28 +57,18 @@
         </li>  
         {% endif %}<span class='sr-only'>(current)</span></a>
       </ul>
-      <!-- <form class='form-inline my-2 my-lg-0'>
-        <input class='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>
-        <button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>
-      </form> -->
     </div>
   </nav>
 
-  <script type='text/javascript'>
-
-    $('#flash').delay(800).fadeIn(800).delay(3000).fadeOut(800)
   
-  </script>   
 
 {% block content %}
   Put your body here.
 {% endblock %}
 
    
-   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-
 
 </body>
 </html>

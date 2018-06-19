@@ -2,12 +2,12 @@
 {% block content %}
 
 <div class='container mx-auto'>
+  <br>
+  <br>
   <div><a href='/profiles'><i class='fas fa-arrow-left'></i>  Back to Profiles</a></div>
   <br>
-  <br>
   <div class='card' >
-    <div id='social-container'
-      >
+    <div id='social-container'>
       <div class='card-header'>
         <div class='page-header'>
           <h2 style='color:white;'>{{ user.fname }} {{ user.lname }}</h2>
@@ -174,7 +174,7 @@
   <div id='mentor-or-active'>
     <div class='card-body' id='is_active'> 
       <br>
-        <h5>Account</h5>
+        <h4>Account</h4>
         <label>
           {% if user.is_active %} 
           <input type='radio' name='active' value=True checked> Active &nbsp;
@@ -188,7 +188,7 @@
     
   
     <div class='card-body' id='is_mentor'>   
-      <h5>Mentor or Mentee</h5>
+      <h4>Mentor or Mentee</h4>
       <label>
         {% if user.is_mentor %}  
         <input type='radio' name='mentor' value=True checked> Mentor &nbsp;

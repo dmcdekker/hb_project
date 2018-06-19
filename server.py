@@ -424,7 +424,7 @@ def logout():
 if __name__ == "__main__":
 
 
-    app.debug = True
+    app.debug = False
 
     # make sure templates, etc. are not cached in debug mode
     app.jinja_env.auto_reload = app.debug
